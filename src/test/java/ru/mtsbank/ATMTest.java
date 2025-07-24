@@ -32,5 +32,12 @@ public class ATMTest {
         Assert.assertEquals(totalAmount, new BigDecimal(5000));
     }
 
+    @Test
+   public void testAmountValidator() {
+        BigDecimal amount = BigDecimal.valueOf(1000);
+        int result = ATM.amountValidator(amount, USD);
+        Assert.assertEquals(result, 10);
+    }
+
     }
 
