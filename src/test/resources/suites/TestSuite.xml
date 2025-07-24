@@ -5,7 +5,7 @@
 <suite name="ru.mtsbank" parallel="tests">
     <test name="atm" parallel="classes">
         <classes>
-            <class name="ru.mtsbank.ATMTests"/>
+            <class name="ru.mtsbank.ATMTest"/>
         </classes>
     </test>
 </suite>
