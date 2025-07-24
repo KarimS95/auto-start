@@ -2,11 +2,8 @@ package ru.mtsbank;
 
 import org.testng.Assert;
 import org.testng.annotations.*;
-
 import java.math.BigDecimal;
-
 import static ru.mtsbank.Currency.*;
-
 
 public class ATMTest {
 
@@ -16,7 +13,6 @@ public class ATMTest {
         String result = ATM.getRates();
         Assert.assertEquals(result, rates);
     }
-
 
     @Test
     public void testGetBalanceForUsd() {

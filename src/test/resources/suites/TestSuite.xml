@@ -6,6 +6,7 @@
     <test name="atm" parallel="classes">
         <classes>
             <class name="ru.mtsbank.ATMTest"/>
+            <class name="ru.mtsbank.ExchangeRateTest"/>
         </classes>
     </test>
 </suite>
