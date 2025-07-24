@@ -46,3 +46,4 @@ gradlew
 build.gradle
 settings.gradle
 .idea
+/.idea/
