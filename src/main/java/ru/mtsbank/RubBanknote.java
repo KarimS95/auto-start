@@ -1,14 +1,14 @@
-package HomeWork2;
+package ru.mtsbank;
 
 import java.math.BigDecimal;
 
-public class DollarBanknote extends Banknote {
+public class RubBanknote extends Banknote {
 
-    public DollarBanknote(Currency currency, int nominal) {
+    public RubBanknote(Currency currency, int nominal) {
         super(currency, nominal);
     }
 
-    private static final int[] AVAILABLE_NOMINALS = {1, 5, 10, 20, 50, 100};
+    private static final int[] AVAILABLE_NOMINALS = {50,100,200,500,1000,5000};
 
     @Override
     public BigDecimal convertTo(Currency currencyTarget) {

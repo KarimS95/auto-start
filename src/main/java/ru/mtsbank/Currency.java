@@ -1,4 +1,4 @@
-package HomeWork2;
+package ru.mtsbank;
 
 public enum Currency {
     USD, EUR, RUB;

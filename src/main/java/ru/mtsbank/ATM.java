@@ -1,10 +1,10 @@
-package HomeWork2;
+package ru.mtsbank;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
-import static HomeWork2.Currency.*;
+import static ru.mtsbank.Currency.*;
 
 public class ATM {
 

@@ -1,4 +1,4 @@
-package HomeWork2;
+package ru.mtsbank;
 
 
 import java.math.BigDecimal;

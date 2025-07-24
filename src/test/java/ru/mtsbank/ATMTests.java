@@ -1,4 +1,4 @@
-package HomeWork2;
+package ru.mtsbank;
 
 import jdk.jfr.Name;
 import org.testng.Assert;

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="ru.mtsbank" parallel="tests">
+    <test name="atm" parallel="classes">
+        <classes>
+            <class name="ru.mtsbank.ATMTests"/>
+        </classes>
+    </test>
+</suite>

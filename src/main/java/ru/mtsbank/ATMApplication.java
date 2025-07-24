@@ -1,10 +1,10 @@
-package HomeWork2;
+package ru.mtsbank;
 
 import java.math.BigDecimal;
 import java.util.*;
 
-import static HomeWork2.Currency.*;
-import static HomeWork2.ExchangeRate.convert;
+import static ru.mtsbank.Currency.*;
+import static ru.mtsbank.ExchangeRate.convert;
 
 public class ATMApplication {
 
