@@ -11,8 +11,7 @@ public class ExchangeRate {
         switch (currencyFrom) {
             case USD:
                 switch (currencyTo) {
-                    case USD:
-                        return amount.multiply(BigDecimal.ONE);
+                    case USD: return amount.multiply(BigDecimal.ONE);
                     case EUR: return amount.multiply(usdToEur);
                     case RUB: return amount.multiply(usdToRub);
                 }

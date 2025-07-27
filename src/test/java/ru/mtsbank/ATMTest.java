@@ -2,7 +2,9 @@ package ru.mtsbank;
 
 import org.testng.Assert;
 import org.testng.annotations.*;
+
 import java.math.BigDecimal;
+
 import static ru.mtsbank.Currency.*;
 
 public class ATMTest {
@@ -14,30 +16,32 @@ public class ATMTest {
         Assert.assertEquals(result, rates);
     }
 
-    @Test
-    public void testGetBalanceForUsd() {
-       BigDecimal totalAmount = ATM.getBalance(USD);
-       Assert.assertEquals(totalAmount, new BigDecimal(2000));
+    @Test(dataProvider = "currencies")
+    public void testGetBalance(Currency currency, BigDecimal expectedResult) {
+        BigDecimal factResult = switch (currency) {
+            case USD -> ATM.getBalance(USD);
+            case EUR -> ATM.getBalance(EUR);
+            case RUB -> ATM.getBalance(RUB);
+        };
+        Assert.assertEquals(factResult,expectedResult);
     }
 
     @Test
-    public void testGetBalanceForEur() {
-        BigDecimal totalAmount = ATM.getBalance(EUR);
-        Assert.assertEquals(totalAmount, new BigDecimal(4000));
-    }
-
-    @Test
-    public void testGetBalanceForRub() {
-        BigDecimal totalAmount = ATM.getBalance(RUB);
-        Assert.assertEquals(totalAmount, new BigDecimal(5000));
-    }
-
-    @Test
-   public void testAmountValidator() {
+    public void testAmountValidator() {
         BigDecimal amount = BigDecimal.valueOf(1000);
         int result = ATM.amountValidator(amount, USD);
         Assert.assertEquals(result, 10);
     }
 
+
+    @DataProvider(name="currencies")
+    public Object[][] currencies() {
+        return new Object[][] {
+                {USD, BigDecimal.valueOf(2000)},
+                {EUR, BigDecimal.valueOf(4000)},
+                {RUB, BigDecimal.valueOf(5000)}
+        };
     }
+
+}
 
