@@ -26,11 +26,15 @@ public class ATMTest {
         Assert.assertEquals(factResult,expectedResult);
     }
 
-    @Test
-    public void testAmountValidator() {
-        BigDecimal amount = BigDecimal.valueOf(1000);
-        int result = ATM.amountValidator(amount, USD);
-        Assert.assertEquals(result, 10);
+    @Test(dataProvider="currencyNominalsCount")
+    public void testAmountValidator(Currency currency, int expectedResult) {
+        int factResult = switch (currency) {
+            case USD -> ATM.amountValidator(BigDecimal.valueOf(1000), USD);
+            case EUR -> ATM.amountValidator(BigDecimal.valueOf(400), EUR);
+            case RUB -> ATM.amountValidator(BigDecimal.valueOf(1250), RUB);
+        };
+
+        Assert.assertEquals(factResult, expectedResult);
     }
 
 
@@ -43,5 +47,13 @@ public class ATMTest {
         };
     }
 
+    @DataProvider(name="currencyNominalsCount")
+    public Object[][] currencyNominalsCount() {
+        return new Object[][]{
+                {USD, 10},
+                {EUR, 2},
+                {RUB, 3}
+        };
+    }
 }
 
