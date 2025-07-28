@@ -9,7 +9,7 @@ import static ru.mtsbank.Currency.*;
 
 public class ATMTest {
 
-    @Test
+    @Test(description = "Проверка получения курса валют")
     public void testGetRates() {
         String rates = "USD to EUR: 0.9\nUSD to RUB: 75";
         String result = ATM.getRates();
@@ -22,6 +22,7 @@ public class ATMTest {
             case USD -> ATM.getBalance(USD);
             case EUR -> ATM.getBalance(EUR);
             case RUB -> ATM.getBalance(RUB);
+
         };
         Assert.assertEquals(factResult,expectedResult);
     }

@@ -29,11 +29,11 @@ public class ExchangeRateTest {
         return new Object[][] {
                 {1,BigDecimal.valueOf(100)},
                 {2,BigDecimal.valueOf(90.0)},
-                {3, BigDecimal.valueOf(7500)},
+                {3,BigDecimal.valueOf(7500)},
                 {4,BigDecimal.valueOf(100)},
                 {5,BigDecimal.valueOf(111)},
-                {6, BigDecimal.valueOf(5400)},
-                {7, BigDecimal.valueOf(100)}
+                {6,BigDecimal.valueOf(5400)},
+                {7,BigDecimal.valueOf(100)}
         };
     }
 
