@@ -26,7 +26,7 @@ public class ATMTest {
         Assert.assertEquals(factResult,expectedResult);
     }
 
-    @Test(dataProvider="currencyNominalsCount")
+    @Test(dataProvider = "currencyNominalsCount")
     public void testAmountValidator(Currency currency, int expectedResult) {
         int factResult = switch (currency) {
             case USD -> ATM.amountValidator(BigDecimal.valueOf(1000), USD);
@@ -38,7 +38,7 @@ public class ATMTest {
     }
 
 
-    @DataProvider(name="currencies")
+    @DataProvider(name = "currencies")
     public Object[][] currencies() {
         return new Object[][] {
                 {USD, BigDecimal.valueOf(2000)},
@@ -47,7 +47,7 @@ public class ATMTest {
         };
     }
 
-    @DataProvider(name="currencyNominalsCount")
+    @DataProvider(name = "currencyNominalsCount")
     public Object[][] currencyNominalsCount() {
         return new Object[][]{
                 {USD, 10},

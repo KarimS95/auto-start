@@ -3,6 +3,7 @@
         <classes>
             <class name="ru.mtsbank.ATMTest"/>
             <class name="ru.mtsbank.ExchangeRateTest"/>
+            <class name="ru.mtsbank.BanknoteTest"/>
         </classes>
     </test>
 </suite>
