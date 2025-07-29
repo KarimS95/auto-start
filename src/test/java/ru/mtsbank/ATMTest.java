@@ -11,31 +11,31 @@ public class ATMTest {
 
     @Test(description = "Проверка получения курса валют")
     public void testGetRates() {
-        String rates = "USD to EUR: 0.9\nUSD to RUB: 75";
-        String result = ATM.getRates();
-        Assert.assertEquals(result, rates);
+        String expectedResult = "USD to EUR: 0.9\nUSD to RUB: 75";
+        String actualResult = ATM.getRates();
+        Assert.assertEquals(actualResult, expectedResult);
     }
 
     @Test(dataProvider = "currencies")
     public void testGetBalance(Currency currency, BigDecimal expectedResult) {
-        BigDecimal factResult = switch (currency) {
+        BigDecimal actualResult = switch (currency) {
             case USD -> ATM.getBalance(USD);
             case EUR -> ATM.getBalance(EUR);
             case RUB -> ATM.getBalance(RUB);
 
         };
-        Assert.assertEquals(factResult,expectedResult);
+        Assert.assertEquals(actualResult,expectedResult);
     }
 
     @Test(dataProvider = "currencyNominalsCount")
     public void testAmountValidator(Currency currency, int expectedResult) {
-        int factResult = switch (currency) {
+        int actualResult = switch (currency) {
             case USD -> ATM.amountValidator(BigDecimal.valueOf(1000), USD);
             case EUR -> ATM.amountValidator(BigDecimal.valueOf(400), EUR);
             case RUB -> ATM.amountValidator(BigDecimal.valueOf(1250), RUB);
         };
 
-        Assert.assertEquals(factResult, expectedResult);
+        Assert.assertEquals(actualResult, expectedResult);
     }
 
 

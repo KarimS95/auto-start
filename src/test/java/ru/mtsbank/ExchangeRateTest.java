@@ -10,7 +10,7 @@ public class ExchangeRateTest {
     @Test(dataProvider = "convert")
     public void testConvert(Integer integer, BigDecimal expectedResult) {
 
-        BigDecimal factResult = switch (integer) {
+        BigDecimal actualResult = switch (integer) {
             case 1 -> ExchangeRate.convert(BigDecimal.valueOf(100), USD, USD);
             case 2 -> ExchangeRate.convert(BigDecimal.valueOf(100), USD, EUR);
             case 3 -> ExchangeRate.convert(BigDecimal.valueOf(100), USD, RUB);
@@ -21,7 +21,7 @@ public class ExchangeRateTest {
             default -> throw new IllegalStateException("Unexpected value: " + integer);
         };
 
-        Assert.assertEquals(factResult, expectedResult);
+        Assert.assertEquals(actualResult, expectedResult);
     }
 
     @DataProvider(name="convert")

@@ -12,18 +12,17 @@ public class BanknoteTest {
 
     @Test(dataProvider = "availableNominals")
     public void testGetAvailableNominals(Currency currency, String expectedResult) {
-        String factResult;
         Banknote dollarBanknote = new DollarBanknote(USD, 1);
         Banknote euroBanknote = new EuroBanknote(EUR, 5);
         Banknote rubBanknote = new RubBanknote(RUB, 50);
 
-        factResult = switch (currency) {
+        String actualResult = switch (currency) {
             case USD -> Arrays.toString(dollarBanknote.getAvailableNominals());
             case EUR -> Arrays.toString(euroBanknote.getAvailableNominals());
             case RUB -> Arrays.toString(rubBanknote.getAvailableNominals());
         };
 
-        Assert.assertEquals(factResult, expectedResult);
+        Assert.assertEquals(actualResult, expectedResult);
     }
 
     @DataProvider(name = "availableNominals")
