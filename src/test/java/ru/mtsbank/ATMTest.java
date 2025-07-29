@@ -27,6 +27,24 @@ public class ATMTest {
         Assert.assertEquals(actualResult,expectedResult);
     }
 
+    @Test(dataProvider = "balance")
+    public void testGetBalanceAfterAmountCalc(Integer action, BigDecimal expectedResult) {
+        switch (action) {
+            case 1 -> ATM.calcTotalAmount(new DollarBanknote(USD, 100),BigDecimal.valueOf(100),1);
+            case 2 -> ATM.calcTotalAmount(new DollarBanknote(USD, 100),BigDecimal.valueOf(100),2);
+        }
+        BigDecimal actualResult = ATM.getBalance(USD);
+        Assert.assertEquals(actualResult, expectedResult);
+    }
+
+    @DataProvider(name = "balance")
+    public Object[][] balance() {
+        return new Object[][]{
+                {1,BigDecimal.valueOf(2100)},
+                {2,BigDecimal.valueOf(2000)}
+        };
+        }
+
     @Test(dataProvider = "currencyNominalsCount")
     public void testAmountValidator(Currency currency, int expectedResult) {
         int actualResult = switch (currency) {
