@@ -16,9 +16,7 @@ public class PremiumPage extends BasePage{
 
     public void openPremiumPage() {
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(120));
-        wait.until(ExpectedConditions.visibilityOf(openPremiumPage));
-
-        openPremiumPage.click();
+        wait.until(ExpectedConditions.visibilityOf(openPremiumPage)).click();
     }
 
     @FindBy(xpath = "//span[contains(text(), 'Премиум') or contains(text(), 'Private')]")

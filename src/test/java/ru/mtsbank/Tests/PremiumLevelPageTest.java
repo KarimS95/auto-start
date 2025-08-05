@@ -9,18 +9,21 @@ import ru.mtsbank.pages.PremiumPage;
 public class PremiumLevelPageTest extends BaseTest{
 
     private final static String premiumLevelUrl = "https://online.mtsdengi-test.mbrd.ru/premium/level";
-    private PremiumPage premiumPage;
+
     private PremiumLevelPage premiumLevelPage;
+    private PremiumPage premiumPage;
 
     @BeforeMethod
     public void getInit() {
-        premiumPage = new PremiumPage(driverContainer);
         premiumLevelPage = new PremiumLevelPage(driverContainer);
+        premiumPage = new PremiumPage(driverContainer);
     }
 
     @Test
     public void testOpenLevelPage() {
+
         premiumPage.openPremiumPage();
+
         premiumLevelPage.openLevelPage();
 
         Assert.assertEquals(driverContainer.get().getCurrentUrl(), premiumLevelUrl);

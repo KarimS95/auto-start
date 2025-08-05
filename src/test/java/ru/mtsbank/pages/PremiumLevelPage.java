@@ -11,37 +11,26 @@ import java.util.Set;
 
 public class PremiumLevelPage extends BasePage {
 
-    private PremiumPage premiumPage;
-
     public PremiumLevelPage(InheritableThreadLocal<WebDriver> driverContainer) {
         super(driverContainer);
-
     }
 
     public void openLevelPage() {
-        premiumPage = new PremiumPage(driverContainer);
-        premiumPage.openPremiumPage();
 
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.visibilityOf(openLevelPage));
-        openLevelPage.click();
+        wait.until(ExpectedConditions.visibilityOf(openLevelPage)).click();
     }
 
     public void checkLevelPage() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
 
-        wait.until(ExpectedConditions.visibilityOf(openLevelSheet));
-        openLevelSheet.click();
+        wait.until(ExpectedConditions.visibilityOf(openLevelSheet)).click();
 
-        wait.until(ExpectedConditions.visibilityOf(closeLevelSheet));
-        closeLevelSheet.click();
+        wait.until(ExpectedConditions.visibilityOf(closeLevelSheet)).click();
 
-        wait.until(ExpectedConditions.visibilityOf(openServiceTerms));
-        openServiceTerms.click();
+        wait.until(ExpectedConditions.visibilityOf(openServiceTerms)).click();
 
-        wait.until(ExpectedConditions.visibilityOf(backButton));
-        Thread.sleep(3000);
-        backButton.click();
+        wait.until(ExpectedConditions.visibilityOf(backButton)).click();
 
 //        wait.until(ExpectedConditions.visibilityOf(openFirstI));
 //        openFirstI.click();

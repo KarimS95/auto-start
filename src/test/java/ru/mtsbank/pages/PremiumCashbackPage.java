@@ -20,9 +20,6 @@ public class PremiumCashbackPage extends BasePage{
 
     public void openPremiumCashbackCategoriesList() {
 
-        PremiumPage premiumPage = new PremiumPage(driverContainer);
-        premiumPage.openPremiumPage();
-
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
         wait.until(ExpectedConditions.visibilityOf(openCategoriesList)).click();
     }
@@ -46,7 +43,7 @@ public class PremiumCashbackPage extends BasePage{
         wait.until(ExpectedConditions.visibilityOf(openPremiumCashbackPrivilege)).click();
     }
 
-    public void checkLevelPageLink() {
+    public void checkLevelPageLink() throws InterruptedException {
 
        new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
         try {
@@ -54,7 +51,9 @@ public class PremiumCashbackPage extends BasePage{
         } catch (StaleElementReferenceException e) {
             openPremiumLink.click();
         }
+        Thread.sleep(5000);
 
+        new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
         backButton.click();
     }
 
