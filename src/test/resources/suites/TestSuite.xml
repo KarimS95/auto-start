@@ -1,9 +1,16 @@
-<suite name="ATM" parallel="tests">
-    <test name="atm" parallel="classes" thread-count="2">
+<suite name="TESTS" parallel="false">
+    <test name="tests">
         <classes>
-            <class name="ru.mtsbank.ATMTest"/>
-            <class name="ru.mtsbank.ExchangeRateTest"/>
-            <class name="ru.mtsbank.BanknoteTest"/>
+<!--            <class name="ru.mtsbank.mtsdengi.premium.AuthorizationTest"/>-->
+<!--            <class name="ru.mtsbank.mtsdengi.premium.PremiumPageTest"/>-->
+<!--            <class name="ru.mtsbank.mtsdengi.premium.PremiumCashbackPremiumPageTest"/>-->
+<!--            <class name="ru.mtsbank.mtsdengi.premium.PremiumCashbackPrivilegePageTest"/>-->
+<!--            <class name="ru.mtsbank.mtsdengi.premium.PremiumLevelPageTest"/>-->
+<!--            <class name="ru.mtsbank.TestTest.TestTest"/>-->
+            <class name="ru.mtsbank.Tests.AuthTest"/>
+            <class name="ru.mtsbank.Tests.PremiumPageTest"/>
+            <class name="ru.mtsbank.Tests.PremiumLevelPageTest"/>
+            <class name="ru.mtsbank.Tests.PremiumCashbackPageTest"/>
         </classes>
     </test>
 </suite>
