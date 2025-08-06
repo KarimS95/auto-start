@@ -23,7 +23,6 @@ public class PremiumLevelPageTest extends BaseTest{
     public void testOpenLevelPage() {
 
         premiumPage.openPremiumPage();
-
         premiumLevelPage.openLevelPage();
 
         Assert.assertEquals(driverContainer.get().getCurrentUrl(), premiumLevelUrl);

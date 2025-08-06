@@ -22,6 +22,7 @@ public class PremiumLevelPage extends BasePage {
     }
 
     public void checkLevelPage() throws InterruptedException {
+
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
 
         wait.until(ExpectedConditions.visibilityOf(openLevelSheet)).click();

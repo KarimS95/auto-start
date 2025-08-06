@@ -15,16 +15,12 @@ public class LoginPage extends BasePage {
       super(driverContainer);
   }
 
-    public void auth(String phoneNumber, List<String> passwordList) throws InterruptedException {
+    public void inputLogin(String phoneNumber) throws InterruptedException {
         WebDriverWait loginInputWait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
         loginInputWait.until(ExpectedConditions.visibilityOf(inputLogin));
 
         inputLogin.sendKeys(phoneNumber);
         nextButton.click();
-
-        for(String i: passwordList) {
-            inputCode.sendKeys(i);
-        }
 
         Thread.sleep(20000);
     }
@@ -34,7 +30,4 @@ public class LoginPage extends BasePage {
 
     @FindBy(xpath = "//button[normalize-space()='Далее']")
     private WebElement nextButton;
-
-    @FindBy(xpath = "//input[@type='tel']")
-    private WebElement inputCode;
 }

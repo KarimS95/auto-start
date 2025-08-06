@@ -3,6 +3,7 @@ package ru.mtsbank.Tests;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.BeforeClass;
+import ru.mtsbank.pages.CodePage;
 import ru.mtsbank.pages.LoginPage;
 
 import java.time.Duration;
@@ -28,12 +29,16 @@ public class BaseTest {
     }
 
     @BeforeClass(alwaysRun = true, dependsOnMethods = "setUp")
-    public void login() throws InterruptedException {
+    public void auth() throws InterruptedException {
         driverContainer.get().get(url);
         LoginPage loginPage = new LoginPage(driverContainer);
+        CodePage codePage = new CodePage(driverContainer);
 
-        loginPage.auth(phoneNumber, passwordList);
+        loginPage.inputLogin(phoneNumber);
+        codePage.inputCode(passwordList);
     }
+
+
 
 //    @AfterClass
 //    public static void tearDown() {
