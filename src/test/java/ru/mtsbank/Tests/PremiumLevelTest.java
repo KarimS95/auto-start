@@ -3,27 +3,25 @@ package ru.mtsbank.Tests;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import ru.mtsbank.pages.BasePage;
+import ru.mtsbank.pages.HomePage;
 import ru.mtsbank.pages.PremiumLevelPage;
 import ru.mtsbank.pages.PremiumPage;
 
-public class PremiumLevelPageTest extends BaseTest{
+public class PremiumLevelTest extends BaseTest{
 
     private final static String premiumLevelUrl = "https://online.mtsdengi-test.mbrd.ru/premium/level";
 
     private PremiumLevelPage premiumLevelPage;
-    private PremiumPage premiumPage;
+    private BasePage basePage;
 
-    @BeforeMethod
-    public void getInit() {
-        premiumLevelPage = new PremiumLevelPage(driverContainer);
-        premiumPage = new PremiumPage(driverContainer);
-    }
 
     @Test
-    public void testOpenLevelPage() {
+    public void testOpenLevelPage() { //PremiumPage
+        HomePage homePage = new HomePage(driverContainer);
+        PremiumPage premiumPage = homePage.openPremiumPage();
 
-        premiumPage.openPremiumPage();
-        premiumLevelPage.openLevelPage();
+        premiumPage.openPremiumLevelPage();
 
         Assert.assertEquals(driverContainer.get().getCurrentUrl(), premiumLevelUrl);
     }

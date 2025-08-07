@@ -27,9 +27,10 @@ public class PremiumCashbackPage extends BasePage{
     public void selectCashbackCategories() {
 
        List<WebElement> checkboxes = driverContainer.get().findElements(By.xpath("//input[@role='checkbox']"));
+
        if(checkboxes.size() >= 5) {
-           for(int i = 0; i < 5; i++) {
-               checkboxes.get(i).click();
+           for(WebElement checkbox : checkboxes) {
+               checkbox.click();
            }
        }
 
@@ -57,31 +58,33 @@ public class PremiumCashbackPage extends BasePage{
         backButton.click();
     }
 
-    public void checkFirstLink() throws InterruptedException {
+    public void openFirstLink() throws InterruptedException {
 
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
-
-        String generalWindowHandle = driverContainer.get().getWindowHandle();
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(60));
 
         wait.until(ExpectedConditions.visibilityOf(openFirstLink)).click();
 
-        Set<String> handles = driverContainer.get().getWindowHandles();
-
-        for (String handle : handles) {
-            if (!handle.equals(generalWindowHandle)) {
-                Thread.sleep(7000);
-                driverContainer.get().switchTo().window(handle).close();
-                driverContainer.get().switchTo().window(generalWindowHandle);
-            }
-        }
+//        Set<String> handles = driverContainer.get().getWindowHandles();
+//
+//        for (String handle : handles) {
+//            if (!handle.equals(generalWindowHandle)) {
+//                Thread.sleep(7000);
+//                driverContainer.get().switchTo().window(handle).close();
+//                driverContainer.get().switchTo().window(generalWindowHandle);
+//            }
+//        }
     }
 
-    public void checkSecondLink() throws InterruptedException {
+    public void closeFirstLink() {
+        driverContainer.get().close();
+    }
 
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
+    public void openSecondLink() throws InterruptedException {
+
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(60));
 
         String generalWindowHandle = driverContainer.get().getWindowHandle();
-        openSecondLink.click();
+        wait.until(ExpectedConditions.visibilityOf(openSecondLink)).click();
 
         Set<String> handles = driverContainer.get().getWindowHandles();
 

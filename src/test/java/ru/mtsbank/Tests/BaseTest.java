@@ -3,8 +3,7 @@ package ru.mtsbank.Tests;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.BeforeClass;
-import ru.mtsbank.pages.CodePage;
-import ru.mtsbank.pages.LoginPage;
+import ru.mtsbank.pages.*;
 
 import java.time.Duration;
 import java.util.Arrays;
@@ -22,7 +21,7 @@ public class BaseTest {
     @BeforeClass(alwaysRun = true)
     public static void setUp() {
         WebDriver driver = new ChromeDriver();
-        System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "./src/test/resources/drivers/chromedriver");
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(7));
         driverContainer.set(driver);

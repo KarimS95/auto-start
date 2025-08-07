@@ -8,12 +8,8 @@ public class AuthTest extends BaseTest{
     private static final String url = "https://online.mtsdengi-test.mbrd.ru/";
 
     @Test
-    public void testInputLogin() {
-
-    }
-
-    @Test(dependsOnMethods = "testInputLogin")
-    public void testInputCode() {
+    public void testAuth() {
         Assert.assertEquals(driverContainer.get().getCurrentUrl(), url);
+        //driverContainer.get().quit();
     }
 }

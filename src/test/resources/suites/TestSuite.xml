@@ -9,8 +9,9 @@
 <!--            <class name="ru.mtsbank.TestTest.TestTest"/>-->
             <class name="ru.mtsbank.Tests.AuthTest"/>
             <class name="ru.mtsbank.Tests.PremiumPageTest"/>
-            <class name="ru.mtsbank.Tests.PremiumLevelPageTest"/>
-            <class name="ru.mtsbank.Tests.PremiumCashbackPageTest"/>
+            <class name="ru.mtsbank.Tests.PremiumLevelTest"/>
+            <class name="ru.mtsbank.Tests.PremiumCashbackTest"/>
+            <class name="ru.mtsbank.Tests.HomePageTest"/>
         </classes>
     </test>
 </suite>

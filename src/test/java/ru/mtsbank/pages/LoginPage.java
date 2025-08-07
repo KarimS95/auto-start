@@ -15,14 +15,14 @@ public class LoginPage extends BasePage {
       super(driverContainer);
   }
 
-    public void inputLogin(String phoneNumber) throws InterruptedException {
+    public CodePage inputLogin(String phoneNumber) throws InterruptedException {
         WebDriverWait loginInputWait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
         loginInputWait.until(ExpectedConditions.visibilityOf(inputLogin));
 
         inputLogin.sendKeys(phoneNumber);
         nextButton.click();
 
-        Thread.sleep(20000);
+        return new CodePage(driverContainer);
     }
 
     @FindBy(id = "login")

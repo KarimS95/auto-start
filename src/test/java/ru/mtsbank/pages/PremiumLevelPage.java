@@ -1,5 +1,7 @@
 package ru.mtsbank.pages;
 
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,12 +17,6 @@ public class PremiumLevelPage extends BasePage {
         super(driverContainer);
     }
 
-    public void openLevelPage() {
-
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.visibilityOf(openLevelPage)).click();
-    }
-
     public void checkLevelPage() throws InterruptedException {
 
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
@@ -33,12 +29,10 @@ public class PremiumLevelPage extends BasePage {
 
         wait.until(ExpectedConditions.visibilityOf(backButton)).click();
 
-//        wait.until(ExpectedConditions.visibilityOf(openFirstI));
-//        openFirstI.click();
-//
-//        wait.until(ExpectedConditions.visibilityOf(closeFirstI));
-//        closeFirstI.click();
-//
+        wait.until(ExpectedConditions.visibilityOf(openFirstI)).click();
+
+        wait.until(ExpectedConditions.visibilityOf(closeFirstI)).click();
+
 //        wait.until(ExpectedConditions.visibilityOf(openSecondI));
 //        openSecondI.click();
 //
@@ -87,22 +81,22 @@ public class PremiumLevelPage extends BasePage {
     @FindBy(xpath = "//button[@data-testid='back-button']")
     private WebElement backButton;
 
-    @FindBy(xpath = "//p[text()='Среднемесячный остаток']/../../div/*/svg")
+    @FindBy(xpath = "//div[@id='parent']//*[[4]/svg")
     private WebElement openFirstI;
 
-    @FindBy(xpath = "//h4[contains(text(), 'Среднемесячный остаток')]/following::button[1]")
+    @FindBy(xpath = "")
     private WebElement closeFirstI;
 
     @FindBy(xpath = "")
     private WebElement openSecondI;
 
-    @FindBy(xpath = "//h4[contains(text), 'Покупки по премиальным картам']/following::button[1]")
-    private  WebElement closeSecondI;
-
     @FindBy(xpath = "")
-    private  WebElement openThirdI;
+    private WebElement closeSecondI;
 
-    @FindBy(xpath = "//h4[contains(text), 'Среднемесячный остаток на тек']/following::button[1]")
+    @FindBy(xpath = "//div[@class='sc-gKlhbP dSUumu']//div[3]//div[2]//div[1]//*[name()='svg']//*[name()='path' and contains(@fill-rule,'evenodd')]")
+    private WebElement openThirdI;
+
+    @FindBy(xpath = "//*[name()='path' and contains(@d,'M6.293 16.')]")
     private WebElement closeThirdI;
 
     @FindBy(xpath = "//a[contains(@href,'pdf')]")

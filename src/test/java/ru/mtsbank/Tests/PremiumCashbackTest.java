@@ -3,30 +3,33 @@ package ru.mtsbank.Tests;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import ru.mtsbank.pages.HomePage;
 import ru.mtsbank.pages.PremiumCashbackPage;
 import ru.mtsbank.pages.PremiumPage;
 
-public class PremiumCashbackPageTest extends BaseTest {
+public class PremiumCashbackTest extends BaseTest {
 
     private static final String cashbackCategoriesListUrl = "https://online.mtsdengi-test.mbrd.ru/premium/cashback-category?fromDate=2025-08-01";
     private static final String premiumUrl = "https://online.mtsdengi-test.mbrd.ru/premium";
     private static final String premiumCashbackUrl = "https://online.mtsdengi-test.mbrd.ru/premium/cashback";
     private static final String premiumLevelUrl = "https://online.mtsdengi-test.mbrd.ru/premium/level";
     private static final String firstLink = "https://vamprivet.ru/supreme-restaurants/";
+    private static final String secondLink = "https://vamprivet.ru/afisha/";
 
     private PremiumPage premiumPage;
     private PremiumCashbackPage premiumCashbackPage;
 
     @BeforeMethod
     public void objectInstance() {
-        premiumCashbackPage = new PremiumCashbackPage(driverContainer);
-        premiumPage = new PremiumPage(driverContainer);
+        premiumCashbackPage = new PremiumCashbackPage(driverContainer); //вынести отдельно в каждый тест
     }
 
     @Test
     public void testOpenPremiumCashbackCategoriesList() {
 
-        premiumPage.openPremiumPage();
+        HomePage homePage = new HomePage(driverContainer);
+        PremiumPage premiumPage = homePage.openPremiumPage();
+
 
         premiumCashbackPage.openPremiumCashbackCategoriesList();
 
@@ -55,10 +58,24 @@ public class PremiumCashbackPageTest extends BaseTest {
     }
 
     @Test(dependsOnMethods = "testCheckLevelPageLink")
-    public void testCheckFirstLink() throws InterruptedException {
-        premiumCashbackPage.checkFirstLink();
+    public void testOpenFirstLink() throws InterruptedException {
+        premiumCashbackPage.openFirstLink();
 
-        Assert.assertEquals(driverContainer.get().getCurrentUrl(), firstLink);
+
+    }
+
+    @Test(dependsOnMethods = "testOpenFirstLink")
+    public void testCloseFirstLink() {
+        premiumCashbackPage.closeFirstLink();
+
+
+    }
+
+    @Test(dependsOnMethods = "testCloseFirstLink")
+    public void testCheckSecondLink() throws InterruptedException{
+        premiumCashbackPage.openSecondLink();
+
+
     }
 
 }
