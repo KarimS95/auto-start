@@ -17,13 +17,19 @@ public class PremiumLevelPage extends BasePage {
         super(driverContainer);
     }
 
+    public String checkLevelSheet() {
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(100));
+        wait.until(ExpectedConditions.visibilityOf(openLevelSheet)).click();
+        closeLevelSheet.click();
+        return openLevelSheet.getText();
+    }
+
+
+
+
     public void checkLevelPage() throws InterruptedException {
 
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
-
-        wait.until(ExpectedConditions.visibilityOf(openLevelSheet)).click();
-
-        wait.until(ExpectedConditions.visibilityOf(closeLevelSheet)).click();
 
         wait.until(ExpectedConditions.visibilityOf(openServiceTerms)).click();
 
@@ -81,10 +87,10 @@ public class PremiumLevelPage extends BasePage {
     @FindBy(xpath = "//button[@data-testid='back-button']")
     private WebElement backButton;
 
-    @FindBy(xpath = "//div[@id='parent']//*[[4]/svg")
+    @FindBy(xpath = "//p[text()='Cреднемесячный остаток']/following::*[name()='svg'][1]")
     private WebElement openFirstI;
 
-    @FindBy(xpath = "")
+    @FindBy(xpath = "//p[text()='Cреднемесячный остаток']/following::*[name()='button'][1]")
     private WebElement closeFirstI;
 
     @FindBy(xpath = "")

@@ -8,28 +8,21 @@ import ru.mtsbank.pages.HomePage;
 import ru.mtsbank.pages.PremiumLevelPage;
 import ru.mtsbank.pages.PremiumPage;
 
-public class PremiumLevelTest extends BaseTest{
+public class PremiumLevelTest extends BaseTest {
 
-    private final static String premiumLevelUrl = "https://online.mtsdengi-test.mbrd.ru/premium/level";
-
-    private PremiumLevelPage premiumLevelPage;
-    private BasePage basePage;
+    private static final String premiumLevelUrl = "https://online.mtsdengi-test.mbrd.ru/premium/level";
+    private static final String expectedHeader = "уровень";
 
 
     @Test
-    public void testOpenLevelPage() { //PremiumPage
+    public void testCheckLevelPage()  {
         HomePage homePage = new HomePage(driverContainer);
         PremiumPage premiumPage = homePage.openPremiumPage();
+        PremiumLevelPage premiumLevelPage = premiumPage.openPremiumLevelPage();
+        String actualHeader = premiumLevelPage.checkLevelSheet();
+        
 
-        premiumPage.openPremiumLevelPage();
-
-        Assert.assertEquals(driverContainer.get().getCurrentUrl(), premiumLevelUrl);
-    }
-
-    @Test(dependsOnMethods = "testOpenLevelPage")
-    public void testCheckLevelPage() throws InterruptedException {
-        premiumLevelPage.checkLevelPage();
-
+        Assert.assertTrue(actualHeader.contains(expectedHeader));
 
     }
 }

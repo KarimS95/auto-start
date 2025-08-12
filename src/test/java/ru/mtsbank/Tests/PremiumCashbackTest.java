@@ -7,75 +7,90 @@ import ru.mtsbank.pages.HomePage;
 import ru.mtsbank.pages.PremiumCashbackPage;
 import ru.mtsbank.pages.PremiumPage;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class PremiumCashbackTest extends BaseTest {
 
-    private static final String cashbackCategoriesListUrl = "https://online.mtsdengi-test.mbrd.ru/premium/cashback-category?fromDate=2025-08-01";
-    private static final String premiumUrl = "https://online.mtsdengi-test.mbrd.ru/premium";
-    private static final String premiumCashbackUrl = "https://online.mtsdengi-test.mbrd.ru/premium/cashback";
-    private static final String premiumLevelUrl = "https://online.mtsdengi-test.mbrd.ru/premium/level";
-    private static final String firstLink = "https://vamprivet.ru/supreme-restaurants/";
-    private static final String secondLink = "https://vamprivet.ru/afisha/";
+    private static final List<String> getCategoristListHeader = Arrays.asList("Кешбэк", "кешбэк");
+    private static final int checkboxesCount = 5;
 
     private PremiumPage premiumPage;
     private PremiumCashbackPage premiumCashbackPage;
 
-    @BeforeMethod
-    public void objectInstance() {
-        premiumCashbackPage = new PremiumCashbackPage(driverContainer); //вынести отдельно в каждый тест
-    }
-
-    @Test
-    public void testOpenPremiumCashbackCategoriesList() {
-
+    @Test(priority = 1)
+    public void testCheckCategoriesList() {
         HomePage homePage = new HomePage(driverContainer);
         PremiumPage premiumPage = homePage.openPremiumPage();
+        PremiumCashbackPage premiumCashbackPage = premiumPage.openPremiumCashbackPrivilege();
 
-
-        premiumCashbackPage.openPremiumCashbackCategoriesList();
-
-        Assert.assertEquals(driverContainer.get().getCurrentUrl(),cashbackCategoriesListUrl);
+        Assert.assertTrue(premiumCashbackPage.categoriesListIsDisplaying());
     }
 
-    @Test(dependsOnMethods = "testOpenPremiumCashbackCategoriesList")
-    public void testSelectCashbackCategories() {
-        premiumCashbackPage.selectCashbackCategories();
+    @Test(dependsOnMethods = "testCheckCategoriesList")
+    public void testPremiumCashbackCategoriesList() {
+        PremiumCashbackPage premiumCashbackPage = new PremiumCashbackPage(driverContainer);
 
-        Assert.assertEquals(driverContainer.get().getCurrentUrl(), premiumUrl);
-    }
+        premiumCashbackPage.openCategoriesList();
 
-    @Test(dependsOnMethods = "testSelectCashbackCategories")
-    public void testOpenCashbackPrivilege() {
-        premiumCashbackPage.openPremiumCashbackPrivilege();
+        boolean isHeaderTrue = false;
+        for(String iterator : getCategoristListHeader) {
+            if(premiumCashbackPage.getCategoriesHeader().contains(iterator)) {
+                isHeaderTrue = true;
+            }
+        }
+        Assert.assertTrue(isHeaderTrue);
 
-        Assert.assertEquals(driverContainer.get().getCurrentUrl(), premiumCashbackUrl);
-    }
-
-    @Test(dependsOnMethods = "testOpenCashbackPrivilege")
-    public void testCheckLevelPageLink() throws InterruptedException {
-        premiumCashbackPage.checkLevelPageLink();
-
-        Assert.assertEquals(driverContainer.get().getCurrentUrl(), premiumCashbackUrl);
-    }
-
-    @Test(dependsOnMethods = "testCheckLevelPageLink")
-    public void testOpenFirstLink() throws InterruptedException {
-        premiumCashbackPage.openFirstLink();
-
+        boolean isCheckboxesTrue = (premiumCashbackPage.checkboxesCount() >= checkboxesCount);
+        Assert.assertTrue(isCheckboxesTrue);
 
     }
 
-    @Test(dependsOnMethods = "testOpenFirstLink")
-    public void testCloseFirstLink() {
-        premiumCashbackPage.closeFirstLink();
+    @Test(dependsOnMethods = "testPremiumCashbackCategoriesList")
+    public void testSelectPremiumCashbackCategories() {
+        PremiumCashbackPage premiumCashbackPage = new PremiumCashbackPage(driverContainer);
+        premiumCashbackPage.selectCashbackCategoriesCheckboxes();
+        premiumCashbackPage.clickOnCategoriesSelectButton();
+        premiumCashbackPage.clickOnSuccessfullButton();
 
-
-    }
-
-    @Test(dependsOnMethods = "testCloseFirstLink")
-    public void testCheckSecondLink() throws InterruptedException{
-        premiumCashbackPage.openSecondLink();
-
+        Assert.assertTrue(premiumCashbackPage.selectedCategoriesDisplaying());
 
     }
+
+    @Test(dependsOnMethods = "testSelectPremiumCashbackCategories")
+    public void testCheckLevelPageLinkIsDisplayed() throws InterruptedException { //изменить метод
+        PremiumCashbackPage premiumCashbackPage = new PremiumCashbackPage(driverContainer);
+
+        Assert.assertTrue(premiumCashbackPage.checkLevelPageLinkIsDisplayed());
+    }
+
+    @Test(dependsOnMethods = "testCheckLevelPageLinkIsDisplayed")
+    public void testCheckLevelPageLinkIsClickable() {
+        PremiumCashbackPage premiumCashbackPage = new PremiumCashbackPage(driverContainer);
+
+        Assert.assertTrue(premiumCashbackPage.checkLevelPageLinkIsClickable());
+    }
+
+    @Test(dependsOnMethods = "testCheckLevelPageLinkIsClickable")
+    public void testCheckFirstLink() {
+        PremiumCashbackPage premiumCashbackPage = new PremiumCashbackPage(driverContainer);
+
+        Assert.assertTrue(premiumCashbackPage.checkFirstLink());
+    }
+
+    @Test(dependsOnMethods = "testCheckFirstLink")
+    public void testCheckSecondLink() {
+        PremiumCashbackPage premiumCashbackPage = new PremiumCashbackPage(driverContainer);
+
+        Assert.assertTrue(premiumCashbackPage.checkSecondLink());
+    }
+
+    @Test(dependsOnMethods = "testCheckSecondLink")
+    public void testCheckThirdLink() {
+        PremiumCashbackPage premiumCashbackPage = new PremiumCashbackPage(driverContainer);
+
+        Assert.assertTrue(premiumCashbackPage.checkThirdLink());
+    }
+
 
 }

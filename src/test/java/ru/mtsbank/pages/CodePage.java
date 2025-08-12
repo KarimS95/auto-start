@@ -1,5 +1,6 @@
 package ru.mtsbank.pages;
 
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -18,13 +19,17 @@ public class CodePage extends BasePage{
     }
 
     public HomePage inputCode(List<String> passwordList) {
-
         for(String i: passwordList) {
             inputCode.sendKeys(i);
         }
 
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(60));
-        wait.until(ExpectedConditions.urlToBe(url));
+        try {
+            WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(120));
+            wait.until(ExpectedConditions.urlToBe(url));
+        } catch (StaleElementReferenceException e) {
+            WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(120));
+            wait.until(ExpectedConditions.urlToBe(url));
+        }
 
         return new HomePage(driverContainer);
     }

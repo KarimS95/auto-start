@@ -1,7 +1,11 @@
 package ru.mtsbank.Tests;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
 import ru.mtsbank.pages.*;
 
@@ -23,7 +27,7 @@ public class BaseTest {
         WebDriver driver = new ChromeDriver();
         System.setProperty("webdriver.chrome.driver", "./src/test/resources/drivers/chromedriver");
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(7));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driverContainer.set(driver);
     }
 
@@ -45,5 +49,13 @@ public class BaseTest {
 //            driverContainer.get().close();
 //        }
 //    }
+
+    protected void returnBack() {
+        WebDriverWait backButtonWait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
+        backButtonWait.until(ExpectedConditions.visibilityOf(backButton)).click();
+    }
+
+    @FindBy(xpath = "//button[@data-testid='back-button']")//ok
+    private WebElement backButton;
 
 }

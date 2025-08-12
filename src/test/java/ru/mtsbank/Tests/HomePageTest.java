@@ -4,29 +4,54 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.mtsbank.pages.HomePage;
+import ru.mtsbank.pages.PremiumPage;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class HomePageTest extends BaseTest {
 
+    private static final String BASE_URL = "https://online.mtsdengi-test.mbrd.ru/";
+    private static final String PREMIUM_URL = "https://online.mtsdengi-test.mbrd.ru/premium";
+    private static final List<String> WIDGET_NAMES = Arrays.asList("Премиум", "Premium", "Прайвет", "Private");
+
     private HomePage homePage;
 
-    @BeforeMethod
-    public void getInit() {
+    @Test
+    public void testCheckPremiumWidgetIsDisplayed() {
         homePage = new HomePage(driverContainer);
+
+        Assert.assertTrue(homePage.checkPremiumWidgetIsDisplayed());
     }
 
     @Test
-    public void testCheckPremiumWidget() {
-        homePage.checkPremiumWidget();
+    public void testChekPremiumWidgetName() {
+        homePage = new HomePage(driverContainer);
+
+        boolean found = false;
+        for(String charToCheck : WIDGET_NAMES) {
+            if(homePage.checkPremiumWidgetName().contains(charToCheck)) {
+                found = true;
+                break;
+            }
+        }
+
+        Assert.assertTrue(found);
     }
 
-    @Test//(dependsOnMethods = "testCheckPremiumWidget")
-    public void testOpenPremiumPage() { //clickable
-        homePage.openPremiumPage();
+    @Test
+    public void testCheckPremiumWidgetIsClickable() {
+        homePage = new HomePage(driverContainer);
+
+        Assert.assertTrue(homePage.checkPremiumWidgetIsClickable());
     }
 
-    @Test(dependsOnMethods = "testOpenPremiumPage")
-    public void testReturnToHomePage() {
-        homePage.returnToPreviousPage(HomePage.class);
-    }
+//    @Test(dependsOnMethods = "testChekPremiumWidgetName")
+//    public void testCheckPremiumPage() {
+//        homePage = new HomePage(driverContainer);
+//
+//        Assert.assertEquals(homePage.checkPremiumPage(), PREMIUM_URL);
+//    }
+
 
 }

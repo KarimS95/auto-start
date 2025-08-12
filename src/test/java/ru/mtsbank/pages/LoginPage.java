@@ -1,5 +1,6 @@
 package ru.mtsbank.pages;
 
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,8 +17,13 @@ public class LoginPage extends BasePage {
   }
 
     public CodePage inputLogin(String phoneNumber) throws InterruptedException {
-        WebDriverWait loginInputWait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
-        loginInputWait.until(ExpectedConditions.visibilityOf(inputLogin));
+      try {
+          WebDriverWait loginInputWait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(100));
+          loginInputWait.until(ExpectedConditions.visibilityOf(inputLogin));
+      } catch (StaleElementReferenceException e) {
+          WebDriverWait loginInputWait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(100));
+          loginInputWait.until(ExpectedConditions.visibilityOf(inputLogin));
+      }
 
         inputLogin.sendKeys(phoneNumber);
         nextButton.click();

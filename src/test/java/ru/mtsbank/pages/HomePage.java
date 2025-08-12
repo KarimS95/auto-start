@@ -1,5 +1,6 @@
 package ru.mtsbank.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,16 +15,41 @@ public class HomePage extends BasePage{
         super(driverContainer);
     }
 
+    public boolean checkPremiumWidgetIsClickable() {
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(200));
+        wait.until(ExpectedConditions.elementToBeClickable(checkPremiumWidget));
+
+        return true;
+    }
+
+    public boolean checkPremiumWidgetIsDisplayed() {
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(200));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(premiumWidget));
+
+        return true;
+    }
+
+    public String checkPremiumWidgetName() {
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(200));
+        wait.until(ExpectedConditions.visibilityOf(openPremiumPage));
+
+        return openPremiumPage.getText();
+    }
+
     public PremiumPage openPremiumPage() {
-        WebDriverWait openPremiumPageWait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(200));
-        openPremiumPageWait.until(ExpectedConditions.visibilityOf(openPremiumPage)).click();
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(150));
+        wait.until(ExpectedConditions.visibilityOf(openPremiumPage)).click();
+
         return new PremiumPage(driverContainer);
     }
 
-    public void checkPremiumWidget() {
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(200));
-        wait.until(ExpectedConditions.visibilityOf(checkPremiumWidget));
+    public String checkPremiumPage() {
+        WebDriverWait waitToOpenPremiumPage = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(100));
+        waitToOpenPremiumPage.until(ExpectedConditions.visibilityOf(openPremiumPage)).click();
+        return driverContainer.get().getCurrentUrl();
     }
+
+
 
     @FindBy(xpath = "//button[@data-testid='back-button']")
     private WebElement backButton;
@@ -33,4 +59,6 @@ public class HomePage extends BasePage{
 
     @FindBy(xpath = "//div[@data-testid='flexbox']/span[contains(text(), 'Премиум') or contains(text(), 'Private')]" )
     private WebElement checkPremiumWidget;
+
+    private By premiumWidget = By.xpath("//div[@data-testid='flexbox']/span[contains(text(), 'Премиум') or contains(text(), 'Private')]");
 }
