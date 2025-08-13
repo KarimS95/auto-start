@@ -1,10 +1,8 @@
-package ru.mtsbank.Tests;
+package ru.mtsbank.premium.Tests;
 
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import ru.mtsbank.pages.HomePage;
-import ru.mtsbank.pages.PremiumPage;
+import ru.mtsbank.premium.pages.HomePage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,12 +15,6 @@ public class HomePageTest extends BaseTest {
 
     private HomePage homePage;
 
-    @Test
-    public void testCheckPremiumWidgetIsDisplayed() {
-        homePage = new HomePage(driverContainer);
-
-        Assert.assertTrue(homePage.checkPremiumWidgetIsDisplayed());
-    }
 
     @Test
     public void testChekPremiumWidgetName() {

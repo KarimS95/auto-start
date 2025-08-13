@@ -1,45 +1,45 @@
-package ru.mtsbank.pages;
+package ru.mtsbank.premium.pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 public class PremiumCashbackPage extends BasePage{
 
+    private static final int MAX_RETRIES = 3;
+
     public PremiumCashbackPage(InheritableThreadLocal<WebDriver> driverContainer) {
         super(driverContainer);
     }
 
-    public boolean categoriesListIsDisplaying() {
-        WebDriverWait waitCategoriesListButton = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(120));
-        waitCategoriesListButton.until(ExpectedConditions.visibilityOfElementLocated(checkCategoriesList));
-        return true;
-    }
-
     public void openCategoriesList() {
-        try {
-            WebDriverWait waitCategoriesListButton = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(120));
-            waitCategoriesListButton.until(ExpectedConditions.elementToBeClickable(openCategoriesList)).click();
-        } catch (StaleElementReferenceException e) {
-            WebDriverWait waitCategoriesListButton = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(120));
-            waitCategoriesListButton.until(ExpectedConditions.elementToBeClickable(openCategoriesList)).click();
+
+        for(int i = 0; i < MAX_RETRIES; i++) {
+            try {
+                WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(100));
+                wait.until(ExpectedConditions.elementToBeClickable(openCategoriesList)).click();
+                break;
+            } catch (StaleElementReferenceException | ElementNotInteractableException e) {
+                System.out.println("Retries: " + i);
+            }
         }
     }
 
-    public String getCategoriesHeader() {
+    public String getCategoriesListHeader() {
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(60));
+        wait.until(ExpectedConditions.visibilityOf(checkCategoriesListHeaderText));
+
         return checkCategoriesListHeaderText.getText();
     }
 
-    public int checkboxesCount() {
+    public int getCheckboxesCount() {
         return driverContainer.get().findElements(checkboxesByLocator).size();
     }
 
@@ -63,31 +63,32 @@ public class PremiumCashbackPage extends BasePage{
         return new PremiumCashbackPage(driverContainer);
     }
 
-    public boolean selectedCategoriesDisplaying() {
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(60));
+    public boolean selectedCategoriesDisplayed() {
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
         wait.until(ExpectedConditions.visibilityOfElementLocated(checkSelectedCategories));
         return true;
     }
 
-    public boolean checkLevelPageLinkIsDisplayed() throws InterruptedException {
-       WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(120));
-       wait.until(ExpectedConditions.visibilityOfElementLocated(checkLevelPageIsDisplayed));
-       return true;
-    }
+    public List<String> checkOpenLevelPageLink() {
+        WebDriverWait waitPremiumLink = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
+        waitPremiumLink.until(ExpectedConditions.elementToBeClickable(openPremiumLink)).click();
 
-    public boolean checkLevelPageLinkIsClickable() {
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(60));
-        wait.until(ExpectedConditions.elementToBeClickable(openPremiumLink));
-        return true;
-    }
+        WebDriverWait waitPremiumLevelPageHeader = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(60));
+        waitPremiumLevelPageHeader.until(ExpectedConditions.visibilityOf(checkPremiumLevelPageHeader));
+        String premiumLevelPageHeaderText = checkPremiumLevelPageHeader.getText();
+        String currentUrl = driverContainer.get().getCurrentUrl();
 
+        backButton.click();
+
+        return Arrays.asList(premiumLevelPageHeaderText,currentUrl);
+    }
 
     public boolean checkFirstLink()  {
         boolean isTrue = false;
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(60));
-        String generalWindowHandle = driverContainer.get().getWindowHandle();
 
-        wait.until(ExpectedConditions.visibilityOf(openFirstLink)).click();
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(120));
+        String generalWindowHandle = driverContainer.get().getWindowHandle();
+        wait.until(ExpectedConditions.elementToBeClickable(openFirstLink)).click();
 
         Set<String> handles = driverContainer.get().getWindowHandles();
 
@@ -104,11 +105,10 @@ public class PremiumCashbackPage extends BasePage{
 
     public boolean checkSecondLink() {
         boolean isTrue = false;
-
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(60));
-
         String generalWindowHandle = driverContainer.get().getWindowHandle();
-        wait.until(ExpectedConditions.visibilityOf(openSecondLink)).click();
+
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.elementToBeClickable(openSecondLink)).click();
 
         Set<String> handles = driverContainer.get().getWindowHandles();
 
@@ -125,11 +125,10 @@ public class PremiumCashbackPage extends BasePage{
 
     public boolean checkThirdLink() {
         boolean isTrue = false;
-
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(60));
-
         String generalWindowHandle = driverContainer.get().getWindowHandle();
-        wait.until(ExpectedConditions.visibilityOf(openCashbackPdf)).click();
+
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.elementToBeClickable(openCashbackPdf)).click();
 
         Set<String> handles = driverContainer.get().getWindowHandles();
 
@@ -191,6 +190,9 @@ public class PremiumCashbackPage extends BasePage{
 
     @FindBy(xpath = "//div[contains(text(), 'кешбэк')]")
     private WebElement checkCategoriesListHeaderText;
+
+    @FindBy(xpath = "//div[contains(text(), 'Премиальное обслуживание')]")
+    private WebElement checkPremiumLevelPageHeader;
 
 
     private By checkLevelPageIsDisplayed = By.xpath("//a[@href='/premium/level']");

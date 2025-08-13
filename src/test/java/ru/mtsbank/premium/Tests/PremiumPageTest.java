@@ -1,10 +1,9 @@
-package ru.mtsbank.Tests;
+package ru.mtsbank.premium.Tests;
 
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import ru.mtsbank.pages.*;
+import ru.mtsbank.premium.pages.HomePage;
+import ru.mtsbank.premium.pages.PremiumPage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -38,12 +37,6 @@ public class PremiumPageTest extends BaseTest {
         Assert.assertTrue(premiumPage.checkPremiumLevelPageIsClickable());
     }
 
-    @Test(dependsOnMethods = "testCheckLevelPageHeaderName")
-    public void testCheckPremiumLevelPageIsDisplayed() {
-        PremiumPage premiumPage = new PremiumPage(driverContainer);
-
-        Assert.assertTrue(premiumPage.checkPremiumLevelPageIsDisplayed());
-    }
 
     @Test(dependsOnMethods = "testCheckLevelPageHeaderName")
     public void testCheckPremiumCashbackCategoriesListIsClickable() {
@@ -52,25 +45,20 @@ public class PremiumPageTest extends BaseTest {
         Assert.assertTrue(premiumPage.checkPremiumCashbackCategoriesListIsClickable());
     }
 
-    @Test(dependsOnMethods = "testCheckLevelPageHeaderName")
-    public void testCheckPremiumCashbackCategoriesListIsDisplayed() {
-        PremiumPage premiumPage = new PremiumPage(driverContainer);
 
-        Assert.assertTrue(premiumPage.checkPremiumCashbackCategoriesListIsDisplayed());
-    }
 
-    @Test(dependsOnMethods = "testCheckLevelPageHeaderName")
-    public void testCheckPremiumCashbackPrivilegeIsDisplayed() {
-        PremiumPage premiumPage = new PremiumPage(driverContainer);
-
-        Assert.assertTrue(premiumPage.checkPremiumCashbackPrivilegeIsDisplayed());
-    }
-
-    @Test(dependsOnMethods = "testCheckLevelPageHeaderName")
+    @Test(dependsOnMethods = "testCheckPremiumCashbackCategoriesListIsClickable")
     public void testCheckPremiumCashbackPrivilegeIsClickable() {
         PremiumPage premiumPage = new PremiumPage(driverContainer);
 
         Assert.assertTrue(premiumPage.checkPremiumCashbackPrivilegeIsClickable());
+    }
+
+    @Test(dependsOnMethods = "testCheckPremiumCashbackPrivilegeIsClickable")
+    public void testCheckPrivilegesBlocksIsDisplayed() {
+        PremiumPage premiumPage = new PremiumPage(driverContainer);
+
+        Assert.assertTrue(premiumPage.checkPrivilegesBlocksIsDisplayed());
     }
 
 }

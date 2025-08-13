@@ -7,11 +7,11 @@
 <!--            <class name="ru.mtsbank.mtsdengi.premium.PremiumCashbackPrivilegePageTest"/>-->
 <!--            <class name="ru.mtsbank.mtsdengi.premium.PremiumLevelPageTest"/>-->
 <!--            <class name="ru.mtsbank.TestTest.TestTest"/>-->
-            <class name="ru.mtsbank.Tests.AuthTest"/>
-            <class name="ru.mtsbank.Tests.PremiumPageTest"/>
-            <class name="ru.mtsbank.Tests.PremiumLevelTest"/>
-            <class name="ru.mtsbank.Tests.PremiumCashbackTest"/>
-            <class name="ru.mtsbank.Tests.HomePageTest"/>
+            <class name="ru.mtsbank.premium.Tests.AuthTest"/>
+            <class name="ru.mtsbank.premium.Tests.PremiumPageTest"/>
+            <class name="ru.mtsbank.premium.Tests.PremiumLevelTest"/>
+            <class name="ru.mtsbank.premium.Tests.PremiumCashbackTest"/>
+            <class name="ru.mtsbank.premium.Tests.HomePageTest"/>
         </classes>
     </test>
 </suite>

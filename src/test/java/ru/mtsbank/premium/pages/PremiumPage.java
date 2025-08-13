@@ -1,4 +1,4 @@
-package ru.mtsbank.pages;
+package ru.mtsbank.premium.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -32,22 +32,14 @@ public class PremiumPage extends BasePage{
     }
 
     public boolean checkPremiumLevelPageIsClickable() {
-        WebDriverWait levelPageWait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(100));
+        WebDriverWait levelPageWait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
         levelPageWait.until(ExpectedConditions.elementToBeClickable(openLevelPage)).isEnabled();
 
         return true;
     }
 
-    public boolean checkPremiumLevelPageIsDisplayed() {
-        WebDriverWait levelPageWait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(100));
-        levelPageWait.until(ExpectedConditions.elementToBeClickable(openLevelPage)).isDisplayed();
-
-        return true;
-    }
-
-
     public void openPremiumCashbackCategoriesList() {
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(100));
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
         wait.until(ExpectedConditions.visibilityOf(openPremiumCashbackCategoriesList)).click();
 
     }
@@ -69,46 +61,38 @@ public class PremiumPage extends BasePage{
     }
 
     public boolean checkPremiumCashbackCategoriesListIsClickable() {
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(100));
-        wait.until(ExpectedConditions.elementToBeClickable(openPremiumCashbackCategoriesList)).isEnabled();
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.elementToBeClickable(openPremiumCashbackCategoriesList));
 
         return true;
     }
-
-    public boolean checkPremiumCashbackCategoriesListIsDisplayed() {
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(100));
-        wait.until(ExpectedConditions.elementToBeClickable(openPremiumCashbackCategoriesList)).isDisplayed();
-
-        return true;
-    }
-
 
     public PremiumCashbackPage openPremiumCashbackPrivilege() {
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(100));
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
         wait.until(ExpectedConditions.visibilityOf(openPremiumCashbackPrivilege)).click();
 
         return new PremiumCashbackPage(driverContainer);
     }
 
     public boolean checkPremiumCashbackPrivilegeIsClickable() {
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(100));
-        wait.until(ExpectedConditions.elementToBeClickable(openPremiumCashbackPrivilege)).isEnabled();
-
-        return true;
-    }
-
-    public boolean checkPremiumCashbackPrivilegeIsDisplayed() {
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(100));
-        wait.until(ExpectedConditions.elementToBeClickable(openPremiumCashbackPrivilege)).isDisplayed();
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.elementToBeClickable(openPremiumCashbackPrivilege));
 
         return true;
     }
 
     public String checkLevelPageHeaderName() {
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(150));
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
         wait.until(ExpectedConditions.visibilityOf(checkLevelPageButton));
 
         return checkLevelPageButton.getText();
+    }
+
+    public boolean checkPrivilegesBlocksIsDisplayed() {
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(checkPrivilegesBlocks));
+
+        return true;
     }
 
 
@@ -142,6 +126,8 @@ public class PremiumPage extends BasePage{
 
     @FindBy(xpath = "//p[contains(text(),'Уровень') or contains(text(), 'Private')]")
     private WebElement checkLevelPageButton;
+
+    private By checkPrivilegesBlocks = By.xpath("//span[contains(text(), 'Мои привилегии')]");
 
 
 }

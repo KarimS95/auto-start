@@ -1,77 +1,72 @@
-package ru.mtsbank.Tests;
+package ru.mtsbank.premium.Tests;
 
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import ru.mtsbank.pages.HomePage;
-import ru.mtsbank.pages.PremiumCashbackPage;
-import ru.mtsbank.pages.PremiumPage;
+import ru.mtsbank.premium.pages.HomePage;
+import ru.mtsbank.premium.pages.PremiumCashbackPage;
+import ru.mtsbank.premium.pages.PremiumPage;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class PremiumCashbackTest extends BaseTest {
 
-    private static final List<String> getCategoristListHeader = Arrays.asList("Кешбэк", "кешбэк");
-    private static final int checkboxesCount = 5;
+    private static final List<String> CATEGORIES_LIST_HEADER = Arrays.asList("Кешбэк", "кешбэк");
+    private static final int CHECKBOXES_COUNT = 5;
+    private static final List<String> EXPECTED_LIST = Arrays.asList("Премиальное обслуживание", "https://online.mtsdengi-test.mbrd.ru/premium","https://online.mtsdengi-dev.mbrd.ru/premium");
 
-    private PremiumPage premiumPage;
-    private PremiumCashbackPage premiumCashbackPage;
+
 
     @Test(priority = 1)
-    public void testCheckCategoriesList() {
+    public void testOpenPremiumCashbackCategoriesList() {
         HomePage homePage = new HomePage(driverContainer);
         PremiumPage premiumPage = homePage.openPremiumPage();
         PremiumCashbackPage premiumCashbackPage = premiumPage.openPremiumCashbackPrivilege();
 
-        Assert.assertTrue(premiumCashbackPage.categoriesListIsDisplaying());
-    }
-
-    @Test(dependsOnMethods = "testCheckCategoriesList")
-    public void testPremiumCashbackCategoriesList() {
-        PremiumCashbackPage premiumCashbackPage = new PremiumCashbackPage(driverContainer);
-
         premiumCashbackPage.openCategoriesList();
 
         boolean isHeaderTrue = false;
-        for(String iterator : getCategoristListHeader) {
-            if(premiumCashbackPage.getCategoriesHeader().contains(iterator)) {
+        for(String iterator : CATEGORIES_LIST_HEADER) {
+            if(premiumCashbackPage.getCategoriesListHeader().contains(iterator)) {
                 isHeaderTrue = true;
+                break;
             }
         }
+
         Assert.assertTrue(isHeaderTrue);
 
-        boolean isCheckboxesTrue = (premiumCashbackPage.checkboxesCount() >= checkboxesCount);
+        boolean isCheckboxesTrue = (premiumCashbackPage.getCheckboxesCount() >= CHECKBOXES_COUNT);
         Assert.assertTrue(isCheckboxesTrue);
 
     }
 
-    @Test(dependsOnMethods = "testPremiumCashbackCategoriesList")
+    @Test(dependsOnMethods = "testOpenPremiumCashbackCategoriesList")
     public void testSelectPremiumCashbackCategories() {
         PremiumCashbackPage premiumCashbackPage = new PremiumCashbackPage(driverContainer);
         premiumCashbackPage.selectCashbackCategoriesCheckboxes();
         premiumCashbackPage.clickOnCategoriesSelectButton();
         premiumCashbackPage.clickOnSuccessfullButton();
 
-        Assert.assertTrue(premiumCashbackPage.selectedCategoriesDisplaying());
+        Assert.assertTrue(premiumCashbackPage.selectedCategoriesDisplayed());
 
     }
 
     @Test(dependsOnMethods = "testSelectPremiumCashbackCategories")
-    public void testCheckLevelPageLinkIsDisplayed() throws InterruptedException { //изменить метод
+    public void testCheckOpenLevelPageLink() {
         PremiumCashbackPage premiumCashbackPage = new PremiumCashbackPage(driverContainer);
 
-        Assert.assertTrue(premiumCashbackPage.checkLevelPageLinkIsDisplayed());
+        boolean isTrue = false;
+        for(String iterator : EXPECTED_LIST) {
+            if(premiumCashbackPage.checkOpenLevelPageLink().contains(iterator)) {
+                isTrue = true;
+                break;
+            }
+        }
+
+        Assert.assertTrue(isTrue);
     }
 
-    @Test(dependsOnMethods = "testCheckLevelPageLinkIsDisplayed")
-    public void testCheckLevelPageLinkIsClickable() {
-        PremiumCashbackPage premiumCashbackPage = new PremiumCashbackPage(driverContainer);
-
-        Assert.assertTrue(premiumCashbackPage.checkLevelPageLinkIsClickable());
-    }
-
-    @Test(dependsOnMethods = "testCheckLevelPageLinkIsClickable")
+    @Test(dependsOnMethods = "testCheckOpenLevelPageLink")
     public void testCheckFirstLink() {
         PremiumCashbackPage premiumCashbackPage = new PremiumCashbackPage(driverContainer);
 

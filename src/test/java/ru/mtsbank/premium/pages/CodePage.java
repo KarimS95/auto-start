@@ -1,6 +1,5 @@
-package ru.mtsbank.pages;
+package ru.mtsbank.premium.pages;
 
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,7 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.List;
 
-public class CodePage extends BasePage{
+public class CodePage extends BasePage {
 
     private static final String url = "https://online.mtsdengi-test.mbrd.ru/";
 
@@ -19,17 +18,12 @@ public class CodePage extends BasePage{
     }
 
     public HomePage inputCode(List<String> passwordList) {
-        for(String i: passwordList) {
-            inputCode.sendKeys(i);
+        for (String j : passwordList) {
+            inputCode.sendKeys(j);
         }
 
-        try {
-            WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(120));
-            wait.until(ExpectedConditions.urlToBe(url));
-        } catch (StaleElementReferenceException e) {
-            WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(120));
-            wait.until(ExpectedConditions.urlToBe(url));
-        }
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(200));
+        wait.until(ExpectedConditions.urlToBe(url));
 
         return new HomePage(driverContainer);
     }

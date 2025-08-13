@@ -1,4 +1,4 @@
-package ru.mtsbank.pages;
+package ru.mtsbank.premium.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -16,21 +16,14 @@ public class HomePage extends BasePage{
     }
 
     public boolean checkPremiumWidgetIsClickable() {
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(200));
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(100));
         wait.until(ExpectedConditions.elementToBeClickable(checkPremiumWidget));
 
         return true;
     }
 
-    public boolean checkPremiumWidgetIsDisplayed() {
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(200));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(premiumWidget));
-
-        return true;
-    }
-
     public String checkPremiumWidgetName() {
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(200));
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
         wait.until(ExpectedConditions.visibilityOf(openPremiumPage));
 
         return openPremiumPage.getText();
@@ -41,12 +34,6 @@ public class HomePage extends BasePage{
         wait.until(ExpectedConditions.visibilityOf(openPremiumPage)).click();
 
         return new PremiumPage(driverContainer);
-    }
-
-    public String checkPremiumPage() {
-        WebDriverWait waitToOpenPremiumPage = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(100));
-        waitToOpenPremiumPage.until(ExpectedConditions.visibilityOf(openPremiumPage)).click();
-        return driverContainer.get().getCurrentUrl();
     }
 
 

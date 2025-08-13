@@ -1,4 +1,4 @@
-package ru.mtsbank.pages;
+package ru.mtsbank.premium.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

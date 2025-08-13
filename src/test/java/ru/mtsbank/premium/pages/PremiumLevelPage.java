@@ -1,15 +1,12 @@
-package ru.mtsbank.pages;
+package ru.mtsbank.premium.pages;
 
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.Set;
+import java.util.Objects;
 
 public class PremiumLevelPage extends BasePage {
 
@@ -17,59 +14,45 @@ public class PremiumLevelPage extends BasePage {
         super(driverContainer);
     }
 
-    public String checkLevelSheet() {
+    public String checkLevelPageHeaderName() {
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(100));
+        wait.until(ExpectedConditions.visibilityOf(getLevelPageHeader));
+
+        return getLevelPageHeader.getText();
+    }
+
+    public boolean checkLevelSheetIsClickable() {
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.elementToBeClickable(openLevelSheet));
+        return true;
+    }
+
+    public String checkClickLevelSheet() {
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
         wait.until(ExpectedConditions.visibilityOf(openLevelSheet)).click();
         closeLevelSheet.click();
         return openLevelSheet.getText();
     }
 
-
-
-
-    public void checkLevelPage() throws InterruptedException {
-
+    public boolean checkServicesTermsButtonIsClickable() {
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.elementToBeClickable(openServiceTerms));
 
-        wait.until(ExpectedConditions.visibilityOf(openServiceTerms)).click();
-
-        wait.until(ExpectedConditions.visibilityOf(backButton)).click();
-
-        wait.until(ExpectedConditions.visibilityOf(openFirstI)).click();
-
-        wait.until(ExpectedConditions.visibilityOf(closeFirstI)).click();
-
-//        wait.until(ExpectedConditions.visibilityOf(openSecondI));
-//        openSecondI.click();
-//
-//        wait.until(ExpectedConditions.visibilityOf(closeSecondI));
-//        closeSecondI.click();
-//
-//        wait.until(ExpectedConditions.visibilityOf(openThirdI));
-//        openThirdI.click();
-//
-//        wait.until(ExpectedConditions.visibilityOf(closeThirdI));
-//        closeThirdI.click();
-
-        String firstHandle = driverContainer.get().getWindowHandle();
-        wait.until(ExpectedConditions.visibilityOf(openLink));
-        openLink.click();
-
-        Set<String> handles = driverContainer.get().getWindowHandles();
-        for (String handle : handles) {
-            if (!handle.equals(firstHandle)) {
-                Thread.sleep(7000);
-                driverContainer.get().switchTo().window(handle).close();
-                driverContainer.get().switchTo().window(firstHandle);
-            }
-        }
-
-        wait.until(ExpectedConditions.visibilityOf(backToPremiumPage));
-        backToPremiumPage.click();
-
-        wait.until(ExpectedConditions.visibilityOf(backToGeneralPage));
-        backToGeneralPage.click();
+        return true;
     }
+
+    public boolean checkOpenServicesTermsButton() {
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.elementToBeClickable(openServiceTerms)).click();
+
+        boolean isTrue = Objects.equals(termsText.getText(), termsStringText);
+
+        backButton.click();
+
+        return isTrue;
+    }
+
+
 
 
     @FindBy(xpath = "//a[@href='/premium/level']")
@@ -113,5 +96,16 @@ public class PremiumLevelPage extends BasePage {
 
     @FindBy(xpath = "//button[@data-testid='back-button']")
     private WebElement backToGeneralPage;
+
+    @FindBy(xpath = "//div[contains(text(), 'Условия')]")
+    private WebElement termsText;
+
+    @FindBy(xpath = "//div[contains(text(), 'Премиальное обслуживание')]")
+    private WebElement getLevelPageHeader;
+
+    private By byOpenLevelSheet = By.xpath("//span[contains(text(),'Мой уровень в')]");
+    private By byOpenServicesTermsButton = By.xpath("//span[text()='Условия обслуживания']");
+
+    private String termsStringText = "Условия обслуживания";
 
 }
