@@ -1,17 +1,18 @@
-<suite name="TESTS" parallel="false">
-    <test name="tests">
+<suite name="tests" parallel="false">
+    <test name="premium-tests">
         <classes>
-<!--            <class name="ru.mtsbank.mtsdengi.premium.AuthorizationTest"/>-->
-<!--            <class name="ru.mtsbank.mtsdengi.premium.PremiumPageTest"/>-->
-<!--            <class name="ru.mtsbank.mtsdengi.premium.PremiumCashbackPremiumPageTest"/>-->
-<!--            <class name="ru.mtsbank.mtsdengi.premium.PremiumCashbackPrivilegePageTest"/>-->
-<!--            <class name="ru.mtsbank.mtsdengi.premium.PremiumLevelPageTest"/>-->
-<!--            <class name="ru.mtsbank.TestTest.TestTest"/>-->
             <class name="ru.mtsbank.premium.Tests.AuthTest"/>
             <class name="ru.mtsbank.premium.Tests.PremiumPageTest"/>
             <class name="ru.mtsbank.premium.Tests.PremiumLevelTest"/>
             <class name="ru.mtsbank.premium.Tests.PremiumCashbackTest"/>
             <class name="ru.mtsbank.premium.Tests.HomePageTest"/>
+        </classes>
+    </test>
+    <test name="homework-tests">
+        <classes>
+            <class name="ru.mtsbank.hm.tests.HomePageTest"/>
+            <class name="ru.mtsbank.hm.tests.RegisterPageTest"/>
+            <class name="ru.mtsbank.hm.tests.ForgotPasswordPageTest"/>
         </classes>
     </test>
 </suite>

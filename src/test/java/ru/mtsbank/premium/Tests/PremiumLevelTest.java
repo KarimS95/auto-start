@@ -23,33 +23,25 @@ public class PremiumLevelTest extends BaseTest {
     }
 
     @Test(dependsOnMethods = "testCheckLevelPageHeaderName")
-    public void testCheckLevelSheetIsClickable() {
-        PremiumLevelPage premiumLevelPage = new PremiumLevelPage(driverContainer);
-
-        Assert.assertTrue(premiumLevelPage.checkLevelSheetIsClickable());
-    }
-
-    @Test(dependsOnMethods = "testCheckLevelSheetIsClickable")
     public void testCheckClickLevelSheet()  {
         PremiumLevelPage premiumLevelPage = new PremiumLevelPage(driverContainer);
-        String actualHeader = premiumLevelPage.checkClickLevelSheet();
 
-        Assert.assertTrue(actualHeader.contains(EXPECTED_LEVEL_SHEET_HEADER));
+        Assert.assertTrue(premiumLevelPage.checkClickLevelSheet().contains(EXPECTED_LEVEL_SHEET_HEADER));
     }
-
 
     @Test(dependsOnMethods = "testCheckClickLevelSheet")
-    public void testCheckServicesTermsButtonIsClickable() {
-        PremiumLevelPage premiumLevelPage = new PremiumLevelPage(driverContainer);
-
-        Assert.assertTrue(premiumLevelPage.checkServicesTermsButtonIsClickable());
-    }
-
-    @Test(dependsOnMethods = "testCheckServicesTermsButtonIsClickable")
     public void testCheckOpenServicesTermsButton() {
         PremiumLevelPage premiumLevelPage = new PremiumLevelPage(driverContainer);
 
         Assert.assertTrue(premiumLevelPage.checkOpenServicesTermsButton());
+    }
+
+    @Test(dependsOnMethods = "testCheckOpenServicesTermsButton")
+    public void testChecksI() {
+        PremiumLevelPage premiumLevelPage = new PremiumLevelPage(driverContainer);
+        premiumLevelPage.checkFirstI();
+        premiumLevelPage.checkSecondI();
+        premiumLevelPage.checkThirdI();
     }
 
 }

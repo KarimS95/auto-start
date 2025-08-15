@@ -23,8 +23,6 @@ public class BaseTest {
     @BeforeClass(alwaysRun = true)
     public static void setUp() {
         WebDriver driver = new ChromeDriver();
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--headless=new");
         System.setProperty("webdriver.chrome.driver", "./src/test/resources/drivers/chromedriver");
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));

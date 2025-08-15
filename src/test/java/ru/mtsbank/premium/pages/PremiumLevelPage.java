@@ -21,24 +21,11 @@ public class PremiumLevelPage extends BasePage {
         return getLevelPageHeader.getText();
     }
 
-    public boolean checkLevelSheetIsClickable() {
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.elementToBeClickable(openLevelSheet));
-        return true;
-    }
-
     public String checkClickLevelSheet() {
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
         wait.until(ExpectedConditions.visibilityOf(openLevelSheet)).click();
         closeLevelSheet.click();
         return openLevelSheet.getText();
-    }
-
-    public boolean checkServicesTermsButtonIsClickable() {
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.elementToBeClickable(openServiceTerms));
-
-        return true;
     }
 
     public boolean checkOpenServicesTermsButton() {
@@ -51,6 +38,26 @@ public class PremiumLevelPage extends BasePage {
 
         return isTrue;
     }
+
+    public void checkFirstI() {
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.elementToBeClickable(openFirstI)).click();
+        closeFirstI.click();
+    }
+
+    public void checkSecondI() {
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.elementToBeClickable(openSecondI)).click();
+        closeSecondI.click();
+    }
+
+    public void checkThirdI() {
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.elementToBeClickable(openThirdI)).click();
+        closeThirdI.click();
+    }
+
+
 
 
 
@@ -70,22 +77,22 @@ public class PremiumLevelPage extends BasePage {
     @FindBy(xpath = "//button[@data-testid='back-button']")
     private WebElement backButton;
 
-    @FindBy(xpath = "//p[text()='Cреднемесячный остаток']/following::*[name()='svg'][1]")
+    @FindBy(xpath = "//div[@class='sc-bSoFTp gkRNID']//div[2]//div[1]//div[1]//div[2]//div[1]//*[name()='svg']")
     private WebElement openFirstI;
 
-    @FindBy(xpath = "//p[text()='Cреднемесячный остаток']/following::*[name()='button'][1]")
+    @FindBy(xpath = "//button[@class='sc-dTWiOz HXJNV sc-eJoXEY iskrJj sc-gtURjR esVnOE']")
     private WebElement closeFirstI;
 
-    @FindBy(xpath = "")
+    @FindBy(xpath = "//div[@class='sc-hdBJTi iua-dQD sc-ceUeOH fdLlLH']//div[2]//div[2]//div[1]//*[name()='svg']")
     private WebElement openSecondI;
 
-    @FindBy(xpath = "")
+    @FindBy(xpath = "//button[@class='sc-dTWiOz HXJNV sc-eJoXEY iskrJj sc-gtURjR esVnOE']")
     private WebElement closeSecondI;
 
-    @FindBy(xpath = "//div[@class='sc-gKlhbP dSUumu']//div[3]//div[2]//div[1]//*[name()='svg']//*[name()='path' and contains(@fill-rule,'evenodd')]")
+    @FindBy(xpath = "//div[@class='sc-bJFmQb uedPQ']//div[3]//div[2]//div[1]//*[name()='svg']")
     private WebElement openThirdI;
 
-    @FindBy(xpath = "//*[name()='path' and contains(@d,'M6.293 16.')]")
+    @FindBy(xpath = "(//button[@class='sc-dTWiOz HXJNV sc-eJoXEY iskrJj sc-gtURjR esVnOE'])[1]")
     private WebElement closeThirdI;
 
     @FindBy(xpath = "//a[contains(@href,'pdf')]")

@@ -24,7 +24,7 @@ public class LoginPage extends BasePage {
         return new CodePage(driverContainer);
     }
 
-    @FindBy(id = "login")
+    @FindBy(xpath = "//input[@type='tel']")
     private WebElement inputLogin;
 
     @FindBy(xpath = "//button[normalize-space()='Далее']")
