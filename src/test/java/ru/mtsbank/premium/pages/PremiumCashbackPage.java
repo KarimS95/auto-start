@@ -13,8 +13,6 @@ import java.util.Set;
 
 public class PremiumCashbackPage extends BasePage{
 
-    private static final int MAX_RETRIES = 3;
-
     public PremiumCashbackPage(InheritableThreadLocal<WebDriver> driverContainer) {
         super(driverContainer);
     }
@@ -26,6 +24,7 @@ public class PremiumCashbackPage extends BasePage{
                 WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(100));
                 wait.until(ExpectedConditions.elementToBeClickable(openCategoriesList)).click();
                 break;
+
             } catch (StaleElementReferenceException | ElementNotInteractableException e) {
                 System.out.println("Retries: " + i);
             }

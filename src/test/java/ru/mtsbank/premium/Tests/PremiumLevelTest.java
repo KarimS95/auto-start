@@ -11,6 +11,7 @@ public class PremiumLevelTest extends BaseTest {
     private static final String PREMIUM_LEVEL_URL = "https://online.mtsdengi-test.mbrd.ru/premium/level";
     private static final String EXPECTED_LEVEL_SHEET_HEADER = "уровень";
     private static final String EXPECTED_LEVEL_PAGE_HEADER = "Премиальное обслуживание";
+    private String EXPECTED_TERMS_HEADER = "Условия обслуживания";
 
 
     @Test(priority = 1)
@@ -33,7 +34,9 @@ public class PremiumLevelTest extends BaseTest {
     public void testCheckOpenServicesTermsButton() {
         PremiumLevelPage premiumLevelPage = new PremiumLevelPage(driverContainer);
 
-        Assert.assertTrue(premiumLevelPage.checkOpenServicesTermsButton());
+        Assert.assertEquals(premiumLevelPage.checkOpenServicesTermsButton(),EXPECTED_TERMS_HEADER);
+
+        premiumLevelPage.returnBack();
     }
 
     @Test(dependsOnMethods = "testCheckOpenServicesTermsButton")

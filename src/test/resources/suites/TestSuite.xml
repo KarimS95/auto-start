@@ -11,8 +11,9 @@
     <test name="homework-tests">
         <classes>
             <class name="ru.mtsbank.hm.tests.HomePageTest"/>
-            <class name="ru.mtsbank.hm.tests.RegisterPageTest"/>
+            <class name="ru.mtsbank.hm.tests.RegisterTest"/>
             <class name="ru.mtsbank.hm.tests.ForgotPasswordPageTest"/>
+            <class name="ru.mtsbank.hm.tests.OTPTest"/>
         </classes>
     </test>
 </suite>

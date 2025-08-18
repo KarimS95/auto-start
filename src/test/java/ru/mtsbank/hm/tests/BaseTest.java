@@ -1,8 +1,10 @@
 package ru.mtsbank.hm.tests;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterClass;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
 
 import java.time.Duration;
@@ -28,6 +30,7 @@ public class BaseTest {
 //    protected void tearDown() {
 //        this.driver.quit();
 //    }
+
 
     protected final int MAX_RETRIES = 5;
     protected final String HOME_PAGE_REG_PAGE_CARD_TEXT = "Test Register Page for Automation Testing Practice, a common use case for website authentication. You can use Playwright to automate these registration test scenarios";
@@ -58,6 +61,23 @@ public class BaseTest {
     protected final String[] FORGOT_PASSWORD_PAGE_TEXT_INFO = {"[Dummy Forgot Password form page for Automation Testing Practice, Example can be used for practicing the Forgot Password scenario in automated tests. An email will be sent to indicate password reset instructions]"};
     protected final String[] INVALID_EMAIL = {"Your email is invalid!", "Please enter a valid email address."};
     protected final String[] VALID_EMAIL = {"An e-mail has been sent to you which explains how to reset your password."};
-    protected final String EMAIL_FIELD = "E-mail";
+    protected final String EMAIL_FIELD = "Your Email Address";
+    protected final String EMAIL_FIELD_FP = "E-mail";
     protected final String MESSAGE_AFTER_PASSWORD_RETRIEVE = "Password reset page for Automation Testing Practice";
+
+    protected final String OTP_PAGE_CARD_TEXT = "The example of a One Time Password (OTP) illustrates the process of authentication using an OTP code";
+    protected final String OTP_PAGE_URL = "https://practice.expandtesting.com/otp-login";
+    protected final String[] OTP_PAGE_TEXT_INFO = {"[OTP Login page for Automation Testing Practice, If you don't want to use a real email address, you can use the following information in your test scenarios:]"};
+    protected final String OTP_SUCCESS_ALERT = "You logged into a secure area!";
+    protected final String INVALID_OTP_CODE = "The provided OTP code is incorrect. Please check your code and try again.";
+    protected final String OTP_BUTTON_TEXT = "Send OTP Code";
+    protected final String INVALID_EMAIL_OTP = "Please enter a valid email address.";
+    protected final String SUCCESS_EMAIL_ALERT = "We've sent an OTP code to your email: practice@expandtesting.com";
+    protected final String OTP_VERIFY_HEADER = "OTP Verification";
+    protected final String SECURE_URL = "https://practice.expandtesting.com/secure";
+
+    protected final String[] SECURE_PAGE_TEXT = {"[Secure Area page for Automation Testing Practice, Hi, Guest!, Welcome to the Secure Area. When you are done click logout below.]"};
+    protected final String LOGOUT_BUTTON_SP = "Logout";
+
+
 }

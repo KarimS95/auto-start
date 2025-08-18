@@ -45,8 +45,6 @@ public class PremiumPageTest extends BaseTest {
         Assert.assertTrue(premiumPage.checkPremiumCashbackCategoriesListIsClickable());
     }
 
-
-
     @Test(dependsOnMethods = "testCheckPremiumCashbackCategoriesListIsClickable")
     public void testCheckPremiumCashbackPrivilegeIsClickable() {
         PremiumPage premiumPage = new PremiumPage(driverContainer);

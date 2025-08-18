@@ -6,6 +6,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 public class PremiumLevelPage extends BasePage {
@@ -28,15 +31,15 @@ public class PremiumLevelPage extends BasePage {
         return openLevelSheet.getText();
     }
 
-    public boolean checkOpenServicesTermsButton() {
+    public String checkOpenServicesTermsButton() {
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(openServiceTerms)).click();
 
-        boolean isTrue = Objects.equals(termsText.getText(), termsStringText);
+        return termsText.getText();
+    }
 
+    public void returnBack() {
         backButton.click();
-
-        return isTrue;
     }
 
     public void checkFirstI() {
@@ -112,7 +115,5 @@ public class PremiumLevelPage extends BasePage {
 
     private By byOpenLevelSheet = By.xpath("//span[contains(text(),'Мой уровень в')]");
     private By byOpenServicesTermsButton = By.xpath("//span[text()='Условия обслуживания']");
-
-    private String termsStringText = "Условия обслуживания";
 
 }

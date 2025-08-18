@@ -12,7 +12,6 @@ import java.time.Duration;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 public class ForgotPasswordPage extends BasePage {
 
@@ -85,8 +84,7 @@ public class ForgotPasswordPage extends BasePage {
 
 
 
-    @FindBy(xpath = "//a[@href='/']")
-    private WebElement backButtonClick;
+
 
     @FindBy(xpath = "//a[@href='/forgot-password'][contains(text(),'Forgot Password Form')]")
     private WebElement forgotPasswordPageLink;

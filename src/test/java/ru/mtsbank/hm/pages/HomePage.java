@@ -1,7 +1,9 @@
 package ru.mtsbank.hm.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -19,29 +21,52 @@ public class HomePage extends BasePage{
         return driverContainer.get().getCurrentUrl();
     }
 
+
+    //For LoginPage
+
+    public String getLoginPageLinkName() {
+        return loginPageLinkLocator.getText();
+    }
+
+    public String getLoginPageButtonName() {
+        return loginPageButtonLocator.getText();
+    }
+
+    public boolean isLoginPageLinkInteractivable() {
+        return loginPageLinkLocator.isDisplayed() && loginPageLinkLocator.isEnabled();
+    }
+
+    public boolean isLoginPageButtonInteractivable() {
+        return loginPageButtonLocator.isDisplayed() && loginPageButtonLocator.isEnabled();
+    }
+
+    public LoginPage openLoginPageWithClickOnLink() {
+        loginPageLinkLocator.click();
+        return new LoginPage(driverContainer);
+    }
+
+    public LoginPage openLoginPageWithClickOnButton() {
+        loginPageButtonLocator.click();
+        return new LoginPage(driverContainer);
+    }
+
+
+
     //For RegisterPage
 
-    public boolean isRegisterPageLinkDisplayed() {
-        WebDriverWait waitRegisterPageLinkLocator = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
-        waitRegisterPageLinkLocator.until(ExpectedConditions.elementToBeClickable(registerPageLinkLocator));
-        return true;
+    public boolean isRegisterPageLinkInteractivable() {
+       return registerPageLinkLocator.isDisplayed() && registerPageLinkLocator.isEnabled();
     }
 
     public String getRegisterPageCardText() {
-        WebDriverWait waitRegisterPageLinkLocator = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
-        waitRegisterPageLinkLocator.until(ExpectedConditions.visibilityOf(registerPageCardTextLocator));
         return registerPageCardTextLocator.getText();
     }
 
-    public boolean isRegisterPageButtonDisplayed() {
-        WebDriverWait waitRegisterPageLinkLocator = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
-        waitRegisterPageLinkLocator.until(ExpectedConditions.elementToBeClickable(registerPageButtonLocator));
-        return true;
+    public boolean isRegisterPageButtonInteractivable() {
+       return registerPageButtonLocator.isDisplayed() && registerPageButtonLocator.isEnabled();
     }
 
     public String getRegisterPageButtonText() {
-        WebDriverWait waitRegisterPageLinkLocator = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
-        waitRegisterPageLinkLocator.until(ExpectedConditions.visibilityOf(registerPageButtonLocator));
         return registerPageButtonLocator.getText();
     }
 
@@ -60,50 +85,77 @@ public class HomePage extends BasePage{
     //For ForgotPasswordPage
 
 
-    public boolean isForgotPasswordPageLinkDisplayed() {
-        WebDriverWait waitRegisterPageLinkLocator = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
-        waitRegisterPageLinkLocator.until(ExpectedConditions.elementToBeClickable(forgotPasswordPageLinkLocator));
-        return true;
+    public boolean isForgotPasswordPageLinkInteractivable() {
+        return forgotPasswordPageLinkLocator.isDisplayed() && forgotPasswordPageLinkLocator.isEnabled();
     }
 
     public String getForgotPasswordPageCardText() {
-        WebDriverWait waitRegisterPageLinkLocator = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
-        waitRegisterPageLinkLocator.until(ExpectedConditions.visibilityOf(forgotPasswordPageCardTextLocator));
+        WebDriverWait waitForgotPasswordPageLinkLocator = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
+        waitForgotPasswordPageLinkLocator.until(ExpectedConditions.visibilityOf(forgotPasswordPageCardTextLocator));
         return forgotPasswordPageCardTextLocator.getText();
     }
 
-    public boolean isForgotPasswordPageButtonDisplayed() {
-        WebDriverWait waitRegisterPageLinkLocator = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
-        waitRegisterPageLinkLocator.until(ExpectedConditions.elementToBeClickable(forgotPasswordPageButtonLocator));
-        return true;
+    public boolean isForgotPasswordPageButtonInteractivable() {
+        return forgotPasswordPageButtonLocator.isDisplayed() && forgotPasswordPageButtonLocator.isEnabled();
     }
 
     public String getForgotPasswordPageButtonText() {
-        WebDriverWait waitRegisterPageLinkLocator = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
-        waitRegisterPageLinkLocator.until(ExpectedConditions.visibilityOf(forgotPasswordPageButtonLocator));
         return forgotPasswordPageButtonLocator.getText();
     }
 
     public ForgotPasswordPage openForgotPasswordPageWithClickOnLink() {
-        WebDriverWait waitRegisterPageLocator = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
-        waitRegisterPageLocator.until(ExpectedConditions.elementToBeClickable(forgotPasswordPageLinkLocator)).click();
+        WebDriverWait waitForgotPasswordPageLinkLocator = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
+        waitForgotPasswordPageLinkLocator.until(ExpectedConditions.elementToBeClickable(forgotPasswordPageLinkLocator)).click();
         return new ForgotPasswordPage(driverContainer);
     }
 
     public ForgotPasswordPage openForgotPasswordPageWithClickOnButton() {
-        WebDriverWait waitRegisterPageLocator = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
-        waitRegisterPageLocator.until(ExpectedConditions.elementToBeClickable(forgotPasswordPageLinkLocator)).click();
+        WebDriverWait waitForgotPasswordPageLinkLocator = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
+        waitForgotPasswordPageLinkLocator.until(ExpectedConditions.elementToBeClickable(forgotPasswordPageLinkLocator)).click();
         return new ForgotPasswordPage(driverContainer);
     }
 
 
     //For OTPPage
 
-    public boolean isOTPPageLinkDisplayed() {
-        otpPageLinkLocator.isDisplayed();
-        return true;
+    public String getOTPPageUrl() {
+        return driverContainer.get().getCurrentUrl();
     }
 
+    public boolean isOTPPageLinkInteractivable() {
+        return otpPageLinkLocator.isDisplayed() && otpPageLinkLocator.isEnabled();
+    }
+
+    public String getOTPPageCardText() {
+        return otpPageCardTextLocator.getText();
+    }
+
+    public boolean isOtpPageButtonInteractivable() {
+        return otpPageButtonLocator.isDisplayed() && otpPageButtonLocator.isEnabled();
+    }
+
+    public String getOtpPageButtonText() {
+        return otpPageButtonLocator.getText();
+    }
+
+    public OTPPage openOTPPageWithClickOnLink() {
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@href='/otp-login'][text()='OTP: One Time Password']")));
+        Actions actions = new Actions(driverContainer.get(), Duration.ofSeconds(30));
+        actions.moveToElement(otpPageLinkLocator).click();
+        return new OTPPage(driverContainer);
+    }
+
+    public OTPPage openOTPPageWithClickOnButton() {
+        Actions actions = new Actions(driverContainer.get(), Duration.ofSeconds(30));
+        actions.moveToElement(otpPageButtonLocator).click();
+        return new OTPPage(driverContainer);
+    }
+
+    public OTPPage openOTPPageWithUrl() {
+        driverContainer.get().get(OTP_PAGE_URL);
+        return new OTPPage(driverContainer);
+    }
 
 
 
@@ -130,8 +182,22 @@ public class HomePage extends BasePage{
 
 
     private final String HOME_PAGE_URL = "https://practice.expandtesting.com/";
+    private final String OTP_PAGE_URL = "https://practice.expandtesting.com/otp-login";
 
-    @FindBy(xpath = "//a[@href='/otp-login'][contains(text(),'OTP: One Time Password')]")
+    @FindBy(xpath = "//a[@href='/otp-login'][text()='OTP: One Time Password']")
     private WebElement otpPageLinkLocator;
+
+    @FindBy(xpath = "//p[contains(text(),'The example of a One Time Password (OTP) illustrates the process of authentication using an OTP code')]")
+    private WebElement otpPageCardTextLocator;
+
+    @FindBy(xpath = "//a[@href='/otp-login'][contains(text(),'Try it out')]")
+    private WebElement otpPageButtonLocator;
+
+
+    @FindBy(xpath = "//a[@href='/login'][text()='Test Login Page']")
+    private WebElement loginPageLinkLocator;
+
+    @FindBy(xpath = "//a[@type='button'][@href='/login']")
+    private WebElement loginPageButtonLocator;
 
 }

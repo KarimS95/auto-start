@@ -39,7 +39,7 @@ public class ForgotPasswordPageTest extends BaseTest {
     public void testCheckEmailField() {
         ForgotPasswordPage forgotPasswordPage = new ForgotPasswordPage(driverContainer);
 
-        Assert.assertEquals(forgotPasswordPage.getEmailFieldName(), EMAIL_FIELD);
+        Assert.assertEquals(forgotPasswordPage.getEmailFieldName(), EMAIL_FIELD_FP);
         Assert.assertTrue(forgotPasswordPage.getEmailField());
     }
 
@@ -97,7 +97,7 @@ public class ForgotPasswordPageTest extends BaseTest {
         return new Object[][]{
                 {1, "@test"},
                 {2, "test@test"},
-                {3, "karimssss41212524221@gmail.com"}
+                {3, "karimssss412125240221@gmail.com"}
         };
     }
 

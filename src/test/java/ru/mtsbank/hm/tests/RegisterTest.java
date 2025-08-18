@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import ru.mtsbank.hm.pages.HomePage;
 import ru.mtsbank.hm.pages.RegisterPage;
 
-public class RegisterPageTest extends BaseTest {
+public class RegisterTest extends BaseTest {
 
 
     @Test

@@ -36,6 +36,11 @@ public class BasePage {
 //        return page;
 //    }
 
+    protected void checkElementOnPage(WebElement element) {
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(150));
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
     protected void returnBack() {
         WebDriverWait backButtonWait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
         backButtonWait.until(ExpectedConditions.visibilityOf(backButton)).click();
@@ -44,6 +49,8 @@ public class BasePage {
 
     @FindBy(xpath = "//button[@data-testid='back-button']")//ok
     private WebElement backButton;
+
+    protected static final int MAX_RETRIES = 3;
 
 
 }
