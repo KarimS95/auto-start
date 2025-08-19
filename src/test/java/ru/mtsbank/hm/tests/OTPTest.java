@@ -15,7 +15,7 @@ public class OTPTest extends BaseTest {
     @Test
     public void testOpenOTPPage() {
         HomePage homePage = new HomePage(driverContainer);
-        OTPPage otpPage = homePage.openOTPPageWithUrl();
+        OTPPage otpPage = homePage.openOTPPageWithClickOnLink();
 
         boolean isFooterTrue = false;
 
@@ -71,7 +71,7 @@ public class OTPTest extends BaseTest {
 
         otpPage.otpLogin(value,code);
 
-        Assert.assertEquals(securePage.getAlert(), OTP_SUCCESS_ALERT);
+        Assert.assertEquals(securePage.getAlert(), LOGGED_IN);
         Assert.assertEquals(securePage.getSecureUrl(), SECURE_URL);
 
         boolean isTrue = false;

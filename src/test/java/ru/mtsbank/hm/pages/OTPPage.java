@@ -17,6 +17,12 @@ public class OTPPage extends BasePage {
         super(driverContainer);
     }
 
+
+
+    public String getOTPPageUrl() {
+        return driverContainer.get().getCurrentUrl();
+    }
+
     public HomePage clickBackButtonToHomePageFromOTPPage() {
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(backButton)).click();

@@ -68,7 +68,7 @@ public class BaseTest {
     protected final String OTP_PAGE_CARD_TEXT = "The example of a One Time Password (OTP) illustrates the process of authentication using an OTP code";
     protected final String OTP_PAGE_URL = "https://practice.expandtesting.com/otp-login";
     protected final String[] OTP_PAGE_TEXT_INFO = {"[OTP Login page for Automation Testing Practice, If you don't want to use a real email address, you can use the following information in your test scenarios:]"};
-    protected final String OTP_SUCCESS_ALERT = "You logged into a secure area!";
+    protected final String LOGGED_IN = "You logged into a secure area!";
     protected final String INVALID_OTP_CODE = "The provided OTP code is incorrect. Please check your code and try again.";
     protected final String OTP_BUTTON_TEXT = "Send OTP Code";
     protected final String INVALID_EMAIL_OTP = "Please enter a valid email address.";
@@ -78,6 +78,13 @@ public class BaseTest {
 
     protected final String[] SECURE_PAGE_TEXT = {"[Secure Area page for Automation Testing Practice, Hi, Guest!, Welcome to the Secure Area. When you are done click logout below.]"};
     protected final String LOGOUT_BUTTON_SP = "Logout";
+
+    protected final String LOGIN_PAGE_CARD_HEADER = "Test Login page for Automation Testing Practice";
+    protected final String[] LOGIN_PAGE_CARD_TEXT = {"This Test Login page is designed for automation testing practice. Test various positive and negative login scenarios in a testing environment.\nYou can use this login page for practicing with Selenium or other tools like Playwright, Cypress, etc.\nRegister here or Log in to the secure area with these credentials:\nUsername: practice\nPassword: SuperSecretPassword!"};
+    protected final String LOGIN_BUTTON = "Login";
+    protected final String INVALID_USERNAME = "Your username is invalid!";
+    protected final String INVALID_PASSWORD = "Your password is invalid!";
+    protected final String LOGGED_OUT = "You logged out of the secure area!";
 
 
 }

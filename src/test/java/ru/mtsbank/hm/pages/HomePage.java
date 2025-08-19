@@ -1,8 +1,6 @@
 package ru.mtsbank.hm.pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -118,6 +116,11 @@ public class HomePage extends BasePage{
 
     //For OTPPage
 
+    public OTPPage openOTPPageWithUrl() {
+        driverContainer.get().get(OTP_PAGE_URL);
+        return new OTPPage(driverContainer);
+    }
+
     public String getOTPPageUrl() {
         return driverContainer.get().getCurrentUrl();
     }
@@ -139,21 +142,17 @@ public class HomePage extends BasePage{
     }
 
     public OTPPage openOTPPageWithClickOnLink() {
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@href='/otp-login'][text()='OTP: One Time Password']")));
-        Actions actions = new Actions(driverContainer.get(), Duration.ofSeconds(30));
-        actions.moveToElement(otpPageLinkLocator).click();
+       checkElement(otpPageLinkLocator);
+        ((JavascriptExecutor)driverContainer.get()).executeScript("arguments[0].scrollIntoView(true);",otpPageLinkLocator);
+        otpPageLinkLocator.click();
         return new OTPPage(driverContainer);
     }
 
     public OTPPage openOTPPageWithClickOnButton() {
-        Actions actions = new Actions(driverContainer.get(), Duration.ofSeconds(30));
-        actions.moveToElement(otpPageButtonLocator).click();
-        return new OTPPage(driverContainer);
-    }
+        checkElement(otpPageButtonLocator);
+        otpPageButtonLocator.sendKeys(Keys.PAGE_DOWN);
+        otpPageButtonLocator.click();
 
-    public OTPPage openOTPPageWithUrl() {
-        driverContainer.get().get(OTP_PAGE_URL);
         return new OTPPage(driverContainer);
     }
 
@@ -190,14 +189,14 @@ public class HomePage extends BasePage{
     @FindBy(xpath = "//p[contains(text(),'The example of a One Time Password (OTP) illustrates the process of authentication using an OTP code')]")
     private WebElement otpPageCardTextLocator;
 
-    @FindBy(xpath = "//a[@href='/otp-login'][contains(text(),'Try it out')]")
+    @FindBy(xpath = "//a[@type='button'][@href='/otp-login'][text()='Try it out']")
     private WebElement otpPageButtonLocator;
-
 
     @FindBy(xpath = "//a[@href='/login'][text()='Test Login Page']")
     private WebElement loginPageLinkLocator;
 
     @FindBy(xpath = "//a[@type='button'][@href='/login']")
     private WebElement loginPageButtonLocator;
+
 
 }
