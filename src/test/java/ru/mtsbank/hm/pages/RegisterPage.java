@@ -75,51 +75,43 @@ public class RegisterPage extends BasePage {
         return registerButton.getText();
     }
 
-    public String inputUsername(String value) {
+    public boolean isRegistrationButtonInteractive() {
+        return registerButton.isDisplayed() && registerButton.isEnabled();
+    }
+
+    public void inputUsername(String value) {
+        checkElement(userNameField);
         userNameField.sendKeys(value);
-        registerButton.click();
-        return alertMessage.getText();
     }
 
-    public String inputPassword(String value) {
+    public void inputPassword(String value) {
+        checkElement(passwordField);
         passwordField.sendKeys(value);
-        registerButton.click();
-        return alertMessage.getText();
     }
 
-    public String inputConfirmPassword(String value) {
+    public void inputConfirmPassword(String value) {
+        checkElement(confirmPasswordField);
         confirmPasswordField.sendKeys(value);
+    }
+
+
+    public void clickRegisterButton() {
+        checkElement(registerButton);
         registerButton.click();
+    }
+
+    public String getAlert() {
         return alertMessage.getText();
     }
 
-    public String inputInvalidCredentials(String username, String password, String confirmPassword) {
-        userNameField.sendKeys(username);
-        passwordField.sendKeys(password);
-        confirmPasswordField.sendKeys(confirmPassword);
-        registerButton.click();
-        return alertMessage.getText();
-    }
 
-//    public LoginPage inputValidCredentials(String username, String password, String confirmPassword) {
-//        userNameField.sendKeys(username);
-//        passwordField.sendKeys(password);
-//        confirmPasswordField.sendKeys(confirmPassword);
-//        registerButton.click();
-//
-//        return new LoginPage(driverContainer);
-//    }
-
-    public String inputValidCredentials(String username, String password, String confirmPassword) {
+    public LoginPage registration(String username, String password, String confirmPassword) {
         userNameField.sendKeys(username);
         passwordField.sendKeys(password);
         confirmPasswordField.sendKeys(confirmPassword);
         registerButton.click();
 
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.visibilityOf(alertMessage));
-
-        return alertMessage.getText();
+        return new LoginPage(driverContainer);
     }
 
     public void registerButtonClick() {

@@ -34,77 +34,84 @@ public class RegisterTest extends BaseTest {
         Assert.assertTrue(footerIsTrue);
         Assert.assertEquals(registerPage.getShowBackButtonToHomePage(), BACK_BUTTON);
         Assert.assertTrue(textInfoIsTrue);
+        Assert.assertEquals(registerPage.getUsernameFieldName(), USERNAME_FIELD);
+        Assert.assertTrue(registerPage.checkUsernameField());
+        Assert.assertEquals(registerPage.getPasswordFieldName(), PASSWORD_FIELD);
+        Assert.assertTrue(registerPage.checkPasswordField());
+        Assert.assertEquals(registerPage.checkConfirmPasswordFieldName(),PASSWORD_CONFIRM_FIELD);
+        Assert.assertTrue(registerPage.checkConfirmPasswordField());
+        Assert.assertEquals(registerPage.checkRegisterButtonName(), REGISTER_BUTTON);
+        Assert.assertTrue(registerPage.isRegistrationButtonInteractive());
     }
 
     @Test(dependsOnMethods = "testOpenRegisterPage")
-    public void testCheckUsernameField() {
+    public void testClickRegistrationButtonWithVoidFieldValues() {
         RegisterPage registerPage = new RegisterPage(driverContainer);
 
-        Assert.assertEquals(registerPage.getUsernameFieldName(), USERNAME_FIELD);
-        Assert.assertTrue(registerPage.checkUsernameField());
+        registerPage.clickRegisterButton();
+
+        Assert.assertEquals(registerPage.getAlert(), ALL_FIELDS_ARE_REQUIRED);
     }
 
-    @Test(dependsOnMethods = "testCheckUsernameField")
-    public void testCheckPasswordField() {
-        RegisterPage registerPage = new RegisterPage(driverContainer);
-
-        Assert.assertEquals(registerPage.getPasswordFieldName(), PASSWORD_FIELD);
-        Assert.assertTrue(registerPage.checkPasswordField());
-    }
-
-    @Test(dependsOnMethods = "testCheckPasswordField")
-    public void testCheckConfirmPasswordFieldName() {
-        RegisterPage registerPage = new RegisterPage(driverContainer);
-
-        Assert.assertEquals(registerPage.checkConfirmPasswordFieldName(),PASSWORD_CONFIRM_FIELD);
-        Assert.assertTrue(registerPage.checkConfirmPasswordField());
-    }
-
-    @Test(dependsOnMethods = "testCheckConfirmPasswordFieldName")
-    public void testCheckRegisterButtonName() {
-        RegisterPage registerPage = new RegisterPage(driverContainer);
-
-        Assert.assertEquals(registerPage.checkRegisterButtonName(), REGISTER_BUTTON);
-    }
-
-    @Test(dependsOnMethods = "testCheckRegisterButtonName", dataProvider = "inputValues")
+    @Test(dependsOnMethods = "testClickRegistrationButtonWithVoidFieldValues", dataProvider = "inputValues")
     public void testInputUsername(String value) {
         RegisterPage registerPage = new RegisterPage(driverContainer);
 
-        Assert.assertEquals(registerPage.inputUsername(value), ALL_FIELDS_ARE_REQUIRED);
+        registerPage.inputUsername(value);
+        registerPage.clickRegisterButton();
+
+        Assert.assertEquals(registerPage.getAlert(), ALL_FIELDS_ARE_REQUIRED);
     }
 
     @Test(dependsOnMethods = "testInputUsername", dataProvider = "inputValues")
     public void testInputPassword(String value) {
         RegisterPage registerPage = new RegisterPage(driverContainer);
 
-        Assert.assertEquals(registerPage.inputPassword(value), ALL_FIELDS_ARE_REQUIRED);
+        registerPage.inputPassword(value);
+        registerPage.clickRegisterButton();
+
+        Assert.assertEquals(registerPage.getAlert(), ALL_FIELDS_ARE_REQUIRED);
     }
 
     @Test(dependsOnMethods = "testInputPassword", dataProvider = "inputValues")
     public void testInputConfirmPassword(String value) {
         RegisterPage registerPage = new RegisterPage(driverContainer);
 
-        Assert.assertEquals(registerPage.inputConfirmPassword(value), ALL_FIELDS_ARE_REQUIRED);
+        registerPage.inputConfirmPassword(value);
+        registerPage.clickRegisterButton();
+
+        Assert.assertEquals(registerPage.getAlert(), ALL_FIELDS_ARE_REQUIRED);
     }
 
     @Test(dependsOnMethods = "testInputConfirmPassword", dataProvider = "invalidCredentials")
-    public void testInputInvalidCredentials(int number, String expectedResult) {
+    public void testInputInvalidCredentials(int number, String username, String password, String confirmPassword) {
         RegisterPage registerPage = new RegisterPage(driverContainer);
 
         for(int i = 0; i < MAX_RETRIES; i++) {
             try {
-                String actualResult = switch (number) {
-                    case 1 -> registerPage.inputInvalidCredentials(".", ".", ".");
-                    case 2 -> registerPage.inputInvalidCredentials("test", "1", "1");
-                    case 3 -> registerPage.inputInvalidCredentials("test", "123", "123");
-                    case 4 -> registerPage.inputInvalidCredentials("тест", "1234", "1234");
-                    case 5 -> registerPage.inputInvalidCredentials("testtesttesttesttesttesttesttesttesttest", "1234", "1234");
-                    case 6 -> registerPage.inputInvalidCredentials("test", "1234", "test");
-                    case 7 -> registerPage.inputInvalidCredentials("practice", "SuperSecretPassword!", "SuperSecretPassword!");
+                switch (number) {
+                    case 1 -> {
+                        registerPage.inputUsername(username); registerPage.inputPassword(password); registerPage.inputConfirmPassword(confirmPassword);
+                        registerPage.clickRegisterButton();
+                    Assert.assertEquals(registerPage.getAlert(), SHORT_USERNAME);}
+                    case 2, 3 -> {
+                        registerPage.inputUsername(username); registerPage.inputPassword(password); registerPage.inputConfirmPassword(confirmPassword);
+                        registerPage.clickRegisterButton();
+                    Assert.assertEquals(registerPage.getAlert(),SHORT_PASSWORD);}
+                    case 4, 5 -> {
+                        registerPage.inputUsername(username); registerPage.inputPassword(password); registerPage.inputConfirmPassword(confirmPassword);
+                        registerPage.clickRegisterButton();
+                    Assert.assertEquals(registerPage.getAlert(), WRONG_USERNAME);}
+                    case 6 -> {
+                        registerPage.inputUsername(username); registerPage.inputPassword(password); registerPage.inputConfirmPassword(confirmPassword);
+                        registerPage.clickRegisterButton();
+                    Assert.assertEquals(registerPage.getAlert(), DIFFERENT_PASSWORDS);}
+                    case 7 -> {
+                        registerPage.inputUsername(username); registerPage.inputPassword(password); registerPage.inputConfirmPassword(confirmPassword);
+                        registerPage.clickRegisterButton();
+                    Assert.assertEquals(registerPage.getAlert(), SAME_CREDS);}
                     default -> throw new IllegalStateException("Unexpected value: " + number);
-                };
-                Assert.assertEquals(actualResult, expectedResult);
+                }
                 break;
             } catch (StaleElementReferenceException e) {
                 System.err.println("Retries: " + i);
@@ -113,12 +120,12 @@ public class RegisterTest extends BaseTest {
     }
 
     @Test(dependsOnMethods = "testInputInvalidCredentials", dataProvider = "validICredentials")
-    public void testInputValidCredentials(String expectedResult) {
+    public void testSuccessfulRegistration(String username, String password, String confirmPassword) {
         RegisterPage registerPage = new RegisterPage(driverContainer);
 
-        String actualResult = registerPage.inputValidCredentials("karimtesttesttestkkkkk","12345aaakk","12345aaakk");
+        registerPage.registration(username,password,confirmPassword);
 
-        Assert.assertEquals(actualResult, expectedResult);
+        Assert.assertEquals(registerPage.getAlert(), VALID_CREDS);
         Assert.assertEquals(driverContainer.get().getCurrentUrl(),LOGIN_PAGE_URL);
     }
 
@@ -126,7 +133,6 @@ public class RegisterTest extends BaseTest {
     @DataProvider(name = "inputValues")
     public Object[][] values() {
         return new Object[][] {
-                {""},
                 {"test"}
         };
     }
@@ -134,20 +140,20 @@ public class RegisterTest extends BaseTest {
     @DataProvider(name = "invalidCredentials")
     public Object[][] invalidCredentials() {
         return new Object[][]{
-                {1, SHORT_USERNAME},
-                {2, SHORT_PASSWORD},
-                {3, SHORT_PASSWORD},
-                {4, WRONG_USERNAME},
-                {5, WRONG_USERNAME},
-                {6, DIFFERENT_PASSWORDS},
-                {7, SAME_CREDS}
+                {1, ".", ".", "."},
+                {2, "test", "1", "1"},
+                {3, "test", "123", "123"},
+                {4, "тест", "1234", "1234"},
+                {5, "testtesttesttesttesttesttesttesttesttest", "1234", "1234"},
+                {6, "test", "1234", "test"},
+                {7, "practice", "SuperSecretPassword!", "SuperSecretPassword!"}
         };
     }
 
     @DataProvider(name = "validICredentials")
     public Object[][] validCredentials() {
       return new Object[][] {
-              {VALID_CREDS}
+              {"karimtesttesttesttest","12345aaakk", "12345aaakk"}
       };
     }
 

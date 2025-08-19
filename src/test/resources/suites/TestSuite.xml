@@ -15,6 +15,7 @@
             <class name="ru.mtsbank.hm.tests.ForgotPasswordPageTest"/>
             <class name="ru.mtsbank.hm.tests.OTPTest"/>
             <class name="ru.mtsbank.hm.tests.LoginPageTest"/>
+            <class name="ru.mtsbank.hm.tests.SecurePageTest"/>
         </classes>
     </test>
 </suite>

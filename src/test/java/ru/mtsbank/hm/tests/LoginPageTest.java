@@ -5,8 +5,8 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.mtsbank.hm.pages.HomePage;
 import ru.mtsbank.hm.pages.LoginPage;
+import ru.mtsbank.hm.pages.SecurePage;
 
-import java.util.Arrays;
 
 
 public class LoginPageTest extends BaseTest {
@@ -42,12 +42,14 @@ public class LoginPageTest extends BaseTest {
 
         switch (number) {
             case 1, 3 -> {
-                loginPage.login(username,password);
+                loginPage.inputUsername(username);
+                loginPage.inputPassword(password);
                 loginPage.clickLoginButton();
                 Assert.assertEquals(loginPage.alert(), INVALID_USERNAME);
             }
             case 2 -> {
-                loginPage.login(username,password);
+                loginPage.inputUsername(username);
+                loginPage.inputPassword(password);
                 loginPage.clickLoginButton();
                 Assert.assertEquals(loginPage.alert(), INVALID_PASSWORD);
             }
@@ -57,18 +59,20 @@ public class LoginPageTest extends BaseTest {
     @Test(dependsOnMethods = "testNegativeLogin", dataProvider = "positiveValues")
     public void testPositiveLogin(String username, String password) {
         LoginPage loginPage = new LoginPage(driverContainer);
+        SecurePage securePage = loginPage.login(username, password);
 
-        loginPage.login(username, password);
-        loginPage.clickLoginButton();
+        boolean isTrue = false;
+        for (String i: SECURE_PAGE_TEXT) {
+            if(securePage.getSecurePageTextInfo().contains(i)) {
+                isTrue = true;
+            }
+        }
 
-        Assert.assertEquals(loginPage.alert(), LOGGED_IN);
-    }
-
-    @Test(dependsOnMethods = "testPositiveLogin")
-    public void testLoggout() {
-        LoginPage loginPage = new LoginPage(driverContainer);
-
-
+        Assert.assertEquals(securePage.getSecureUrl(), SECURE_URL);
+        Assert.assertEquals(securePage.getAlert(), LOGGED_IN);
+        Assert.assertEquals(securePage.getLogoutButtonText(), LOGOUT_BUTTON_SP);
+        Assert.assertTrue(isTrue);
+        Assert.assertTrue(securePage.isLogoutButtonInteractable());
     }
 
 

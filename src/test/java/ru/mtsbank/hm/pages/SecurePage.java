@@ -34,6 +34,14 @@ public class SecurePage extends BasePage {
         return logoutButton.isEnabled();
     }
 
+    public LoginPage logout() {
+        logoutButton.click();
+        return new LoginPage(driverContainer);
+    }
+
+
+
+
 
     @FindBy(xpath = "//div[@id='flash']")
     private WebElement alert;

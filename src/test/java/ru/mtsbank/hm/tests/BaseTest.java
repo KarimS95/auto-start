@@ -76,7 +76,7 @@ public class BaseTest {
     protected final String OTP_VERIFY_HEADER = "OTP Verification";
     protected final String SECURE_URL = "https://practice.expandtesting.com/secure";
 
-    protected final String[] SECURE_PAGE_TEXT = {"[Secure Area page for Automation Testing Practice, Hi, Guest!, Welcome to the Secure Area. When you are done click logout below.]"};
+    protected final String[] SECURE_PAGE_TEXT = {"[Secure Area page for Automation Testing Practice, Hi, practice!, Welcome to the Secure Area. When you are done click logout below.]"};
     protected final String LOGOUT_BUTTON_SP = "Logout";
 
     protected final String LOGIN_PAGE_CARD_HEADER = "Test Login page for Automation Testing Practice";

@@ -68,13 +68,11 @@ public class LoginPage extends BasePage {
         loginButton.click();
     }
 
-    public void login(String username, String password) {
+    public SecurePage login(String username, String password) {
         usernameField.sendKeys(username);
         passwordField.sendKeys(password);
-    }
-
-    public void loggout() {
-
+        loginButton.click();
+        return new SecurePage(driverContainer);
     }
 
 
@@ -109,5 +107,7 @@ public class LoginPage extends BasePage {
 
     @FindBy(xpath = "//div[@id='flash']")
     private WebElement alert;
+
+
 
 }
