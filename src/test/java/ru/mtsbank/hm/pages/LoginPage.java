@@ -24,7 +24,7 @@ public class LoginPage extends BasePage {
         return loginPageCardText.getText();
     }
 
-    public boolean checkRegisterLink() {
+    public boolean isRegisterLinkInteractive() {
         return registerLink.isDisplayed() && registerLink.isEnabled();
     }
 
@@ -48,7 +48,7 @@ public class LoginPage extends BasePage {
         return loginButton.getText();
     }
 
-    public boolean checkLoginButton() {
+    public boolean isLoginButtonInteractive() {
         return loginButton.isDisplayed() && loginButton.isEnabled();
     }
 

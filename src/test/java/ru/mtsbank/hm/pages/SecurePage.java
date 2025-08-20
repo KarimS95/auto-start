@@ -18,7 +18,7 @@ public class SecurePage extends BasePage {
         return alert.getText();
     }
 
-    public String getSecureUrl() {
+    public String getSecurePageUrl() {
         return driverContainer.get().getCurrentUrl();
     }
 
@@ -30,8 +30,8 @@ public class SecurePage extends BasePage {
         return logoutButton.getText();
     }
 
-    public boolean isLogoutButtonInteractable() {
-        return logoutButton.isEnabled();
+    public boolean isLogoutButtonInteractive() {
+        return logoutButton.isDisplayed() && logoutButton.isEnabled();
     }
 
     public LoginPage logout() {

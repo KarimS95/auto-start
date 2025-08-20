@@ -38,8 +38,8 @@ public class RegisterPage extends BasePage {
     }
 
     public HomePage clickBackButtonToHomePageFromRegisterPage() {
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.elementToBeClickable(backButtonClick)).click();
+        checkElement(backButtonClick);
+        backButtonClick.click();
         return new HomePage(driverContainer);
     }
 
@@ -52,7 +52,7 @@ public class RegisterPage extends BasePage {
     }
 
     public boolean checkUsernameField() {
-        return userNameField.isEnabled();
+        return userNameField.isDisplayed() && userNameField.isEnabled();
     }
 
     public String getPasswordFieldName() {
@@ -60,7 +60,7 @@ public class RegisterPage extends BasePage {
     }
 
     public boolean checkPasswordField() {
-        return passwordField.isEnabled();
+        return passwordField.isDisplayed() && passwordField.isEnabled();
     }
 
     public String checkConfirmPasswordFieldName() {
@@ -68,10 +68,10 @@ public class RegisterPage extends BasePage {
     }
 
     public boolean checkConfirmPasswordField() {
-        return confirmPasswordField.isEnabled();
+        return confirmPasswordField.isDisplayed() && confirmPasswordField.isEnabled();
     }
 
-    public String checkRegisterButtonName() {
+    public String getRegisterButtonName() {
         return registerButton.getText();
     }
 
@@ -112,10 +112,6 @@ public class RegisterPage extends BasePage {
         registerButton.click();
 
         return new LoginPage(driverContainer);
-    }
-
-    public void registerButtonClick() {
-        registerButton.click();
     }
 
 

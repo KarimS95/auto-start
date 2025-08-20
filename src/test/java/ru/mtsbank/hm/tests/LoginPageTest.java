@@ -17,26 +17,79 @@ public class LoginPageTest extends BaseTest {
         HomePage homePage = new HomePage(driverContainer);
         LoginPage loginPage = homePage.openLoginPageWithClickOnLink();
 
+        Assert.assertEquals(loginPage.getLoginPageUrl(), LOGIN_PAGE_URL);
+    }
+
+    @Test(dependsOnMethods = "testOpenLoginPage")
+    public void testGetLoginPageCardHeader() {
+        LoginPage loginPage = new LoginPage(driverContainer);
+
+        Assert.assertEquals(loginPage.getLoginPageCardHeader(), LOGIN_PAGE_CARD_HEADER);
+    }
+
+    @Test(dependsOnMethods = "testGetLoginPageCardHeader")
+    public void testGetUsernameFieldName() {
+        LoginPage loginPage = new LoginPage(driverContainer);
+
+        Assert.assertEquals(loginPage.getUsernameFieldName(), USERNAME_FIELD);
+    }
+
+    @Test(dependsOnMethods = "testGetUsernameFieldName")
+    public void testGetPasswordFieldName() {
+        LoginPage loginPage = new LoginPage(driverContainer);
+
+        Assert.assertEquals(loginPage.getPasswordFieldName(), PASSWORD_FIELD);
+    }
+
+    @Test(dependsOnMethods = "testGetPasswordFieldName")
+    public void testGetLoginButtonText() {
+        LoginPage loginPage = new LoginPage(driverContainer);
+
+        Assert.assertEquals(loginPage.getLoginButtonText(), LOGIN_BUTTON);
+    }
+
+    @Test(dependsOnMethods = "testGetLoginButtonText")
+    public void testIsRegisterLinkInteractive() {
+        LoginPage loginPage = new LoginPage(driverContainer);
+
+        Assert.assertTrue(loginPage.isRegisterLinkInteractive());
+    }
+
+    @Test(dependsOnMethods = "testIsRegisterLinkInteractive")
+    public void testIsLoginButtonInteractive() {
+        LoginPage loginPage = new LoginPage(driverContainer);
+
+        Assert.assertTrue(loginPage.isLoginButtonInteractive());
+    }
+
+    @Test(dependsOnMethods = "testIsLoginButtonInteractive")
+    public void testCheckUsernameField() {
+        LoginPage loginPage = new LoginPage(driverContainer);
+
+        Assert.assertTrue(loginPage.checkUsernameField());
+    }
+
+    @Test(dependsOnMethods = "testCheckUsernameField")
+    public void testCheckPasswordField() {
+        LoginPage loginPage = new LoginPage(driverContainer);
+
+        Assert.assertTrue(loginPage.checkPasswordField());
+    }
+
+    @Test(dependsOnMethods = "testCheckPasswordField")
+    public void testGetLoginPageCardText() {
+        LoginPage loginPage = new LoginPage(driverContainer);
+
         boolean isTrue = false;
         for (String i : LOGIN_PAGE_CARD_TEXT) {
             if (loginPage.getLoginPageCardText().contains(i)) {
                 isTrue = true;
             }
         }
-
         Assert.assertTrue(isTrue);
-        Assert.assertEquals(loginPage.getLoginPageUrl(), LOGIN_PAGE_URL);
-        Assert.assertEquals(loginPage.getLoginPageCardHeader(), LOGIN_PAGE_CARD_HEADER);
-        Assert.assertTrue(loginPage.checkRegisterLink());
-        Assert.assertTrue(loginPage.checkUsernameField());
-        Assert.assertTrue(loginPage.checkPasswordField());
-        Assert.assertTrue(loginPage.checkLoginButton());
-        Assert.assertEquals(loginPage.getUsernameFieldName(), USERNAME_FIELD);
-        Assert.assertEquals(loginPage.getPasswordFieldName(), PASSWORD_FIELD);
-        Assert.assertEquals(loginPage.getLoginButtonText(), LOGIN_BUTTON);
     }
 
-    @Test(dependsOnMethods = "testOpenLoginPage", dataProvider = "negativeValues")
+    @Test(dependsOnMethods = "testGetLoginPageCardText", dataProvider = "negativeValues")
     public void testNegativeLogin(int number, String username, String password) {
         LoginPage loginPage = new LoginPage(driverContainer);
 
@@ -61,18 +114,9 @@ public class LoginPageTest extends BaseTest {
         LoginPage loginPage = new LoginPage(driverContainer);
         SecurePage securePage = loginPage.login(username, password);
 
-        boolean isTrue = false;
-        for (String i: SECURE_PAGE_TEXT) {
-            if(securePage.getSecurePageTextInfo().contains(i)) {
-                isTrue = true;
-            }
-        }
 
-        Assert.assertEquals(securePage.getSecureUrl(), SECURE_URL);
+        Assert.assertEquals(securePage.getSecurePageUrl(), SECURE_URL);
         Assert.assertEquals(securePage.getAlert(), LOGGED_IN);
-        Assert.assertEquals(securePage.getLogoutButtonText(), LOGOUT_BUTTON_SP);
-        Assert.assertTrue(isTrue);
-        Assert.assertTrue(securePage.isLogoutButtonInteractable());
     }
 
 

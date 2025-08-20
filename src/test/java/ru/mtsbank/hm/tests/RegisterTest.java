@@ -15,12 +15,32 @@ public class RegisterTest extends BaseTest {
         HomePage homePage = new HomePage(driverContainer);
         RegisterPage registerPage = homePage.openRegisterPageWithClickOnLink();
 
+        Assert.assertEquals(registerPage.getRegisterPageUrl(), REGISTER_PAGE_URL);
+    }
+
+    @Test(dependsOnMethods = "testOpenRegisterPage")
+    public void testGetRegisterPageHeader() {
+        RegisterPage registerPage = new RegisterPage(driverContainer);
+
+        Assert.assertTrue(registerPage.getRegisterPageHeader());
+    }
+
+    @Test(dependsOnMethods = "testGetRegisterPageHeader")
+    public void testGetRegisterPageFooter() {
+        RegisterPage registerPage = new RegisterPage(driverContainer);
+
         boolean footerIsTrue = false;
         for (String i : FOOTER) {
             if(registerPage.getRegisterPageFooter().contains(i)) {
                 footerIsTrue = true;
             }
         }
+        Assert.assertTrue(footerIsTrue);
+    }
+
+    @Test(dependsOnMethods = "testGetRegisterPageFooter")
+    public void testGetShowRegisterPageTextInfo() {
+        RegisterPage registerPage = new RegisterPage(driverContainer);
 
         boolean textInfoIsTrue = false;
         for (String i : REGISTER_PAGE_TEXT_INFO) {
@@ -28,23 +48,76 @@ public class RegisterTest extends BaseTest {
                 textInfoIsTrue = true;
             }
         }
-
-        Assert.assertEquals(registerPage.getRegisterPageUrl(), REGISTER_PAGE_URL);
-        Assert.assertTrue(registerPage.getRegisterPageHeader());
-        Assert.assertTrue(footerIsTrue);
-        Assert.assertEquals(registerPage.getShowBackButtonToHomePage(), BACK_BUTTON);
         Assert.assertTrue(textInfoIsTrue);
+    }
+
+    @Test(dependsOnMethods = "testGetShowRegisterPageTextInfo")
+    public void testGetShowBackButtonToHomePage() {
+        RegisterPage registerPage = new RegisterPage(driverContainer);
+
+        Assert.assertEquals(registerPage.getShowBackButtonToHomePage(), BACK_BUTTON);
+    }
+
+
+    @Test(dependsOnMethods = "testGetShowBackButtonToHomePage")
+    public void testGetUsernameFieldName() {
+        RegisterPage registerPage = new RegisterPage(driverContainer);
+
         Assert.assertEquals(registerPage.getUsernameFieldName(), USERNAME_FIELD);
-        Assert.assertTrue(registerPage.checkUsernameField());
+    }
+
+    @Test(dependsOnMethods = "testGetUsernameFieldName")
+    public void testGetPasswordFieldName() {
+        RegisterPage registerPage = new RegisterPage(driverContainer);
+
         Assert.assertEquals(registerPage.getPasswordFieldName(), PASSWORD_FIELD);
-        Assert.assertTrue(registerPage.checkPasswordField());
+    }
+
+    @Test(dependsOnMethods = "testGetPasswordFieldName")
+    public void testGetConfirmPasswordFieldName() {
+        RegisterPage registerPage = new RegisterPage(driverContainer);
+
         Assert.assertEquals(registerPage.checkConfirmPasswordFieldName(),PASSWORD_CONFIRM_FIELD);
+    }
+
+    @Test(dependsOnMethods = "testGetConfirmPasswordFieldName")
+    public void testGetRegisterButtonName() {
+        RegisterPage registerPage = new RegisterPage(driverContainer);
+
+        Assert.assertEquals(registerPage.getRegisterButtonName(), REGISTER_BUTTON);
+    }
+
+    @Test(dependsOnMethods = "testGetRegisterButtonName")
+    public void testIsUsernameFieldInteractive() {
+        RegisterPage registerPage = new RegisterPage(driverContainer);
+
+        Assert.assertTrue(registerPage.checkUsernameField());
+    }
+
+    @Test(dependsOnMethods = "testIsUsernameFieldInteractive")
+    public void testIsPasswordFieldInteractive() {
+        RegisterPage registerPage = new RegisterPage(driverContainer);
+
+        Assert.assertTrue(registerPage.checkPasswordField());
+    }
+
+    @Test(dependsOnMethods = "testIsPasswordFieldInteractive")
+    public void testIsConfirmPasswordFieldInteractive() {
+        RegisterPage registerPage = new RegisterPage(driverContainer);
+
         Assert.assertTrue(registerPage.checkConfirmPasswordField());
-        Assert.assertEquals(registerPage.checkRegisterButtonName(), REGISTER_BUTTON);
+    }
+
+    @Test(dependsOnMethods = "testIsConfirmPasswordFieldInteractive")
+    public void testIsRegistrationButtonInteractive() {
+        RegisterPage registerPage = new RegisterPage(driverContainer);
+
         Assert.assertTrue(registerPage.isRegistrationButtonInteractive());
     }
 
-    @Test(dependsOnMethods = "testOpenRegisterPage")
+
+
+    @Test(dependsOnMethods = "testIsRegistrationButtonInteractive")
     public void testClickRegistrationButtonWithVoidFieldValues() {
         RegisterPage registerPage = new RegisterPage(driverContainer);
 

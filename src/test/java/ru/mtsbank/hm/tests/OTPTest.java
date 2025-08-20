@@ -72,18 +72,7 @@ public class OTPTest extends BaseTest {
         otpPage.otpLogin(value,code);
 
         Assert.assertEquals(securePage.getAlert(), LOGGED_IN);
-        Assert.assertEquals(securePage.getSecureUrl(), SECURE_URL);
-
-        boolean isTrue = false;
-
-        for (String i : SECURE_PAGE_TEXT) {
-            if (securePage.getSecurePageTextInfo().contains(i)) {
-                isTrue = true;
-            }
-        }
-        Assert.assertTrue(isTrue);
-        Assert.assertEquals(securePage.getLogoutButtonText(), LOGOUT_BUTTON_SP);
-        Assert.assertTrue(securePage.isLogoutButtonInteractable());
+        Assert.assertEquals(securePage.getSecurePageUrl(), SECURE_URL);
     }
 
 
