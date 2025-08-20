@@ -20,31 +20,53 @@ public class PremiumLevelTest extends BaseTest {
         PremiumPage premiumPage = homePage.openPremiumPage();
         PremiumLevelPage premiumLevelPage = premiumPage.openPremiumLevelPage();
 
-        Assert.assertTrue(premiumLevelPage.checkLevelPageHeaderName().contains(EXPECTED_LEVEL_PAGE_HEADER));
+        Assert.assertTrue(premiumLevelPage.getLevelPageHeader().contains(EXPECTED_LEVEL_PAGE_HEADER));
     }
 
     @Test(dependsOnMethods = "testCheckLevelPageHeaderName")
     public void testCheckClickLevelSheet()  {
         PremiumLevelPage premiumLevelPage = new PremiumLevelPage(driverContainer);
 
-        Assert.assertTrue(premiumLevelPage.checkClickLevelSheet().contains(EXPECTED_LEVEL_SHEET_HEADER));
+        Assert.assertTrue(premiumLevelPage.openLevelSheet().contains(EXPECTED_LEVEL_SHEET_HEADER));
     }
 
     @Test(dependsOnMethods = "testCheckClickLevelSheet")
     public void testCheckOpenServicesTermsButton() {
         PremiumLevelPage premiumLevelPage = new PremiumLevelPage(driverContainer);
 
-        Assert.assertEquals(premiumLevelPage.checkOpenServicesTermsButton(),EXPECTED_TERMS_HEADER);
+        Assert.assertEquals(premiumLevelPage.openServicesTermsButton(),EXPECTED_TERMS_HEADER);
 
         premiumLevelPage.returnBack();
     }
 
     @Test(dependsOnMethods = "testCheckOpenServicesTermsButton")
-    public void testChecksI() {
+    public void testOpenFirstI() {
         PremiumLevelPage premiumLevelPage = new PremiumLevelPage(driverContainer);
-        premiumLevelPage.checkFirstI();
-        premiumLevelPage.checkSecondI();
-        premiumLevelPage.checkThirdI();
+        premiumLevelPage.openFirstI();
+    }
+
+    @Test
+    public void testCloseFirstI() {
+        PremiumLevelPage premiumLevelPage = new PremiumLevelPage(driverContainer);
+        premiumLevelPage.closeFirstI();
+    }
+
+    @Test
+    public void testOpenSecond() {
+        PremiumLevelPage premiumLevelPage = new PremiumLevelPage(driverContainer);
+        premiumLevelPage.openSecondI();
+    }
+
+    @Test
+    public void testCloseSecondI() {
+        PremiumLevelPage premiumLevelPage = new PremiumLevelPage(driverContainer);
+        premiumLevelPage.closeSecondI();
+    }
+
+    @Test
+    public void testOpenThirdI() {
+        PremiumLevelPage premiumLevelPage = new PremiumLevelPage(driverContainer);
+        premiumLevelPage.closeThirdI();
     }
 
 }

@@ -34,7 +34,7 @@ public class PremiumPageTest extends BaseTest {
     public void testCheckPremiumLevelPageIsClickable() {
         PremiumPage premiumPage = new PremiumPage(driverContainer);
 
-        Assert.assertTrue(premiumPage.checkPremiumLevelPageIsClickable());
+        Assert.assertTrue(premiumPage.checkPremiumLevelPage());
     }
 
 
@@ -42,14 +42,14 @@ public class PremiumPageTest extends BaseTest {
     public void testCheckPremiumCashbackCategoriesListIsClickable() {
         PremiumPage premiumPage = new PremiumPage(driverContainer);
 
-        Assert.assertTrue(premiumPage.checkPremiumCashbackCategoriesListIsClickable());
+        Assert.assertTrue(premiumPage.checkPremiumCashbackCategoriesList());
     }
 
     @Test(dependsOnMethods = "testCheckPremiumCashbackCategoriesListIsClickable")
     public void testCheckPremiumCashbackPrivilegeIsClickable() {
         PremiumPage premiumPage = new PremiumPage(driverContainer);
 
-        Assert.assertTrue(premiumPage.checkPremiumCashbackPrivilegeIsClickable());
+        Assert.assertTrue(premiumPage.checkPremiumCashbackPrivilege());
     }
 
     @Test(dependsOnMethods = "testCheckPremiumCashbackPrivilegeIsClickable")

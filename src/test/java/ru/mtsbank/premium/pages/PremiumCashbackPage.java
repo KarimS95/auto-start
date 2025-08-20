@@ -57,37 +57,46 @@ public class PremiumCashbackPage extends BasePage{
         selectCashbackCategories.click();
     }
 
-    public PremiumCashbackPage clickOnSuccessfullButton() {
+    public PremiumCashbackPage clickOnSuccessfulButton() {
         selectOk.click();
         return new PremiumCashbackPage(driverContainer);
     }
 
-    public boolean selectedCategoriesDisplayed() {
+    public boolean checkSelectedCategories() {
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(checkSelectedCategories));
-        return true;
+        wait.until(ExpectedConditions.visibilityOf(checkSelectedCategories));
+        return checkSelectedCategories.isDisplayed();
     }
 
-    public List<String> checkOpenLevelPageLink() {
+    public String openLevelPageLink() {
         WebDriverWait waitPremiumLink = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
         waitPremiumLink.until(ExpectedConditions.elementToBeClickable(openPremiumLink)).click();
 
-        WebDriverWait waitPremiumLevelPageHeader = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(60));
-        waitPremiumLevelPageHeader.until(ExpectedConditions.visibilityOf(checkPremiumLevelPageHeader));
-        String premiumLevelPageHeaderText = checkPremiumLevelPageHeader.getText();
-        String currentUrl = driverContainer.get().getCurrentUrl();
-
-        backButton.click();
-
-        return Arrays.asList(premiumLevelPageHeaderText,currentUrl);
+        return driverContainer.get().getCurrentUrl();
     }
 
-    public boolean checkFirstLink()  {
-        boolean isTrue = false;
+    public String getLevelPageHeader() {
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.visibilityOf(checkPremiumLevelPageHeader));
 
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(120));
+        return checkPremiumLevelPageHeader.getText();
+    }
+
+    public String backToCashbackPrivilege() {
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.visibilityOf(backButton));
+        backButton.click();
+        return driverContainer.get().getCurrentUrl();
+    }
+
+    public boolean openFirstLink()  {
+        boolean isTrue = false;
         String generalWindowHandle = driverContainer.get().getWindowHandle();
-        wait.until(ExpectedConditions.elementToBeClickable(openFirstLink)).click();
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(120));
+        wait.until(ExpectedConditions.visibilityOf(openFirstLink));
+
+        ((JavascriptExecutor)driverContainer.get()).executeScript("arguments[0].scrollIntoView(true)", openFirstLink);
+        openFirstLink.click();
 
         Set<String> handles = driverContainer.get().getWindowHandles();
 
@@ -102,7 +111,7 @@ public class PremiumCashbackPage extends BasePage{
         return isTrue;
     }
 
-    public boolean checkSecondLink() {
+    public boolean openSecondLink() {
         boolean isTrue = false;
         String generalWindowHandle = driverContainer.get().getWindowHandle();
 
@@ -122,7 +131,7 @@ public class PremiumCashbackPage extends BasePage{
         return isTrue;
     }
 
-    public boolean checkThirdLink() {
+    public boolean openThirdLink() {
         boolean isTrue = false;
         String generalWindowHandle = driverContainer.get().getWindowHandle();
 
@@ -193,13 +202,15 @@ public class PremiumCashbackPage extends BasePage{
     @FindBy(xpath = "//div[contains(text(), 'Премиальное обслуживание')]")
     private WebElement checkPremiumLevelPageHeader;
 
+    @FindBy(xpath = "//span[contains(text(), 'Повышенный кешбэк в')]")
+    private WebElement checkSelectedCategories;
+
 
     private By checkLevelPageIsDisplayed = By.xpath("//a[@href='/premium/level']");
     private String checkFirstLink = "https://vamprivet.ru/supreme-restaurants/";
     private String checkSecondLink = "https://vamprivet.ru/afisha/";
     private String checkThirdLink = "https://static.mtsdengi.ru/portal-frontend-premium/documents/usloviya-nachisleniya-keshbehka-dlya-debetovyh-kart-v-ramkah.pdf";
     private By checkboxesByLocator = By.xpath("//input[@role='checkbox']");
-    private By checkSelectedCategories = By.xpath("//span[contains(text(), 'Повышенный кешбэк в')]");
     private By checkCategoriesList = By.xpath("//a[contains(@href, '/premium/cashback-category?fromDate=')]");
 
 }

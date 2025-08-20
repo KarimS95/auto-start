@@ -17,21 +17,25 @@ public class PremiumLevelPage extends BasePage {
         super(driverContainer);
     }
 
-    public String checkLevelPageHeaderName() {
+    public String getLevelPageHeader() {
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(100));
         wait.until(ExpectedConditions.visibilityOf(getLevelPageHeader));
 
         return getLevelPageHeader.getText();
     }
 
-    public String checkClickLevelSheet() {
+    public String openLevelSheet() {
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
         wait.until(ExpectedConditions.visibilityOf(openLevelSheet)).click();
-        closeLevelSheet.click();
         return openLevelSheet.getText();
     }
 
-    public String checkOpenServicesTermsButton() {
+    public void closeLevelSheet() {
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.visibilityOf(closeLevelSheet)).click();
+    }
+
+    public String openServicesTermsButton() {
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(openServiceTerms)).click();
 
@@ -42,22 +46,34 @@ public class PremiumLevelPage extends BasePage {
         backButton.click();
     }
 
-    public void checkFirstI() {
+    public void openFirstI() {
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(openFirstI)).click();
-        closeFirstI.click();
     }
 
-    public void checkSecondI() {
+    public void closeFirstI() {
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.elementToBeClickable(closeFirstI)).click();
+    }
+
+    public void openSecondI() {
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(openSecondI)).click();
-        closeSecondI.click();
     }
 
-    public void checkThirdI() {
+    public void closeSecondI() {
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.elementToBeClickable(closeSecondI)).click();
+    }
+
+    public void openThirdI() {
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(openThirdI)).click();
-        closeThirdI.click();
+    }
+
+    public void closeThirdI() {
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.elementToBeClickable(closeThirdI)).click();
     }
 
 

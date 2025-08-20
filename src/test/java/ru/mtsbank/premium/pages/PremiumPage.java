@@ -30,9 +30,9 @@ public class PremiumPage extends BasePage{
         return new PremiumLevelPage(driverContainer);
     }
 
-    public boolean checkPremiumLevelPageIsClickable() {
+    public boolean checkPremiumLevelPage() {
         checkElementOnPage(openLevelPage);
-        return openLevelPage.isEnabled();
+        return openLevelPage.isDisplayed() && openLevelPage.isEnabled();
     }
 
     public void openPremiumCashbackCategoriesList() {
@@ -49,14 +49,18 @@ public class PremiumPage extends BasePage{
                 checkbox.click();
             }
         }
-
-        selectCashbackCategories.click();
-        selectOk.click();
-
         return new PremiumPage(driverContainer);
     }
 
-    public boolean checkPremiumCashbackCategoriesListIsClickable() {
+    public void confirmSelectedCashbackCategories() {
+        selectCashbackCategories.click();
+    }
+
+    public void SelectOk() {
+        selectOk.click();
+    }
+
+    public boolean checkPremiumCashbackCategoriesList() {
         checkElementOnPage(openPremiumCashbackCategoriesList);
 
         return openPremiumCashbackCategoriesList.isDisplayed() && openPremiumCashbackCategoriesList.isEnabled();
@@ -69,9 +73,9 @@ public class PremiumPage extends BasePage{
         return new PremiumCashbackPage(driverContainer);
     }
 
-    public boolean checkPremiumCashbackPrivilegeIsClickable() {
+    public boolean checkPremiumCashbackPrivilege() {
        checkElementOnPage(openPremiumCashbackPrivilege);
-        return openPremiumCashbackPrivilege.isEnabled();
+        return openPremiumCashbackPrivilege.isDisplayed() && openPremiumCashbackPrivilege.isEnabled();
     }
 
     public String checkLevelPageHeaderName() {

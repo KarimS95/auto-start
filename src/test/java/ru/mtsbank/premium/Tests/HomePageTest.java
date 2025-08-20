@@ -35,7 +35,7 @@ public class HomePageTest extends BaseTest {
     public void testCheckPremiumWidgetIsClickable() {
         homePage = new HomePage(driverContainer);
 
-        Assert.assertTrue(homePage.checkPremiumWidgetIsClickable());
+        Assert.assertTrue(homePage.checkPremiumWidget());
     }
 
 //    @Test(dependsOnMethods = "testChekPremiumWidgetName")

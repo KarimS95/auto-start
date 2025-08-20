@@ -15,11 +15,11 @@ public class HomePage extends BasePage{
         super(driverContainer);
     }
 
-    public boolean checkPremiumWidgetIsClickable() {
+    public boolean checkPremiumWidget() {
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(100));
         wait.until(ExpectedConditions.elementToBeClickable(checkPremiumWidget));
 
-        return true;
+        return checkPremiumWidget.isDisplayed() && checkPremiumWidget.isEnabled();
     }
 
     public String checkPremiumWidgetName() {
