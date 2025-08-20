@@ -17,6 +17,48 @@ public class OTPTest extends BaseTest {
         HomePage homePage = new HomePage(driverContainer);
         OTPPage otpPage = homePage.openOTPPageWithClickOnLink();
 
+        Assert.assertEquals(otpPage.getOTPPageUrl(), OTP_PAGE_URL);
+    }
+
+    @Test
+    public void testGetOTPPageHeader() {
+        OTPPage otpPage = new OTPPage(driverContainer);
+
+        Assert.assertTrue(otpPage.getOTPPageHeader());
+    }
+
+    @Test
+    public void testGetShowBackButtonToHomePage() {
+        OTPPage otpPage = new OTPPage(driverContainer);
+
+        Assert.assertEquals(otpPage.getShowBackButtonToHomePage(), BACK_BUTTON);
+    }
+
+    @Test
+    public void testGetEmailFieldName() {
+        OTPPage otpPage = new OTPPage(driverContainer);
+
+        Assert.assertEquals(otpPage.getEmailFieldName(), EMAIL_FIELD);
+    }
+
+    @Test
+    public void testGetEmailField() {
+        OTPPage otpPage = new OTPPage(driverContainer);
+
+        Assert.assertTrue(otpPage.getEmailField());
+    }
+
+    @Test
+    public void testGetSendOtpButtonText() {
+        OTPPage otpPage = new OTPPage(driverContainer);
+
+        Assert.assertEquals(otpPage.getSendOtpButtonText(), OTP_BUTTON_TEXT);
+    }
+
+    @Test
+    public void testGetOTPPageFooter() {
+        OTPPage otpPage = new OTPPage(driverContainer);
+
         boolean isFooterTrue = false;
 
         for (String i : FOOTER) {
@@ -24,6 +66,12 @@ public class OTPTest extends BaseTest {
                 isFooterTrue = true;
             }
         }
+        Assert.assertTrue(isFooterTrue);
+    }
+
+    @Test
+    public void testGetShowOTPPageTextInfo() {
+        OTPPage otpPage = new OTPPage(driverContainer);
 
         boolean isTextInfoTrue = false;
 
@@ -32,16 +80,11 @@ public class OTPTest extends BaseTest {
                 isTextInfoTrue = true;
             }
         }
-
-        Assert.assertEquals(homePage.getOTPPageUrl(), OTP_PAGE_URL);
-        Assert.assertTrue(otpPage.getOTPPageHeader());
-        Assert.assertTrue(isFooterTrue);
         Assert.assertTrue(isTextInfoTrue);
-        Assert.assertEquals(otpPage.getShowBackButtonToHomePage(), BACK_BUTTON);
-        Assert.assertEquals(otpPage.getEmailFieldName(), EMAIL_FIELD);
-        Assert.assertTrue(otpPage.getEmailField());
-        Assert.assertEquals(otpPage.getSendOtpButtonText(), OTP_BUTTON_TEXT);
     }
+
+
+
 
     @Test(dependsOnMethods = "testOpenOTPPage", dataProvider = "invalid email values")
     public void testNegativeOtpLogin(int number, String email) {

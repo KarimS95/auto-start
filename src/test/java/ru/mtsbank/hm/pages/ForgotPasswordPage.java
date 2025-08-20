@@ -49,20 +49,23 @@ public class ForgotPasswordPage extends BasePage {
         return emailFieldName.getText();
     }
 
-    public boolean getEmailField() {
-        return emailField.isEnabled();
+    public boolean checkEmailField() {
+        return emailField.isDisplayed() && emailField.isEnabled();
     }
 
     public String getRetrievePasswordButtonName() {
         return retrievePasswordButton.getText();
     }
 
-    public boolean getRetrievePasswordButton() {
-        return retrievePasswordButton.isEnabled();
+    public boolean checkRetrievePasswordButton() {
+        return retrievePasswordButton.isDisplayed() && retrievePasswordButton.isEnabled();
     }
 
     public void inputEmail(String value) {
         emailField.sendKeys(value);
+    }
+
+    public void clickRetrievePasswordButton() {
         retrievePasswordButton.click();
     }
 
@@ -70,11 +73,11 @@ public class ForgotPasswordPage extends BasePage {
         emailField.clear();
     }
 
-   public String getAlertMessage() {
+   public String getAlert() {
         return alertMessage.getText();
    }
 
-   public String getTextMessage() {
+   public String getErrorMessage() {
         return errorText.getText();
    }
 

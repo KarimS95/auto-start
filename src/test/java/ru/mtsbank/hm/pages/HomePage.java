@@ -121,11 +121,7 @@ public class HomePage extends BasePage{
         return new OTPPage(driverContainer);
     }
 
-    public String getOTPPageUrl() {
-        return driverContainer.get().getCurrentUrl();
-    }
-
-    public boolean isOTPPageLinkInteractivable() {
+    public boolean isOTPPageLinkInteractive() {
         return otpPageLinkLocator.isDisplayed() && otpPageLinkLocator.isEnabled();
     }
 
@@ -133,7 +129,7 @@ public class HomePage extends BasePage{
         return otpPageCardTextLocator.getText();
     }
 
-    public boolean isOtpPageButtonInteractivable() {
+    public boolean isOtpPageButtonInteractive() {
         return otpPageButtonLocator.isDisplayed() && otpPageButtonLocator.isEnabled();
     }
 
