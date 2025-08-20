@@ -1,4 +1,4 @@
-<suite name="tests" parallel="false">
+<suite name="tests" parallel="methods" thread-count="10">
     <test name="premium-tests">
         <classes>
             <class name="ru.mtsbank.premium.Tests.AuthTest"/>
@@ -17,5 +17,13 @@
             <class name="ru.mtsbank.hm.tests.LoginPageTest"/>
             <class name="ru.mtsbank.hm.tests.SecurePageTest"/>
         </classes>
+    </test>
+    <test name="parallel">
+        <groups>
+            <run>
+                <include
+                    name="parallel"/>
+            </run>
+        </groups>
     </test>
 </suite>

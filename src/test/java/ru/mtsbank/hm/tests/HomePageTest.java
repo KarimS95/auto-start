@@ -6,50 +6,123 @@ import ru.mtsbank.hm.pages.*;
 
 public class HomePageTest extends BaseTest {
 
-    //For ALL PAGES
+    //ALL PAGES
 
     @Test
-    public void testIsPagesLinkInteractive() {
+    public void testCheckLoginPageLink() {
         HomePage homePage = new HomePage(driverContainer);
 
-        Assert.assertTrue(homePage.isRegisterPageLinkInteractivable());
-        Assert.assertTrue(homePage.isForgotPasswordPageLinkInteractivable());
-        Assert.assertTrue(homePage.isOTPPageLinkInteractive());
-        Assert.assertTrue(homePage.isLoginPageLinkInteractivable());
+        Assert.assertTrue(homePage.isLoginPageLinkInteractive());
     }
 
-    @Test(dependsOnMethods = "testIsPagesLinkInteractive")
-    public void testGetPagesCardText() {
+    @Test(groups = "parallel", dependsOnMethods = "testCheckLoginPageLink")
+    public void testCheckLoginPageButton() {
         HomePage homePage = new HomePage(driverContainer);
 
-        Assert.assertEquals(homePage.getRegisterPageCardText(), HOME_PAGE_REG_PAGE_CARD_TEXT);
-        Assert.assertEquals(homePage.getForgotPasswordPageCardText(), HOME_PAGE_FORGOT_PASS_PAGE_CARD_TEXT);
-        Assert.assertEquals(homePage.getOTPPageCardText(), OTP_PAGE_CARD_TEXT);
+        Assert.assertTrue(homePage.isLoginPageButtonInteractive());
     }
 
-    @Test(dependsOnMethods = "testGetPagesCardText")
-    public void testIsPagesButtonsInteractive() {
+    @Test(groups = "parallel", dependsOnMethods = "testCheckLoginPageLink")
+    public void testGetLoginPageButtonName() {
         HomePage homePage = new HomePage(driverContainer);
 
-        Assert.assertTrue(homePage.isRegisterPageButtonInteractivable());
-        Assert.assertTrue(homePage.isForgotPasswordPageButtonInteractivable());
-        Assert.assertTrue(homePage.isOtpPageButtonInteractive());
-        Assert.assertTrue(homePage.isLoginPageButtonInteractivable());
-    }
-
-    @Test(dependsOnMethods = "testIsPagesButtonsInteractive")
-    public void testGetPagesButtonsText() {
-        HomePage homePage = new HomePage(driverContainer);
-
-        Assert.assertEquals(homePage.getRegisterPageButtonText(), HOME_PAGE_BUTTON_TEXT);
-        Assert.assertEquals(homePage.getForgotPasswordPageButtonText(), HOME_PAGE_BUTTON_TEXT);
-        Assert.assertEquals(homePage.getOtpPageButtonText(), HOME_PAGE_BUTTON_TEXT);
         Assert.assertEquals(homePage.getLoginPageButtonName(), HOME_PAGE_BUTTON_TEXT);
     }
 
-    //For LoginPage
+    @Test(groups = "parallel", dependsOnMethods = "testCheckLoginPageLink")
+    public void testCheckRegisterPageLink() {
+        HomePage homePage = new HomePage(driverContainer);
 
-    @Test(dependsOnMethods = "testGetPagesButtonsText")
+        Assert.assertTrue(homePage.isRegisterPageLinkInteractive());
+    }
+
+    @Test(groups = "parallel", dependsOnMethods = "testCheckLoginPageLink")
+    public void testCheckRegisterPageButton() {
+        HomePage homePage = new HomePage(driverContainer);
+
+        Assert.assertTrue(homePage.isRegisterPageButtonInteractive());
+    }
+
+    @Test(groups = "parallel", dependsOnMethods = "testCheckLoginPageLink")
+    public void testGetLoginPageCardText() {
+        HomePage homePage = new HomePage(driverContainer);
+
+        Assert.assertEquals(homePage.getLoginPageCardText(), HOME_PAGE_LOGIN_PAGES_CARD_TEXT);
+    }
+
+    @Test(groups = "parallel", dependsOnMethods = "testCheckLoginPageLink")
+    public void testGetRegisterPageCardText() {
+        HomePage homePage = new HomePage(driverContainer);
+
+        Assert.assertEquals(homePage.getRegisterPageCardText(), HOME_PAGE_REG_PAGE_CARD_TEXT);
+    }
+
+    @Test(groups = "parallel", dependsOnMethods = "testCheckLoginPageLink")
+    public void testGetRegisterPageButtonText() {
+        HomePage homePage = new HomePage(driverContainer);
+
+        Assert.assertEquals(homePage.getRegisterPageButtonText(), HOME_PAGE_BUTTON_TEXT);
+    }
+
+    @Test(groups = "parallel", dependsOnMethods = "testCheckLoginPageLink")
+    public void testCheckForgotPasswordPageLink() {
+        HomePage homePage = new HomePage(driverContainer);
+
+        Assert.assertTrue(homePage.isForgotPasswordPageLinkInteractive());
+    }
+
+    @Test(groups = "parallel", dependsOnMethods = "testCheckLoginPageLink")
+    public void testCheckForgotPasswordPageButton() {
+        HomePage homePage = new HomePage(driverContainer);
+
+        Assert.assertTrue(homePage.isForgotPasswordPageButtonInteractive());
+    }
+
+    @Test(groups = "parallel", dependsOnMethods = "testCheckLoginPageLink")
+    public void tesGetForgotPasswordPageCardText() {
+        HomePage homePage = new HomePage(driverContainer);
+
+        Assert.assertEquals(homePage.getForgotPasswordPageCardText(), HOME_PAGE_FORGOT_PASS_PAGE_CARD_TEXT);
+    }
+
+    @Test(groups = "parallel", dependsOnMethods = "testCheckLoginPageLink")
+    public void testGetForgotPasswordPageButtonText() {
+        HomePage homePage = new HomePage(driverContainer);
+
+        Assert.assertEquals(homePage.getForgotPasswordPageButtonText(), HOME_PAGE_BUTTON_TEXT);
+    }
+
+    @Test(groups = "parallel", dependsOnMethods = "testCheckLoginPageLink")
+    public void testCheckOTPPageLink() {
+        HomePage homePage = new HomePage(driverContainer);
+
+        Assert.assertTrue(homePage.isOTPPageLinkInteractive());
+    }
+
+    @Test(groups = "parallel", dependsOnMethods = "testCheckLoginPageLink")
+    public void testCheckOTPPageButton() {
+        HomePage homePage = new HomePage(driverContainer);
+
+        Assert.assertTrue(homePage.isOtpPageButtonInteractive());
+    }
+
+    @Test(groups = "parallel", dependsOnMethods = "testCheckLoginPageLink")
+    public void testGetOTPPageCardText() {
+        HomePage homePage = new HomePage(driverContainer);
+
+        Assert.assertEquals(homePage.getOTPPageCardText(), OTP_PAGE_CARD_TEXT);
+    }
+
+    @Test(groups = "parallel", dependsOnMethods = "testCheckLoginPageLink")
+    public void testGetOTPPageButtonText() {
+        HomePage homePage = new HomePage(driverContainer);
+
+        Assert.assertEquals(homePage.getOTPPageButtonText(), HOME_PAGE_BUTTON_TEXT);
+    }
+
+    //LoginPage
+
+    @Test(dependsOnGroups = "parallel")
     public void testOpenLoginPageWithClickOnLink() {
         HomePage homePage = new HomePage(driverContainer);
         LoginPage loginPage = homePage.openLoginPageWithClickOnLink();
@@ -74,8 +147,7 @@ public class HomePageTest extends BaseTest {
         Assert.assertEquals(loginPage.getLoginPageUrl(), LOGIN_PAGE_URL);
     }
 
-
-    //For RegisterPage
+    //RegisterPage
 
     @Test(dependsOnMethods = "testOpenLoginPageWithClickOnButton")
     public void testOpenRegisterPageWithClickOnLink() {
@@ -102,8 +174,7 @@ public class HomePageTest extends BaseTest {
         Assert.assertEquals(registerPage.getRegisterPageUrl(), REGISTER_PAGE_URL);
     }
 
-
-    //For PasswordForgotPage
+    //PasswordForgotPage
 
     @Test(dependsOnMethods = "testOpenRegisterPageWithClickOnButton")
     public void testOpenForgotPasswordPageWithClickOnLink() {
@@ -130,8 +201,7 @@ public class HomePageTest extends BaseTest {
         Assert.assertEquals(forgotPasswordPage.getForgotPasswordPageUrl(), FORGOT_PASSWORD_PAGE_URL);
     }
 
-
-    //For OTPPage
+    //OTPPage
 
     @Test(dependsOnMethods = "testOpenForgotPasswordPageWithClickOnButton")
     public void testOpenOTPPageWithClickOnLink() {

@@ -3,6 +3,7 @@ package ru.mtsbank.hm.tests;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
@@ -14,10 +15,13 @@ public class BaseTest {
 
     protected InheritableThreadLocal<WebDriver> driverContainer = new InheritableThreadLocal<>();
     WebDriver driver;
+    ChromeOptions chromeOptions;
 
     @BeforeClass
     protected void setUp() {
-        this.driver = new ChromeDriver();
+        this.chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--incognito");
+        this.driver = new ChromeDriver(chromeOptions);
         System.setProperty("webdriver.chrome.driver", "./src/test/resources/drivers/chromedriver");
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(50));
@@ -86,6 +90,7 @@ public class BaseTest {
     protected final String INVALID_USERNAME = "Your username is invalid!";
     protected final String INVALID_PASSWORD = "Your password is invalid!";
     protected final String LOGGED_OUT = "You logged out of the secure area!";
+    protected final String HOME_PAGE_LOGIN_PAGES_CARD_TEXT = "Test Login Page for Automation Testing Practice, a common use case for website authentication. You can use Playwright to automate these login test scenarios";
 
 
 }

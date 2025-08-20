@@ -30,11 +30,15 @@ public class HomePage extends BasePage{
         return loginPageButtonLocator.getText();
     }
 
-    public boolean isLoginPageLinkInteractivable() {
+    public String getLoginPageCardText() {
+        return homePageLoginPagesCardText.getText();
+    }
+
+    public boolean isLoginPageLinkInteractive() {
         return loginPageLinkLocator.isDisplayed() && loginPageLinkLocator.isEnabled();
     }
 
-    public boolean isLoginPageButtonInteractivable() {
+    public boolean isLoginPageButtonInteractive() {
         return loginPageButtonLocator.isDisplayed() && loginPageButtonLocator.isEnabled();
     }
 
@@ -52,7 +56,7 @@ public class HomePage extends BasePage{
 
     //For RegisterPage
 
-    public boolean isRegisterPageLinkInteractivable() {
+    public boolean isRegisterPageLinkInteractive() {
        return registerPageLinkLocator.isDisplayed() && registerPageLinkLocator.isEnabled();
     }
 
@@ -60,7 +64,7 @@ public class HomePage extends BasePage{
         return registerPageCardTextLocator.getText();
     }
 
-    public boolean isRegisterPageButtonInteractivable() {
+    public boolean isRegisterPageButtonInteractive() {
        return registerPageButtonLocator.isDisplayed() && registerPageButtonLocator.isEnabled();
     }
 
@@ -83,7 +87,7 @@ public class HomePage extends BasePage{
     //For ForgotPasswordPage
 
 
-    public boolean isForgotPasswordPageLinkInteractivable() {
+    public boolean isForgotPasswordPageLinkInteractive() {
         return forgotPasswordPageLinkLocator.isDisplayed() && forgotPasswordPageLinkLocator.isEnabled();
     }
 
@@ -93,7 +97,7 @@ public class HomePage extends BasePage{
         return forgotPasswordPageCardTextLocator.getText();
     }
 
-    public boolean isForgotPasswordPageButtonInteractivable() {
+    public boolean isForgotPasswordPageButtonInteractive() {
         return forgotPasswordPageButtonLocator.isDisplayed() && forgotPasswordPageButtonLocator.isEnabled();
     }
 
@@ -116,8 +120,8 @@ public class HomePage extends BasePage{
 
     //For OTPPage
 
-    public OTPPage openOTPPageWithUrl() {
-        driverContainer.get().get(OTP_PAGE_URL);
+    public OTPPage openOTPPageWithUrl(String url) {
+        driverContainer.get().get(url);
         return new OTPPage(driverContainer);
     }
 
@@ -133,19 +137,23 @@ public class HomePage extends BasePage{
         return otpPageButtonLocator.isDisplayed() && otpPageButtonLocator.isEnabled();
     }
 
-    public String getOtpPageButtonText() {
+    public String getOTPPageButtonText() {
         return otpPageButtonLocator.getText();
     }
 
     public OTPPage openOTPPageWithClickOnLink() {
-       checkElement(otpPageLinkLocator);
-        ((JavascriptExecutor)driverContainer.get()).executeScript("arguments[0].scrollIntoView(true);",otpPageLinkLocator);
-        otpPageLinkLocator.click();
-        return new OTPPage(driverContainer);
+       WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
+       wait.until(ExpectedConditions.elementToBeClickable(otpPageLinkLocator));
+
+       ((JavascriptExecutor)driverContainer.get()).executeScript("arguments[0].scrollIntoView(true);",otpPageLinkLocator);
+       otpPageLinkLocator.click();
+       return new OTPPage(driverContainer);
     }
 
     public OTPPage openOTPPageWithClickOnButton() {
-        checkElement(otpPageButtonLocator);
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.elementToBeClickable(otpPageButtonLocator));
+
         otpPageButtonLocator.sendKeys(Keys.PAGE_DOWN);
         otpPageButtonLocator.click();
 
@@ -176,8 +184,7 @@ public class HomePage extends BasePage{
     private WebElement registerPageButtonLocator;
 
 
-    private final String HOME_PAGE_URL = "https://practice.expandtesting.com/";
-    private final String OTP_PAGE_URL = "https://practice.expandtesting.com/otp-login";
+
 
     @FindBy(xpath = "//a[@href='/otp-login'][text()='OTP: One Time Password']")
     private WebElement otpPageLinkLocator;
@@ -193,6 +200,9 @@ public class HomePage extends BasePage{
 
     @FindBy(xpath = "//a[@type='button'][@href='/login']")
     private WebElement loginPageButtonLocator;
+
+    @FindBy(xpath = "//p[contains(text(),' Test Login Page for Automation Testing Practice, a common use case for website authentication. You can use Playwright to automate these login test scenarios')]")
+    private WebElement homePageLoginPagesCardText;
 
 
 }

@@ -18,14 +18,14 @@ public class ForgotPasswordPageTest extends BaseTest {
         Assert.assertEquals(forgotPasswordPage.getForgotPasswordPageUrl(), FORGOT_PASSWORD_PAGE_URL);
     }
 
-    @Test(dependsOnMethods = "testOpenForgotPasswordPage")
+    @Test(groups = "parallel", dependsOnMethods = "testOpenForgotPasswordPage")
     public void testGetForgotPasswordPageHeader() {
         ForgotPasswordPage forgotPasswordPage = new ForgotPasswordPage(driverContainer);
 
         Assert.assertTrue(forgotPasswordPage.getForgotPasswordPageHeader());
     }
 
-    @Test(dependsOnMethods = "testGetForgotPasswordPageHeader")
+    @Test(groups = "parallel", dependsOnMethods = "testOpenForgotPasswordPage")
     public void testGetForgotPasswordPageFooter() {
         ForgotPasswordPage forgotPasswordPage = new ForgotPasswordPage(driverContainer);
 
@@ -38,7 +38,7 @@ public class ForgotPasswordPageTest extends BaseTest {
         Assert.assertTrue(footerIsTrue);
     }
 
-    @Test(dependsOnMethods = "testGetForgotPasswordPageFooter")
+    @Test(groups = "parallel", dependsOnMethods = "testOpenForgotPasswordPage")
     public void testGetShowForgotPasswordPageTextInfo() {
         ForgotPasswordPage forgotPasswordPage = new ForgotPasswordPage(driverContainer);
 
@@ -51,42 +51,42 @@ public class ForgotPasswordPageTest extends BaseTest {
         Assert.assertTrue(textInfoIsTrue);
     }
 
-    @Test(dependsOnMethods = "testGetShowForgotPasswordPageTextInfo")
+    @Test(groups = "parallel", dependsOnMethods = "testOpenForgotPasswordPage")
     public void testGetShowBackButtonToHomePage() {
         ForgotPasswordPage forgotPasswordPage = new ForgotPasswordPage(driverContainer);
 
         Assert.assertEquals(forgotPasswordPage.getShowBackButtonToHomePage(), BACK_BUTTON);
     }
 
-    @Test(dependsOnMethods = "testGetShowBackButtonToHomePage")
+    @Test(groups = "parallel", dependsOnMethods = "testOpenForgotPasswordPage")
     public void testGetEmailFieldName() {
         ForgotPasswordPage forgotPasswordPage = new ForgotPasswordPage(driverContainer);
 
         Assert.assertEquals(forgotPasswordPage.getEmailFieldName(), EMAIL_FIELD_FP);
     }
 
-    @Test(dependsOnMethods = "testGetEmailFieldName")
+    @Test(groups = "parallel", dependsOnMethods = "testOpenForgotPasswordPage")
     public void testCheckEmailField() {
         ForgotPasswordPage forgotPasswordPage = new ForgotPasswordPage(driverContainer);
 
         Assert.assertTrue(forgotPasswordPage.checkEmailField());
     }
 
-    @Test(dependsOnMethods = "testCheckEmailField")
+    @Test(groups = "parallel", dependsOnMethods = "testOpenForgotPasswordPage")
     public void testGetRetrievePasswordButtonName() {
         ForgotPasswordPage forgotPasswordPage = new ForgotPasswordPage(driverContainer);
 
         Assert.assertEquals(forgotPasswordPage.getRetrievePasswordButtonName(), RETRIEVE_PASSWORD_BUTTON);
     }
 
-    @Test(dependsOnMethods = "testGetRetrievePasswordButtonName")
+    @Test(groups = "parallel", dependsOnMethods = "testOpenForgotPasswordPage")
     public void testCheckRetrievePasswordButton() {
         ForgotPasswordPage forgotPasswordPage = new ForgotPasswordPage(driverContainer);
 
         Assert.assertTrue(forgotPasswordPage.checkRetrievePasswordButton());
     }
 
-    @Test(dependsOnMethods = "testCheckRetrievePasswordButton", dataProvider = "emails")
+    @Test(dependsOnGroups = "parallel", dataProvider = "emails")
     public void testInputEmail(int number, String value) {
         ForgotPasswordPage forgotPasswordPage = new ForgotPasswordPage(driverContainer);
 

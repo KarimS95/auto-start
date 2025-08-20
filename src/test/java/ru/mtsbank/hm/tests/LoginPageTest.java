@@ -20,63 +20,63 @@ public class LoginPageTest extends BaseTest {
         Assert.assertEquals(loginPage.getLoginPageUrl(), LOGIN_PAGE_URL);
     }
 
-    @Test(dependsOnMethods = "testOpenLoginPage")
+    @Test(groups = "parallel", dependsOnMethods = "testOpenLoginPage")
     public void testGetLoginPageCardHeader() {
         LoginPage loginPage = new LoginPage(driverContainer);
 
         Assert.assertEquals(loginPage.getLoginPageCardHeader(), LOGIN_PAGE_CARD_HEADER);
     }
 
-    @Test(dependsOnMethods = "testGetLoginPageCardHeader")
+    @Test(groups = "parallel", dependsOnMethods = "testOpenLoginPage")
     public void testGetUsernameFieldName() {
         LoginPage loginPage = new LoginPage(driverContainer);
 
         Assert.assertEquals(loginPage.getUsernameFieldName(), USERNAME_FIELD);
     }
 
-    @Test(dependsOnMethods = "testGetUsernameFieldName")
+    @Test(groups = "parallel", dependsOnMethods = "testOpenLoginPage")
     public void testGetPasswordFieldName() {
         LoginPage loginPage = new LoginPage(driverContainer);
 
         Assert.assertEquals(loginPage.getPasswordFieldName(), PASSWORD_FIELD);
     }
 
-    @Test(dependsOnMethods = "testGetPasswordFieldName")
+    @Test(groups = "parallel", dependsOnMethods = "testOpenLoginPage")
     public void testGetLoginButtonText() {
         LoginPage loginPage = new LoginPage(driverContainer);
 
         Assert.assertEquals(loginPage.getLoginButtonText(), LOGIN_BUTTON);
     }
 
-    @Test(dependsOnMethods = "testGetLoginButtonText")
+    @Test(groups = "parallel", dependsOnMethods = "testOpenLoginPage")
     public void testIsRegisterLinkInteractive() {
         LoginPage loginPage = new LoginPage(driverContainer);
 
         Assert.assertTrue(loginPage.isRegisterLinkInteractive());
     }
 
-    @Test(dependsOnMethods = "testIsRegisterLinkInteractive")
+    @Test(groups = "parallel", dependsOnMethods = "testOpenLoginPage")
     public void testIsLoginButtonInteractive() {
         LoginPage loginPage = new LoginPage(driverContainer);
 
         Assert.assertTrue(loginPage.isLoginButtonInteractive());
     }
 
-    @Test(dependsOnMethods = "testIsLoginButtonInteractive")
+    @Test(groups = "parallel", dependsOnMethods = "testOpenLoginPage")
     public void testCheckUsernameField() {
         LoginPage loginPage = new LoginPage(driverContainer);
 
         Assert.assertTrue(loginPage.checkUsernameField());
     }
 
-    @Test(dependsOnMethods = "testCheckUsernameField")
+    @Test(groups = "parallel", dependsOnMethods = "testOpenLoginPage")
     public void testCheckPasswordField() {
         LoginPage loginPage = new LoginPage(driverContainer);
 
         Assert.assertTrue(loginPage.checkPasswordField());
     }
 
-    @Test(dependsOnMethods = "testCheckPasswordField")
+    @Test(groups = "parallel", dependsOnMethods = "testOpenLoginPage")
     public void testGetLoginPageCardText() {
         LoginPage loginPage = new LoginPage(driverContainer);
 
@@ -89,7 +89,7 @@ public class LoginPageTest extends BaseTest {
         Assert.assertTrue(isTrue);
     }
 
-    @Test(dependsOnMethods = "testGetLoginPageCardText", dataProvider = "negativeValues")
+    @Test(dependsOnGroups = "parallel", dataProvider = "negativeValues")
     public void testNegativeLogin(int number, String username, String password) {
         LoginPage loginPage = new LoginPage(driverContainer);
 

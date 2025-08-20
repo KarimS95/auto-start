@@ -18,14 +18,14 @@ public class RegisterTest extends BaseTest {
         Assert.assertEquals(registerPage.getRegisterPageUrl(), REGISTER_PAGE_URL);
     }
 
-    @Test(dependsOnMethods = "testOpenRegisterPage")
+    @Test(groups = "parallel", dependsOnMethods = "testOpenRegisterPage")
     public void testGetRegisterPageHeader() {
         RegisterPage registerPage = new RegisterPage(driverContainer);
 
         Assert.assertTrue(registerPage.getRegisterPageHeader());
     }
 
-    @Test(dependsOnMethods = "testGetRegisterPageHeader")
+    @Test(groups = "parallel", dependsOnMethods = "testOpenRegisterPage")
     public void testGetRegisterPageFooter() {
         RegisterPage registerPage = new RegisterPage(driverContainer);
 
@@ -38,7 +38,7 @@ public class RegisterTest extends BaseTest {
         Assert.assertTrue(footerIsTrue);
     }
 
-    @Test(dependsOnMethods = "testGetRegisterPageFooter")
+    @Test(groups = "parallel", dependsOnMethods = "testOpenRegisterPage")
     public void testGetShowRegisterPageTextInfo() {
         RegisterPage registerPage = new RegisterPage(driverContainer);
 
@@ -51,7 +51,7 @@ public class RegisterTest extends BaseTest {
         Assert.assertTrue(textInfoIsTrue);
     }
 
-    @Test(dependsOnMethods = "testGetShowRegisterPageTextInfo")
+    @Test(groups = "parallel", dependsOnMethods = "testOpenRegisterPage")
     public void testGetShowBackButtonToHomePage() {
         RegisterPage registerPage = new RegisterPage(driverContainer);
 
@@ -59,56 +59,56 @@ public class RegisterTest extends BaseTest {
     }
 
 
-    @Test(dependsOnMethods = "testGetShowBackButtonToHomePage")
+    @Test(groups = "parallel", dependsOnMethods = "testOpenRegisterPage")
     public void testGetUsernameFieldName() {
         RegisterPage registerPage = new RegisterPage(driverContainer);
 
         Assert.assertEquals(registerPage.getUsernameFieldName(), USERNAME_FIELD);
     }
 
-    @Test(dependsOnMethods = "testGetUsernameFieldName")
+    @Test(groups = "parallel", dependsOnMethods = "testOpenRegisterPage")
     public void testGetPasswordFieldName() {
         RegisterPage registerPage = new RegisterPage(driverContainer);
 
         Assert.assertEquals(registerPage.getPasswordFieldName(), PASSWORD_FIELD);
     }
 
-    @Test(dependsOnMethods = "testGetPasswordFieldName")
+    @Test(groups = "parallel", dependsOnMethods = "testOpenRegisterPage")
     public void testGetConfirmPasswordFieldName() {
         RegisterPage registerPage = new RegisterPage(driverContainer);
 
         Assert.assertEquals(registerPage.checkConfirmPasswordFieldName(),PASSWORD_CONFIRM_FIELD);
     }
 
-    @Test(dependsOnMethods = "testGetConfirmPasswordFieldName")
+    @Test(groups = "parallel", dependsOnMethods = "testOpenRegisterPage")
     public void testGetRegisterButtonName() {
         RegisterPage registerPage = new RegisterPage(driverContainer);
 
         Assert.assertEquals(registerPage.getRegisterButtonName(), REGISTER_BUTTON);
     }
 
-    @Test(dependsOnMethods = "testGetRegisterButtonName")
+    @Test(groups = "parallel", dependsOnMethods = "testOpenRegisterPage")
     public void testIsUsernameFieldInteractive() {
         RegisterPage registerPage = new RegisterPage(driverContainer);
 
         Assert.assertTrue(registerPage.checkUsernameField());
     }
 
-    @Test(dependsOnMethods = "testIsUsernameFieldInteractive")
+    @Test(groups = "parallel", dependsOnMethods = "testOpenRegisterPage")
     public void testIsPasswordFieldInteractive() {
         RegisterPage registerPage = new RegisterPage(driverContainer);
 
         Assert.assertTrue(registerPage.checkPasswordField());
     }
 
-    @Test(dependsOnMethods = "testIsPasswordFieldInteractive")
+    @Test(groups = "parallel", dependsOnMethods = "testOpenRegisterPage")
     public void testIsConfirmPasswordFieldInteractive() {
         RegisterPage registerPage = new RegisterPage(driverContainer);
 
         Assert.assertTrue(registerPage.checkConfirmPasswordField());
     }
 
-    @Test(dependsOnMethods = "testIsConfirmPasswordFieldInteractive")
+    @Test(groups = "parallel", dependsOnMethods = "testOpenRegisterPage")
     public void testIsRegistrationButtonInteractive() {
         RegisterPage registerPage = new RegisterPage(driverContainer);
 
@@ -116,8 +116,7 @@ public class RegisterTest extends BaseTest {
     }
 
 
-
-    @Test(dependsOnMethods = "testIsRegistrationButtonInteractive")
+    @Test(dependsOnGroups = "parallel")
     public void testClickRegistrationButtonWithVoidFieldValues() {
         RegisterPage registerPage = new RegisterPage(driverContainer);
 
@@ -226,7 +225,7 @@ public class RegisterTest extends BaseTest {
     @DataProvider(name = "validICredentials")
     public Object[][] validCredentials() {
       return new Object[][] {
-              {"karimtesttesttesttest","12345aaakk", "12345aaakk"}
+              {"karimtesttesttesttest11","12345aaakk", "12345aaakk"}
       };
     }
 

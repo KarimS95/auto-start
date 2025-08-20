@@ -19,7 +19,7 @@ public class SecurePageTest extends BaseTest {
         Assert.assertEquals(securePage.getSecurePageUrl(), SECURE_URL);
     }
 
-    @Test(dependsOnMethods = "testOpenSecurePage")
+    @Test(groups = "parallel", dependsOnMethods = "testOpenSecurePage")
     public void testGetSecurePageTextInfo() {
         SecurePage securePage = new SecurePage(driverContainer);
 
@@ -32,21 +32,21 @@ public class SecurePageTest extends BaseTest {
         Assert.assertTrue(isTrue);
     }
 
-    @Test(dependsOnMethods = "testGetSecurePageTextInfo")
+    @Test(groups = "parallel", dependsOnMethods = "testOpenSecurePage")
     public void testGetLogoutButtonText() {
         SecurePage securePage = new SecurePage(driverContainer);
 
         Assert.assertEquals(securePage.getLogoutButtonText(), LOGOUT_BUTTON_SP);
     }
 
-    @Test(dependsOnMethods = "testGetLogoutButtonText")
+    @Test(groups = "parallel", dependsOnMethods = "testOpenSecurePage")
     public void testIsLogoutButtonInteractive() {
         SecurePage securePage = new SecurePage(driverContainer);
 
         Assert.assertTrue(securePage.isLogoutButtonInteractive());
     }
 
-    @Test(dependsOnMethods = "testIsLogoutButtonInteractive")
+    @Test(dependsOnGroups = "parallel")
     public void testLogout() {
         SecurePage securePage = new SecurePage(driverContainer);
         LoginPage loginPage = securePage.logout();

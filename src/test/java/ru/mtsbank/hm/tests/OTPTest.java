@@ -20,42 +20,42 @@ public class OTPTest extends BaseTest {
         Assert.assertEquals(otpPage.getOTPPageUrl(), OTP_PAGE_URL);
     }
 
-    @Test
+    @Test(groups = "parallel", dependsOnMethods = "testOpenOTPPage")
     public void testGetOTPPageHeader() {
         OTPPage otpPage = new OTPPage(driverContainer);
 
         Assert.assertTrue(otpPage.getOTPPageHeader());
     }
 
-    @Test
+    @Test(groups = "parallel", dependsOnMethods = "testOpenOTPPage")
     public void testGetShowBackButtonToHomePage() {
         OTPPage otpPage = new OTPPage(driverContainer);
 
         Assert.assertEquals(otpPage.getShowBackButtonToHomePage(), BACK_BUTTON);
     }
 
-    @Test
+    @Test(groups = "parallel", dependsOnMethods = "testOpenOTPPage")
     public void testGetEmailFieldName() {
         OTPPage otpPage = new OTPPage(driverContainer);
 
         Assert.assertEquals(otpPage.getEmailFieldName(), EMAIL_FIELD);
     }
 
-    @Test
+    @Test(groups = "parallel", dependsOnMethods = "testOpenOTPPage")
     public void testGetEmailField() {
         OTPPage otpPage = new OTPPage(driverContainer);
 
         Assert.assertTrue(otpPage.getEmailField());
     }
 
-    @Test
+    @Test(groups = "parallel", dependsOnMethods = "testOpenOTPPage")
     public void testGetSendOtpButtonText() {
         OTPPage otpPage = new OTPPage(driverContainer);
 
         Assert.assertEquals(otpPage.getSendOtpButtonText(), OTP_BUTTON_TEXT);
     }
 
-    @Test
+    @Test(groups = "parallel", dependsOnMethods = "testOpenOTPPage")
     public void testGetOTPPageFooter() {
         OTPPage otpPage = new OTPPage(driverContainer);
 
@@ -69,7 +69,7 @@ public class OTPTest extends BaseTest {
         Assert.assertTrue(isFooterTrue);
     }
 
-    @Test
+    @Test(groups = "parallel", dependsOnMethods = "testOpenOTPPage")
     public void testGetShowOTPPageTextInfo() {
         OTPPage otpPage = new OTPPage(driverContainer);
 
@@ -83,10 +83,7 @@ public class OTPTest extends BaseTest {
         Assert.assertTrue(isTextInfoTrue);
     }
 
-
-
-
-    @Test(dependsOnMethods = "testOpenOTPPage", dataProvider = "invalid email values")
+    @Test(dependsOnGroups = "parallel", dataProvider = "invalid email values")
     public void testNegativeOtpLogin(int number, String email) {
         OTPPage otpPage = new OTPPage(driverContainer);
 
@@ -109,7 +106,7 @@ public class OTPTest extends BaseTest {
     @Test(dependsOnMethods = "testNegativeOtpLogin", dataProvider = "otpValues")
     public void testPositiveOtpLogin(String value, String code) {
         HomePage homePage = new HomePage(driverContainer);
-        OTPPage otpPage = homePage.openOTPPageWithUrl();
+        OTPPage otpPage = homePage.openOTPPageWithUrl(OTP_PAGE_URL);
         SecurePage securePage = new SecurePage(driverContainer);
 
         otpPage.otpLogin(value,code);
@@ -117,7 +114,6 @@ public class OTPTest extends BaseTest {
         Assert.assertEquals(securePage.getAlert(), LOGGED_IN);
         Assert.assertEquals(securePage.getSecurePageUrl(), SECURE_URL);
     }
-
 
 
 
