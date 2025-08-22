@@ -11,7 +11,7 @@ public class HomePageTest extends BaseTest {
 
     private static final String BASE_URL = "https://online.mtsdengi-test.mbrd.ru/";
     private static final String PREMIUM_URL = "https://online.mtsdengi-test.mbrd.ru/premium";
-    private static final List<String> WIDGET_NAMES = Arrays.asList("Премиум", "Premium", "Прайвет", "Private");
+    private static final List<String> WIDGET_NAMES = List.of("Премиум", "Premium", "Прайвет", "Private");
 
     private HomePage homePage;
 
@@ -21,8 +21,8 @@ public class HomePageTest extends BaseTest {
         homePage = new HomePage(driverContainer);
 
         boolean found = false;
-        for(String charToCheck : WIDGET_NAMES) {
-            if(homePage.checkPremiumWidgetName().contains(charToCheck)) {
+        for(String i : WIDGET_NAMES) {
+            if(homePage.checkPremiumWidgetName().contains(i)) {
                 found = true;
                 break;
             }
@@ -31,8 +31,8 @@ public class HomePageTest extends BaseTest {
         Assert.assertTrue(found);
     }
 
-    @Test
-    public void testCheckPremiumWidgetIsClickable() {
+    @Test(dependsOnMethods = "testChekPremiumWidgetName")
+    public void testCheckPremiumWidget() {
         homePage = new HomePage(driverContainer);
 
         Assert.assertTrue(homePage.checkPremiumWidget());

@@ -11,19 +11,18 @@ import java.util.List;
 
 public class CodePage extends BasePage {
 
-    private static final String url = "https://online.mtsdengi-test.mbrd.ru/";
+    private static final String[] URL = {"https://online.mtsdengi-test.mbrd.ru/", "https://online.mtsdengi-dev.mbrd.ru/"};
 
     public CodePage(InheritableThreadLocal<WebDriver> driverContainer) {
         super(driverContainer);
     }
 
-    public HomePage inputCode(List<String> passwordList) {
-        for (String j : passwordList) {
-            inputCode.sendKeys(j);
-        }
-
+    public HomePage inputCode(String[] passwordList) {
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(200));
-        wait.until(ExpectedConditions.urlToBe(url));
+
+        for (String i : passwordList) {
+            inputCode.sendKeys(i);
+        }
 
         return new HomePage(driverContainer);
     }

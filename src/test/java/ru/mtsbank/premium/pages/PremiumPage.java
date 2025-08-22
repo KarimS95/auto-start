@@ -83,7 +83,7 @@ public class PremiumPage extends BasePage{
        return checkLevelPageButton.getText();
     }
 
-    public boolean checkPrivilegesBlocksIsDisplayed() {
+    public boolean checkPrivilegesBlocks() {
         checkElementOnPage(checkPrivilegesBlocks);
         return checkPrivilegesBlocks.isDisplayed();
     }

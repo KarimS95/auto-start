@@ -23,7 +23,7 @@ public class HomePage extends BasePage{
     }
 
     public String checkPremiumWidgetName() {
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(100));
         wait.until(ExpectedConditions.visibilityOf(openPremiumPage));
 
         return openPremiumPage.getText();

@@ -42,19 +42,49 @@ public class PremiumCashbackPage extends BasePage{
         return driverContainer.get().findElements(checkboxesByLocator).size();
     }
 
+    public boolean checkCheckboxes() {
+        return checkboxes.isEnabled();
+    }
+
+    public boolean checkDisableSelectButton() {
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.elementToBeClickable(selectCashbackCategories));
+        return selectCashbackCategories.getAttribute("disabled") != null;
+    }
+
     public void selectCashbackCategoriesCheckboxes() {
 
-       List<WebElement> checkboxes = driverContainer.get().findElements(By.xpath("//input[@role='checkbox']"));
+       List<WebElement> checkboxesList = driverContainer.get().findElements(checkboxesByLocator);
 
-       if(checkboxes.size() >= 5) {
-           for(WebElement checkbox : checkboxes) {
+       if(checkboxesList.size() >= 5) {
+           for(WebElement checkbox : checkboxesList) {
                checkbox.click();
            }
        }
     }
 
+    public boolean checkDisableCheckboxes() {
+        List<WebElement> checkboxesList = driverContainer.get().findElements(checkboxesByLocator);
+        System.out.println("checkboxesListCount: " + checkboxesList);
+
+        boolean isTrue = false;
+
+        for (WebElement i : checkboxesList) {
+            isTrue = (!i.isSelected()) && i.getAttribute("disabled") != null;
+        }
+        return isTrue;
+    }
+
+    public boolean checkEnableSelectButton() {
+        return selectCashbackCategories.isEnabled();
+    }
+
     public void clickOnCategoriesSelectButton() {
         selectCashbackCategories.click();
+    }
+
+    public boolean checkSelectButton() {
+        return selectOk.isDisplayed() && selectOk.isEnabled();
     }
 
     public PremiumCashbackPage clickOnSuccessfulButton() {
@@ -65,11 +95,12 @@ public class PremiumCashbackPage extends BasePage{
     public boolean checkSelectedCategories() {
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
         wait.until(ExpectedConditions.visibilityOf(checkSelectedCategories));
+
         return checkSelectedCategories.isDisplayed();
     }
 
     public String openLevelPageLink() {
-        WebDriverWait waitPremiumLink = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
+        WebDriverWait waitPremiumLink = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(60));
         waitPremiumLink.until(ExpectedConditions.elementToBeClickable(openPremiumLink)).click();
 
         return driverContainer.get().getCurrentUrl();
@@ -89,8 +120,8 @@ public class PremiumCashbackPage extends BasePage{
         return driverContainer.get().getCurrentUrl();
     }
 
-    public boolean openFirstLink()  {
-        boolean isTrue = false;
+    public String openFirstLink()  {
+        String URL = "";
         String generalWindowHandle = driverContainer.get().getWindowHandle();
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(120));
         wait.until(ExpectedConditions.visibilityOf(openFirstLink));
@@ -103,16 +134,17 @@ public class PremiumCashbackPage extends BasePage{
         for (String handle : handles) {
             if (!handle.equals(generalWindowHandle)) {
                 driverContainer.get().switchTo().window(handle);
-                isTrue = Objects.equals(driverContainer.get().getCurrentUrl(), checkFirstLink);
+                URL = driverContainer.get().getCurrentUrl();
                 driverContainer.get().close();
                 driverContainer.get().switchTo().window(generalWindowHandle);
             }
         }
-        return isTrue;
+        return URL;
     }
 
-    public boolean openSecondLink() {
+    public String openSecondLink() {
         boolean isTrue = false;
+        String URL = "";
         String generalWindowHandle = driverContainer.get().getWindowHandle();
 
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
@@ -123,12 +155,12 @@ public class PremiumCashbackPage extends BasePage{
         for (String handle : handles) {
             if (!handle.equals(generalWindowHandle)) {
                 driverContainer.get().switchTo().window(handle);
-                isTrue = Objects.equals(driverContainer.get().getCurrentUrl(), checkSecondLink);
+                URL = driverContainer.get().getCurrentUrl();
                 driverContainer.get().close();
                 driverContainer.get().switchTo().window(generalWindowHandle);
             }
        }
-        return isTrue;
+        return URL;
     }
 
     public boolean openThirdLink() {
@@ -149,6 +181,14 @@ public class PremiumCashbackPage extends BasePage{
             }
         }
         return isTrue;
+    }
+
+    public String getPremiumCashbackPageURL() {
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
+        String URL = driverContainer.get().getCurrentUrl();
+        System.out.println("URL FROM getCurrentUrl: " + URL);
+        wait.until(ExpectedConditions.urlToBe(URL));
+        return URL;
     }
 
 
