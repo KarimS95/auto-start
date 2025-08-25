@@ -1,11 +1,11 @@
-package ru.mtsbank.hm.tests;
+package ru.mtsbank.hw.tests;
 
 import org.openqa.selenium.StaleElementReferenceException;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import ru.mtsbank.hm.pages.HomePage;
-import ru.mtsbank.hm.pages.RegisterPage;
+import ru.mtsbank.hw.pages.HomePage;
+import ru.mtsbank.hw.pages.RegisterPage;
 
 public class RegisterTest extends BaseTest {
 

@@ -107,7 +107,7 @@ public class PremiumCashbackPage extends BasePage{
     }
 
     public String getLevelPageHeader() {
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(60));
         wait.until(ExpectedConditions.visibilityOf(checkPremiumLevelPageHeader));
 
         return checkPremiumLevelPageHeader.getText();

@@ -1,10 +1,10 @@
-package ru.mtsbank.hm.tests;
+package ru.mtsbank.hw.tests;
 
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import ru.mtsbank.hm.pages.ForgotPasswordPage;
-import ru.mtsbank.hm.pages.HomePage;
+import ru.mtsbank.hw.pages.ForgotPasswordPage;
+import ru.mtsbank.hw.pages.HomePage;
 
 
 public class ForgotPasswordPageTest extends BaseTest {

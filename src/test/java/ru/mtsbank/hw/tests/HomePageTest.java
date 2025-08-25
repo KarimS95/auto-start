@@ -1,8 +1,8 @@
-package ru.mtsbank.hm.tests;
+package ru.mtsbank.hw.tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import ru.mtsbank.hm.pages.*;
+import ru.mtsbank.hw.pages.*;
 
 public class HomePageTest extends BaseTest {
 

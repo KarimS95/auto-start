@@ -1,11 +1,11 @@
-package ru.mtsbank.hm.tests;
+package ru.mtsbank.hw.tests;
 
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import ru.mtsbank.hm.pages.HomePage;
-import ru.mtsbank.hm.pages.LoginPage;
-import ru.mtsbank.hm.pages.SecurePage;
+import ru.mtsbank.hw.pages.HomePage;
+import ru.mtsbank.hw.pages.LoginPage;
+import ru.mtsbank.hw.pages.SecurePage;
 
 public class SecurePageTest extends BaseTest {
 

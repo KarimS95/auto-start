@@ -10,12 +10,12 @@
     </test>
     <test name="homework-tests">
         <classes>
-            <class name="ru.mtsbank.hm.tests.HomePageTest"/>
-            <class name="ru.mtsbank.hm.tests.RegisterTest"/>
-            <class name="ru.mtsbank.hm.tests.ForgotPasswordPageTest"/>
-            <class name="ru.mtsbank.hm.tests.OTPTest"/>
-            <class name="ru.mtsbank.hm.tests.LoginPageTest"/>
-            <class name="ru.mtsbank.hm.tests.SecurePageTest"/>
+            <class name="ru.mtsbank.hw.tests.HomePageTest"/>
+            <class name="ru.mtsbank.hw.tests.RegisterTest"/>
+            <class name="ru.mtsbank.hw.tests.ForgotPasswordPageTest"/>
+            <class name="ru.mtsbank.hw.tests.OTPTest"/>
+            <class name="ru.mtsbank.hw.tests.LoginPageTest"/>
+            <class name="ru.mtsbank.hw.tests.SecurePageTest"/>
         </classes>
     </test>
     <test name="parallel">
