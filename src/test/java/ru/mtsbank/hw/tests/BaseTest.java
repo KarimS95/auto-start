@@ -26,7 +26,6 @@ public class BaseTest {
     }
 
 
-
 //    @AfterClass
 //    protected void tearDown() {
 //        this.driverContainer.get().quit();
@@ -88,5 +87,20 @@ public class BaseTest {
     protected final String LOGGED_OUT = "You logged out of the secure area!";
     protected final String HOME_PAGE_LOGIN_PAGES_CARD_TEXT = "Test Login Page for Automation Testing Practice, a common use case for website authentication. You can use Playwright to automate these login test scenarios";
 
+    protected final String HOME_PAGE_WEB_INPUTS_PAGES_CARD_TEXT = "This is an example of using input fields such as numbers, text, passwords, or dates on a website";
+    protected final String WEB_INPUTS_PAGE_CARD_HEADER = "Web inputs page for Automation Testing Practice";
+    protected final String WEB_INPUTS_PAGE_CARD_TEXT = "Web inputs refer to the data or information provided by users through various input mechanisms on a website.\n" + "Web inputs allow users to interact with web pages, submit forms, and provide data for processing.";
+    protected final String DISPLAY_INPUTS_BUTTON = "Display Inputs";
+    protected final String CLEAR_INPUTS_BUTTON = "Clear Inputs";
+    protected final String INPUT_NUMBER_NAME = "Input: Number";
+    protected final String INPUT_TEXT_NAME = "Input: Text";
+    protected final String INPUT_PASSWORD_NAME = "Input: Password";
+    protected final String INPUT_DATE_NAME = "Input: Date";
+    protected final String OUTPUT_NUMBER_NAME = "Output: Number";
+    protected final String OUTPUT_TEXT_NAME = "Output: Text";
+    protected final String OUTPUT_DATE_NAME = "Output: Date";
+    protected final String OUTPUT_PASSWORD_NAME = "Output: Password";
+    protected final String WEB_INPUTS_PAGE_URL = "https://practice.expandtesting.com/inputs";
+    protected final String WEB_INPUTS_PAGE_FOOTER = "Practice Test Automation WebSite for Web UI and Rest API";
 
 }

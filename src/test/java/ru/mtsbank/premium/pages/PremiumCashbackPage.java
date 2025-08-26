@@ -6,9 +6,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 public class PremiumCashbackPage extends BasePage{
@@ -57,7 +55,7 @@ public class PremiumCashbackPage extends BasePage{
        List<WebElement> checkboxesList = driverContainer.get().findElements(checkboxesByLocator);
 
        if(checkboxesList.size() >= 5) {
-           for(WebElement checkbox : checkboxesList) {
+           for (WebElement checkbox : checkboxesList) {
                checkbox.click();
            }
        }
@@ -123,7 +121,7 @@ public class PremiumCashbackPage extends BasePage{
     public String openFirstLink()  {
         String URL = "";
         String generalWindowHandle = driverContainer.get().getWindowHandle();
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(120));
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(150));
         wait.until(ExpectedConditions.visibilityOf(openFirstLink));
 
         ((JavascriptExecutor)driverContainer.get()).executeScript("arguments[0].scrollIntoView(true)", openFirstLink);
@@ -143,7 +141,6 @@ public class PremiumCashbackPage extends BasePage{
     }
 
     public String openSecondLink() {
-        boolean isTrue = false;
         String URL = "";
         String generalWindowHandle = driverContainer.get().getWindowHandle();
 
@@ -163,8 +160,8 @@ public class PremiumCashbackPage extends BasePage{
         return URL;
     }
 
-    public boolean openThirdLink() {
-        boolean isTrue = false;
+    public String openThirdLink() {
+        String URL = "";
         String generalWindowHandle = driverContainer.get().getWindowHandle();
 
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
@@ -175,18 +172,17 @@ public class PremiumCashbackPage extends BasePage{
         for (String handle : handles) {
             if (!handle.equals(generalWindowHandle)) {
                 driverContainer.get().switchTo().window(handle);
-                isTrue = Objects.equals(driverContainer.get().getCurrentUrl(), checkThirdLink);
+                URL = driverContainer.get().getCurrentUrl();
                 driverContainer.get().close();
                 driverContainer.get().switchTo().window(generalWindowHandle);
             }
         }
-        return isTrue;
+        return URL;
     }
 
     public String getPremiumCashbackPageURL() {
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
         String URL = driverContainer.get().getCurrentUrl();
-        System.out.println("URL FROM getCurrentUrl: " + URL);
         wait.until(ExpectedConditions.urlToBe(URL));
         return URL;
     }

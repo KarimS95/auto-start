@@ -16,6 +16,7 @@
             <class name="ru.mtsbank.hw.tests.OTPTest"/>
             <class name="ru.mtsbank.hw.tests.LoginPageTest"/>
             <class name="ru.mtsbank.hw.tests.SecurePageTest"/>
+            <class name="ru.mtsbank.hw.tests.WebInputsPageTest"/>
         </classes>
     </test>
     <test name="parallel">

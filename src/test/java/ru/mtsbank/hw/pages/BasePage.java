@@ -15,7 +15,7 @@ public class BasePage {
 
     public BasePage(InheritableThreadLocal<WebDriver> driverContainer) {
         this.driverContainer = driverContainer;
-        PageFactory.initElements(driverContainer.get(),this);
+        PageFactory.initElements(this.driverContainer.get(),this);
     }
 
 

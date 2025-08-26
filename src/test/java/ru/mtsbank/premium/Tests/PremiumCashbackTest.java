@@ -138,11 +138,13 @@ public class PremiumCashbackTest extends BaseTest {
     @Test(dependsOnMethods = "testBackToCashbackPrivilege")
     public void testOpenFirstLink() {
         PremiumCashbackPage premiumCashbackPage = new PremiumCashbackPage(driverContainer);
+        String URL = premiumCashbackPage.openFirstLink();
 
         boolean isTrue = false;
         for (String i : PARTNERS_URLS) {
-            if (premiumCashbackPage.openFirstLink().equals(i)) {
+            if (URL.equals(i)) {
                 isTrue = true;
+                break;
             }
         }
         Assert.assertTrue(isTrue);
@@ -151,11 +153,13 @@ public class PremiumCashbackTest extends BaseTest {
     @Test(dependsOnMethods = "testOpenFirstLink")
     public void testOpenSecondLink() {
         PremiumCashbackPage premiumCashbackPage = new PremiumCashbackPage(driverContainer);
+        String URL = premiumCashbackPage.openSecondLink();
 
         boolean isTrue = false;
         for (String i : PARTNERS_URLS) {
-            if (premiumCashbackPage.openSecondLink().equals(i)) {
+            if (URL.equals(i)) {
                 isTrue = true;
+                break;
             }
         }
         Assert.assertTrue(isTrue);
@@ -164,8 +168,16 @@ public class PremiumCashbackTest extends BaseTest {
     @Test(dependsOnMethods = "testOpenSecondLink")
     public void testOpenThirdLink() {
         PremiumCashbackPage premiumCashbackPage = new PremiumCashbackPage(driverContainer);
+        String URL = premiumCashbackPage.openThirdLink();
 
-        Assert.assertTrue(premiumCashbackPage.openThirdLink());
+        boolean isTrue = false;
+        for (String i : CASHBACK_TERMS_URL) {
+            if (URL.equals(i)) {
+                isTrue = true;
+                break;
+            }
+        }
+        Assert.assertTrue(isTrue);
     }
 
 }

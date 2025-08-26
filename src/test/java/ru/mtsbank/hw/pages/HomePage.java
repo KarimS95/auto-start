@@ -19,6 +19,37 @@ public class HomePage extends BasePage{
     }
 
 
+
+    //For WebInputsPage
+
+    public String getWebInputsPageLinkName() {
+        return webInputsPageLinkLocator.getText();
+    }
+
+    public String getWebInputsPageButtonName() {
+        return webInputsPageButtonLocator.getText();
+    }
+
+    public boolean checkWebInputsPageLink() {
+        return webInputsPageLinkLocator.isDisplayed() && webInputsPageLinkLocator.isEnabled();
+    }
+
+    public boolean checkWebInputsPageButton() {
+        return webInputsPageButtonLocator.isDisplayed() && webInputsPageButtonLocator.isEnabled();
+    }
+
+    public WebInputsPage openWebInputsPageWithClickOnLink() {
+        webInputsPageLinkLocator.click();
+        return new WebInputsPage(driverContainer);
+    }
+
+    public WebInputsPage openWebInputsPageWithClickOnButton() {
+        webInputsPageButtonLocator.click();
+        return new WebInputsPage(driverContainer);
+    }
+
+
+
     //For LoginPage
 
     public String getLoginPageLinkName() {
@@ -183,8 +214,6 @@ public class HomePage extends BasePage{
     private WebElement registerPageButtonLocator;
 
 
-
-
     @FindBy(xpath = "//a[@href='/otp-login'][text()='OTP: One Time Password']")
     private WebElement otpPageLinkLocator;
 
@@ -194,14 +223,25 @@ public class HomePage extends BasePage{
     @FindBy(xpath = "//a[@type='button'][@href='/otp-login'][text()='Try it out']")
     private WebElement otpPageButtonLocator;
 
+
     @FindBy(xpath = "//a[@href='/login'][text()='Test Login Page']")
     private WebElement loginPageLinkLocator;
 
     @FindBy(xpath = "//a[@type='button'][@href='/login']")
     private WebElement loginPageButtonLocator;
 
+
     @FindBy(xpath = "//p[contains(text(),' Test Login Page for Automation Testing Practice, a common use case for website authentication. You can use Playwright to automate these login test scenarios')]")
     private WebElement homePageLoginPagesCardText;
 
+
+    @FindBy(xpath = "//a[@href='/inputs'][text()='Web inputs']")
+    private WebElement webInputsPageLinkLocator;
+
+    @FindBy(xpath = "//a[@type='button'][@href='/inputs']")
+    private WebElement webInputsPageButtonLocator;
+
+    @FindBy(xpath = "//p[contains(text(),'This is an example of using input fields such as numbers, text, passwords, or dates on a website')]")
+    private WebElement webInputsPageCardTextLocator;
 
 }

@@ -68,7 +68,7 @@ public class PremiumLevelTest extends BaseTest {
     @Test
     public void testOpenThirdI() {
         PremiumLevelPage premiumLevelPage = new PremiumLevelPage(driverContainer);
-        premiumLevelPage.closeThirdI();
+        premiumLevelPage.openThirdI();
     }
 
     @Test

@@ -40,7 +40,7 @@ public class PremiumPage extends BasePage{
         openPremiumCashbackCategoriesList.click();
     }
 
-    public PremiumPage selectCashbackCategories() {
+    public void selectCashbackCategories() {
 
         List<WebElement> checkboxes = driverContainer.get().findElements(By.xpath("//input[@role='checkbox']"));
 
@@ -49,15 +49,15 @@ public class PremiumPage extends BasePage{
                 checkbox.click();
             }
         }
-        return new PremiumPage(driverContainer);
     }
 
-    public void confirmSelectedCashbackCategories() {
+    public void clickOnCategoriesSelectButton() {
         selectCashbackCategories.click();
     }
 
-    public void SelectOk() {
+    public PremiumPage clickOnSuccessfulButton() {
         selectOk.click();
+        return new PremiumPage(driverContainer);
     }
 
     public boolean checkPremiumCashbackCategoriesList() {

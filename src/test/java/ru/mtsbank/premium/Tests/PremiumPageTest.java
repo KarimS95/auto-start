@@ -21,16 +21,15 @@ public class PremiumPageTest extends BaseTest {
         boolean found = false;
 
         for(String i : LEVEL_PAGE_NAME) {
-            if(premiumPage.checkLevelPageHeaderName().contains(i)) {
+            if(premiumPage.checkLevelPageHeaderName().equals(i)) {
                 found = true;
                 break;
             }
         }
-
         Assert.assertTrue(found);
     }
 
-    @Test(dependsOnMethods = "testCheckLevelPageHeader")
+    @Test(groups = "parallel", dependsOnMethods = "testCheckLevelPageHeader")
     public void testCheckPremiumLevelPage() {
         PremiumPage premiumPage = new PremiumPage(driverContainer);
 
@@ -38,21 +37,21 @@ public class PremiumPageTest extends BaseTest {
     }
 
 
-    @Test(dependsOnMethods = "testCheckPremiumLevelPage")
+    @Test(groups = "parallel", dependsOnMethods = "testCheckLevelPageHeader")
     public void testCheckPremiumCashbackCategoriesList() {
         PremiumPage premiumPage = new PremiumPage(driverContainer);
 
         Assert.assertTrue(premiumPage.checkPremiumCashbackCategoriesList());
     }
 
-    @Test(dependsOnMethods = "testCheckPremiumCashbackCategoriesList")
+    @Test(groups = "parallel", dependsOnMethods = "testCheckLevelPageHeader")
     public void testCheckPremiumCashbackPrivilege() {
         PremiumPage premiumPage = new PremiumPage(driverContainer);
 
         Assert.assertTrue(premiumPage.checkPremiumCashbackPrivilege());
     }
 
-    @Test(dependsOnMethods = "testCheckPremiumCashbackPrivilege")
+    @Test(groups = "parallel", dependsOnMethods = "testCheckLevelPageHeader")
     public void testCheckPrivilegesBlocks() {
         PremiumPage premiumPage = new PremiumPage(driverContainer);
 

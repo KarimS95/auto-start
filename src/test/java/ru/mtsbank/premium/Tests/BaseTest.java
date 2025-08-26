@@ -14,7 +14,7 @@ import java.util.List;
 
 public class BaseTest {
 
-    protected static InheritableThreadLocal<WebDriver> driverContainer = new InheritableThreadLocal<>();
+    protected InheritableThreadLocal<WebDriver> driverContainer = new InheritableThreadLocal<>();
 
     private final String PHONE_NUMBER = "9636125085";
     private final String[] PASSWORD_LIST = {"1", "2", "3","4"};
@@ -23,7 +23,7 @@ public class BaseTest {
 
 
     @BeforeClass(alwaysRun = true)
-    public static void setUp() {
+    public void setUp() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--incognito");
         WebDriver driver = new ChromeDriver(options);

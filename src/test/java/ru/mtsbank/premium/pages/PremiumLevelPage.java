@@ -20,7 +20,6 @@ public class PremiumLevelPage extends BasePage {
     public String getLevelPageHeader() {
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(100));
         wait.until(ExpectedConditions.visibilityOf(getLevelPageHeader));
-
         return getLevelPageHeader.getText();
     }
 
@@ -38,7 +37,6 @@ public class PremiumLevelPage extends BasePage {
     public String openServicesTermsButton() {
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(openServiceTerms)).click();
-
         return termsText.getText();
     }
 
