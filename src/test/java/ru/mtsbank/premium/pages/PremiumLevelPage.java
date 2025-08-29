@@ -95,7 +95,7 @@ public class PremiumLevelPage extends BasePage {
     }
 
     public void closeI() {
-        closeFirstI.click();
+        closeI.click();
     }
 
     public String checkLevelRulesButton() {
@@ -132,7 +132,7 @@ public class PremiumLevelPage extends BasePage {
     @FindBy(xpath = "//button[@data-testid='back-button']")
     private WebElement backButton;
 
-    @FindBy(xpath = "(//*[name()='svg'][@class='sc-dTvVRJ ketkom'])[2]")
+    @FindBy(xpath = "(//*[name()='svg'])[13]")
     private WebElement openFirstI;
 
     @FindBy(xpath = "//h4[text()='Cреднемесячный остаток']")
@@ -144,20 +144,14 @@ public class PremiumLevelPage extends BasePage {
     @FindBy(xpath = "//p[contains(text(),'Cреднемесячный остаток на тек')]")
     private WebElement thirdIHeader;
 
-    @FindBy(xpath = "//*[name()='path' and contains(@d,'M6.293 16.')]")
-    private WebElement closeFirstI;
+    @FindBy(xpath = "(//*[name()='svg'])[21]")
+    private WebElement closeI;
 
-    @FindBy(xpath = "(//*[name()='svg'][@class='sc-dTvVRJ ketkom'])[3]")
+    @FindBy(xpath = "(//*[name()='svg'])[14]")
     private WebElement openSecondI;
 
-    @FindBy(xpath = "(//*[name()='svg'][@class='sc-dTvVRJ ketkom'])[5]")
-    private WebElement closeSecondI;
-
-    @FindBy(xpath = "(//*[name()='svg'][@class='sc-dTvVRJ ketkom'])[4]")
+    @FindBy(xpath = "(//*[name()='svg'])[15]")
     private WebElement openThirdI;
-
-    @FindBy(xpath = "(//button[@class='sc-dTWiOz HXJNV sc-eJoXEY iskrJj sc-gtURjR esVnOE'])[1]")
-    private WebElement closeThirdI;
 
     @FindBy(xpath = "//a[contains(@href,'pdf')]")
     private WebElement openLink;
