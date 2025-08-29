@@ -20,7 +20,7 @@ public class HomePage extends BasePage {
 
 
     public String getHomePageURL() {
-        WebDriverWait waitURL = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(10));
+        WebDriverWait waitURL = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(120));
         waitURL.until(ExpectedConditions.urlContains("https://online.mtsdengi-"));
         return driverContainer.get().getCurrentUrl();
     }

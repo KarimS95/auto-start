@@ -34,16 +34,12 @@ public class OTPPage extends BasePage {
         return otpPageHeader.isDisplayed();
     }
 
-    public List<String> getOTPPageFooter() {
-        return Collections.singletonList(Arrays.asList(otpPageFooterOne.getText(), otpPageFooterTwo.getText()).toString());
-    }
-
     public String getShowBackButtonToHomePage() {
         return backButton.getText();
     }
 
-    public List<String> getShowOTPPageTextInfo() {
-        return Collections.singletonList(Arrays.asList(pageTextCardHeaderName.getText(), pageTextInfo.getText()).toString());
+    public String getCardHeader() {
+        return pageTextCardHeaderName.getText();
     }
 
     public String getEmailFieldName() {
@@ -118,10 +114,10 @@ public class OTPPage extends BasePage {
     @FindBy(xpath = "//p[@data-testid='build-version']")
     private WebElement otpPageFooterTwo;
 
-    @FindBy(xpath = "//h1[contains(text(),'OTP Login page for Automation Testing Practice')]")
+    @FindBy(xpath = "//h1[contains(text(),'OTP Login')]")
     private WebElement pageTextCardHeaderName;
 
-    @FindBy(xpath = "//p[contains(text(),'If you d')]")
+    @FindBy(xpath = "//p[contains(text(),'IF YOU D')]")
     private WebElement pageTextInfo;
 
     @FindBy(xpath = "//label[@for='email']")

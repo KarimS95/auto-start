@@ -20,7 +20,6 @@ public class AuthTest extends BaseTest{
                     break;
                 }
             }
-
         Assert.assertTrue(found);
     }
 

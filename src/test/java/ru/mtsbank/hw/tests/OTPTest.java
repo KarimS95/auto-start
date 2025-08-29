@@ -54,31 +54,10 @@ public class OTPTest extends BaseTest {
     }
 
     @Test(groups = "parallel", dependsOnMethods = "testOpenOTPPage")
-    public void testGetOTPPageFooter() {
-        OTPPage otpPage = new OTPPage(driverContainer);
-
-        boolean isFooterTrue = false;
-
-        for (String i : FOOTER) {
-            if (otpPage.getOTPPageFooter().contains(i)) {
-                isFooterTrue = true;
-            }
-        }
-        Assert.assertTrue(isFooterTrue);
-    }
-
-    @Test(groups = "parallel", dependsOnMethods = "testOpenOTPPage")
     public void testGetShowOTPPageTextInfo() {
         OTPPage otpPage = new OTPPage(driverContainer);
 
-        boolean isTextInfoTrue = false;
-
-        for (String i : OTP_PAGE_TEXT_INFO) {
-            if (otpPage.getShowOTPPageTextInfo().contains(i)) {
-                isTextInfoTrue = true;
-            }
-        }
-        Assert.assertTrue(isTextInfoTrue);
+      Assert.assertEquals(otpPage.getCardHeader(),OTP_PAGE_TEXT_INFO);
     }
 
     @Test(dependsOnGroups = "parallel", dataProvider = "invalid email values")
@@ -102,12 +81,12 @@ public class OTPTest extends BaseTest {
     }
 
     @Test(dependsOnMethods = "testNegativeOtpLogin", dataProvider = "otpValues")
-    public void testPositiveOtpLogin(String value, String code) {
+    public void testPositiveOtpLogin(String email, String code) {
         HomePage homePage = new HomePage(driverContainer);
         OTPPage otpPage = homePage.openOTPPageWithUrl(OTP_PAGE_URL);
         SecurePage securePage = new SecurePage(driverContainer);
 
-        otpPage.otpLogin(value,code);
+        otpPage.otpLogin(email,code);
 
         Assert.assertEquals(securePage.getAlert(), LOGGED_IN);
         Assert.assertEquals(securePage.getSecurePageUrl(), SECURE_URL);

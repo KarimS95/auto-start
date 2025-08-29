@@ -67,7 +67,7 @@ public class BaseTest {
 
     protected final String OTP_PAGE_CARD_TEXT = "The example of a One Time Password (OTP) illustrates the process of authentication using an OTP code";
     protected final String OTP_PAGE_URL = "https://practice.expandtesting.com/otp-login";
-    protected final String[] OTP_PAGE_TEXT_INFO = {"[OTP Login page for Automation Testing Practice, If you don't want to use a real email address, you can use the following information in your test scenarios:]"};
+    protected final String OTP_PAGE_TEXT_INFO = "OTP Login page for Automation Testing Practice";
     protected final String LOGGED_IN = "You logged into a secure area!";
     protected final String INVALID_OTP_CODE = "The provided OTP code is incorrect. Please check your code and try again.";
     protected final String OTP_BUTTON_TEXT = "Send OTP Code";

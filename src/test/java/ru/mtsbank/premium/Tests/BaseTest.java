@@ -52,21 +52,5 @@ public class BaseTest {
 
 
 
-    protected boolean checkIsTrue(String firstComparedValue, String[] secondComparedValue) {
-        boolean isTrue = false;
-
-        for (String i : secondComparedValue) {
-            if (firstComparedValue.equals(i)) {
-                isTrue = true;
-            }
-            break;
-        }
-        return isTrue;
-    }
-
-
-
-
-
 
 }

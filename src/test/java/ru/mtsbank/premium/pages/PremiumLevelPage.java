@@ -144,7 +144,7 @@ public class PremiumLevelPage extends BasePage {
     @FindBy(xpath = "//p[contains(text(),'Cреднемесячный остаток на тек')]")
     private WebElement thirdIHeader;
 
-    @FindBy(xpath = "(//*[name()='svg'])[21]")
+    @FindBy(xpath = "(//*[name()='svg'][@class='sc-dTvVRJ ketkom'])[6]")
     private WebElement closeI;
 
     @FindBy(xpath = "(//*[name()='svg'])[14]")
