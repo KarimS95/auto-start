@@ -9,11 +9,22 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class HomePage extends BasePage{
+public class HomePage extends BasePage {
+
+    private final String URL_DEV = "https://online.mtsdengi-dev.mbrd.ru/";
+    private final String URL_TEST = "https://online.mtsdengi-test.mbrd.ru/";
 
     public HomePage(InheritableThreadLocal<WebDriver> driverContainer) {
         super(driverContainer);
     }
+
+
+    public String getHomePageURL() {
+        WebDriverWait waitURL = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(10));
+        waitURL.until(ExpectedConditions.urlContains("https://online.mtsdengi-"));
+        return driverContainer.get().getCurrentUrl();
+    }
+
 
     public boolean checkPremiumWidget() {
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(100));
@@ -37,14 +48,13 @@ public class HomePage extends BasePage{
     }
 
 
-
     @FindBy(xpath = "//button[@data-testid='back-button']")
     private WebElement backButton;
 
     @FindBy(xpath = "//span[contains(text(), 'Премиум') or contains(text(), 'Private')]")
     private WebElement openPremiumPage;
 
-    @FindBy(xpath = "//div[@data-testid='flexbox']/span[contains(text(), 'Премиум') or contains(text(), 'Private')]" )
+    @FindBy(xpath = "//div[@data-testid='flexbox']/span[contains(text(), 'Премиум') or contains(text(), 'Private')]")
     private WebElement checkPremiumWidget;
 
     private By premiumWidget = By.xpath("//div[@data-testid='flexbox']/span[contains(text(), 'Премиум') or contains(text(), 'Private')]");

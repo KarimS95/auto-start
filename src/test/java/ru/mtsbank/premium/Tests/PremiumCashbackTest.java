@@ -20,86 +20,58 @@ public class PremiumCashbackTest extends BaseTest {
     private final String[] CASHBACK_TERMS_URL = {
             "https://static.mtsdengi.ru/portal-frontend-premium/documents/usloviya-nachisleniya-keshbehka-dlya-debetovyh-kart-v-ramkah.pdf",
             "https://static.mtsdengi.ru/portal-frontend-private-banking/documents/usloviya-nachisleniya-keshbeka-private.pdf"};
+    private final String BASE_CASHBACK_BLOCK_HEADER = "Базовый кешбэк";
+    private final String INCREASED_CASHBACK_BLOCK_HEADER = "Повышенный кешбэк";
+    private final String SUBSCRIPTION_BLOCK_HEADER = "С подпиской МТС PREMIUM";
+    private final String FROM_PAYMENT_SYSTEM_BLOCK_HEADER = "От платежной системы МИР";
+    private final String HOW_TO_GET_BLOCK_HEADER = "Как получить";
 
 
-    @Test(priority = 1)
-    public void testOpenPremiumCashbackCategoriesList() {
+    @Test
+    public void testGetBaseCashbackBlockHeader() {
         HomePage homePage = new HomePage(driverContainer);
         PremiumPage premiumPage = homePage.openPremiumPage();
         PremiumCashbackPage premiumCashbackPage = premiumPage.openPremiumCashbackPrivilege();
 
-        premiumCashbackPage.openCategoriesList();
-
-        boolean isHeaderTrue = false;
-        for(String iterator : CASHBACK_HEADER) {
-            if(premiumCashbackPage.getCategoriesListHeader().contains(iterator)) {
-                isHeaderTrue = true;
-                break;
-            }
-        }
-
-        Assert.assertTrue(isHeaderTrue);
+        Assert.assertEquals(premiumCashbackPage.getBaseCashbackBlockHeader(), BASE_CASHBACK_BLOCK_HEADER);
     }
 
-    @Test(groups = "parallel", dependsOnMethods = "testOpenPremiumCashbackCategoriesList")
-    public void testGetCheckboxesCount() {
+    @Test(groups = "parallel", dependsOnMethods = "testGetBaseCashbackBlockHeader")
+    public void testGetIncreasedCashbackBlockHeader() {
         PremiumCashbackPage premiumCashbackPage = new PremiumCashbackPage(driverContainer);
 
-        boolean isCheckboxesTrue = (premiumCashbackPage.getCheckboxesCount() >= CHECKBOXES_COUNT);
-        Assert.assertTrue(isCheckboxesTrue);
+        Assert.assertEquals(premiumCashbackPage.getIncreasedCashbackBlockHeader(), INCREASED_CASHBACK_BLOCK_HEADER);
     }
 
-    @Test(groups = "parallel", dependsOnMethods = "testOpenPremiumCashbackCategoriesList")
-    public void testCheckCheckboxes() {
+    @Test(groups = "parallel", dependsOnMethods = "testGetBaseCashbackBlockHeader")
+    public void testGetSubscriptionBlockHeader() {
         PremiumCashbackPage premiumCashbackPage = new PremiumCashbackPage(driverContainer);
 
-        Assert.assertTrue(premiumCashbackPage.checkCheckboxes());
+        Assert.assertEquals(premiumCashbackPage.getSubscriptionBlockHeader(), SUBSCRIPTION_BLOCK_HEADER);
     }
 
-    @Test(groups = "parallel", dependsOnMethods = "testOpenPremiumCashbackCategoriesList")
-    public void testCheckDisableSelectButton() {
+    @Test(groups = "parallel", dependsOnMethods = "testGetBaseCashbackBlockHeader")
+    public void testGetFromPaymentSystemBlockHeder() {
         PremiumCashbackPage premiumCashbackPage = new PremiumCashbackPage(driverContainer);
 
-        Assert.assertTrue(premiumCashbackPage.checkDisableSelectButton());
+        Assert.assertEquals(premiumCashbackPage.getFromPaymentSystemBlockHeder(), FROM_PAYMENT_SYSTEM_BLOCK_HEADER);
     }
 
+    @Test(groups = "parallel", dependsOnMethods = "testGetBaseCashbackBlockHeader")
+    public void testGetHowToGetBlockHeader() {
+        PremiumCashbackPage premiumCashbackPage = new PremiumCashbackPage(driverContainer);
+
+        Assert.assertEquals(premiumCashbackPage.getHowToGetBlockHeader(), HOW_TO_GET_BLOCK_HEADER);
+    }
+
+    @Test(groups = "parallel", dependsOnMethods = "testGetBaseCashbackBlockHeader")
+    public void testCheckSelectCashbackCategoriesButton() {
+        PremiumCashbackPage premiumCashbackPage = new PremiumCashbackPage(driverContainer);
+
+        Assert.assertTrue(premiumCashbackPage.checkSelectCashbackCategoriesButton());
+    }
 
     @Test(dependsOnGroups = "parallel")
-    public void testSelectPremiumCashbackCategories() {
-        PremiumCashbackPage premiumCashbackPage = new PremiumCashbackPage(driverContainer);
-        premiumCashbackPage.selectCashbackCategoriesCheckboxes();
-
-        Assert.assertTrue(premiumCashbackPage.checkDisableCheckboxes());
-        Assert.assertTrue(premiumCashbackPage.checkEnableSelectButton());
-    }
-
-    @Test(dependsOnMethods = "testSelectPremiumCashbackCategories")
-    public void testClickOnCategoriesSelectButton() {
-        PremiumCashbackPage premiumCashbackPage = new PremiumCashbackPage(driverContainer);
-        premiumCashbackPage.clickOnCategoriesSelectButton();
-
-        Assert.assertTrue(premiumCashbackPage.checkSelectButton());
-    }
-
-    @Test(dependsOnMethods = "testClickOnCategoriesSelectButton")
-    public void testClickOnSuccessfulButton() {
-        PremiumCashbackPage premiumCashbackPage = new PremiumCashbackPage(driverContainer);
-        premiumCashbackPage.clickOnSuccessfulButton();
-
-        Assert.assertTrue(premiumCashbackPage.checkSelectedCategories());
-
-        boolean isTrue = false;
-        for (String i : CASHBACK_URL) {
-            if (premiumCashbackPage.getPremiumCashbackPageURL().equals(i)) {
-                isTrue = true;
-                break;
-            }
-        }
-
-        Assert.assertTrue(isTrue);
-    }
-
-    @Test(dependsOnMethods = "testClickOnSuccessfulButton")
     public void testOpenLevelPageLink() {
         PremiumCashbackPage premiumCashbackPage = new PremiumCashbackPage(driverContainer);
         String URL = premiumCashbackPage.openLevelPageLink();
@@ -179,5 +151,83 @@ public class PremiumCashbackTest extends BaseTest {
         }
         Assert.assertTrue(isTrue);
     }
+
+
+    @Test(dependsOnMethods = "testOpenThirdLink")
+    public void testOpenPremiumCashbackCategoriesList() {
+        PremiumCashbackPage premiumCashbackPage = new PremiumCashbackPage(driverContainer);
+
+        premiumCashbackPage.openCategoriesList();
+
+        boolean isHeaderTrue = false;
+        for(String i : CASHBACK_HEADER) {
+            if(premiumCashbackPage.getCategoriesListHeader().contains(i)) {
+                isHeaderTrue = true;
+                break;
+            }
+        }
+
+        Assert.assertTrue(isHeaderTrue);
+    }
+
+    @Test(groups = "second-parallel", dependsOnMethods = "testOpenPremiumCashbackCategoriesList")
+    public void testGetCheckboxesCount() {
+        PremiumCashbackPage premiumCashbackPage = new PremiumCashbackPage(driverContainer);
+
+        boolean isCheckboxesTrue = (premiumCashbackPage.getCheckboxesCount() >= CHECKBOXES_COUNT);
+        Assert.assertTrue(isCheckboxesTrue);
+    }
+
+    @Test(groups = "second-parallel", dependsOnMethods = "testOpenPremiumCashbackCategoriesList")
+    public void testCheckCheckboxes() {
+        PremiumCashbackPage premiumCashbackPage = new PremiumCashbackPage(driverContainer);
+
+        Assert.assertTrue(premiumCashbackPage.checkCheckboxes());
+    }
+
+    @Test(groups = "second-parallel", dependsOnMethods = "testOpenPremiumCashbackCategoriesList")
+    public void testCheckDisableSelectButton() {
+        PremiumCashbackPage premiumCashbackPage = new PremiumCashbackPage(driverContainer);
+
+        Assert.assertTrue(premiumCashbackPage.checkDisableSelectButton());
+    }
+
+
+    @Test(dependsOnGroups = "second-parallel")
+    public void testSelectPremiumCashbackCategories() {
+        PremiumCashbackPage premiumCashbackPage = new PremiumCashbackPage(driverContainer);
+        premiumCashbackPage.selectCashbackCategoriesCheckboxes();
+
+        Assert.assertTrue(premiumCashbackPage.checkDisableCheckboxes());
+        Assert.assertTrue(premiumCashbackPage.checkEnableSelectButton());
+    }
+
+    @Test(dependsOnMethods = "testSelectPremiumCashbackCategories")
+    public void testClickOnCategoriesSelectButton() {
+        PremiumCashbackPage premiumCashbackPage = new PremiumCashbackPage(driverContainer);
+        premiumCashbackPage.clickOnCategoriesSelectButton();
+
+        Assert.assertTrue(premiumCashbackPage.checkSelectButton());
+    }
+
+    @Test(dependsOnMethods = "testClickOnCategoriesSelectButton")
+    public void testClickOnSuccessfulButton() {
+        PremiumCashbackPage premiumCashbackPage = new PremiumCashbackPage(driverContainer);
+        premiumCashbackPage.clickOnSuccessfulButton();
+
+        Assert.assertTrue(premiumCashbackPage.checkSelectedCategories());
+
+        boolean isTrue = false;
+        for (String i : CASHBACK_URL) {
+            if (premiumCashbackPage.getPremiumCashbackPageURL().equals(i)) {
+                isTrue = true;
+                break;
+            }
+        }
+
+        Assert.assertTrue(isTrue);
+    }
+
+
 
 }

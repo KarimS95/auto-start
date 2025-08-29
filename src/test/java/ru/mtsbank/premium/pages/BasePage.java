@@ -37,7 +37,7 @@ public class BasePage {
 //    }
 
     protected void checkElementOnPage(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(150));
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 

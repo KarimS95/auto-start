@@ -27,4 +27,20 @@
             </run>
         </groups>
     </test>
+    <test name="second-parallel">
+        <groups>
+            <run>
+                <include
+                        name="second-parallel"/>
+            </run>
+        </groups>
+    </test>
+    <test name="third-parallel">
+        <groups>
+            <run>
+                <include
+                        name="third-parallel"/>
+            </run>
+        </groups>
+    </test>
 </suite>

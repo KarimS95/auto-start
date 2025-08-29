@@ -15,11 +15,38 @@ public class PremiumCashbackPage extends BasePage{
         super(driverContainer);
     }
 
+
+    public String getBaseCashbackBlockHeader() {
+        return baseCashbackBlockHeader.getText();
+    }
+
+    public String getIncreasedCashbackBlockHeader() {
+        return increasedCashbackBlockHeader.getText();
+    }
+
+    public String getSubscriptionBlockHeader() {
+        return subscriptionBlockHeader.getText();
+    }
+
+    public String getFromPaymentSystemBlockHeder() {
+        return fromPaymentSystemBlockHeader.getText();
+    }
+
+    public String getHowToGetBlockHeader() {
+        return howToGetBlockHeader.getText();
+    }
+
+    public boolean checkSelectCashbackCategoriesButton() {
+        return selectCashbackCategoriesButton.isDisplayed() && selectCashbackCategoriesButton.isEnabled();
+    }
+
+
     public void openCategoriesList() {
 
         for(int i = 0; i < MAX_RETRIES; i++) {
             try {
-                WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(100));
+                WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
+                openCategoriesList.sendKeys(Keys.PAGE_UP);
                 wait.until(ExpectedConditions.elementToBeClickable(openCategoriesList)).click();
                 break;
 
@@ -30,7 +57,7 @@ public class PremiumCashbackPage extends BasePage{
     }
 
     public String getCategoriesListHeader() {
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(60));
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
         wait.until(ExpectedConditions.visibilityOf(checkCategoriesListHeaderText));
 
         return checkCategoriesListHeaderText.getText();
@@ -46,8 +73,8 @@ public class PremiumCashbackPage extends BasePage{
 
     public boolean checkDisableSelectButton() {
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(5));
-        wait.until(ExpectedConditions.elementToBeClickable(selectCashbackCategories));
-        return selectCashbackCategories.getAttribute("disabled") != null;
+        wait.until(ExpectedConditions.elementToBeClickable(selectCashbackCategoriesLink));
+        return selectCashbackCategoriesLink.getAttribute("disabled") != null;
     }
 
     public void selectCashbackCategoriesCheckboxes() {
@@ -63,7 +90,6 @@ public class PremiumCashbackPage extends BasePage{
 
     public boolean checkDisableCheckboxes() {
         List<WebElement> checkboxesList = driverContainer.get().findElements(checkboxesByLocator);
-        System.out.println("checkboxesListCount: " + checkboxesList);
 
         boolean isTrue = false;
 
@@ -74,11 +100,11 @@ public class PremiumCashbackPage extends BasePage{
     }
 
     public boolean checkEnableSelectButton() {
-        return selectCashbackCategories.isEnabled();
+        return selectCashbackCategoriesLink.isEnabled();
     }
 
     public void clickOnCategoriesSelectButton() {
-        selectCashbackCategories.click();
+        selectCashbackCategoriesLink.click();
     }
 
     public boolean checkSelectButton() {
@@ -124,7 +150,6 @@ public class PremiumCashbackPage extends BasePage{
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(150));
         wait.until(ExpectedConditions.visibilityOf(openFirstLink));
 
-        ((JavascriptExecutor)driverContainer.get()).executeScript("arguments[0].scrollIntoView(true)", openFirstLink);
         openFirstLink.click();
 
         Set<String> handles = driverContainer.get().getWindowHandles();
@@ -180,6 +205,7 @@ public class PremiumCashbackPage extends BasePage{
         return URL;
     }
 
+
     public String getPremiumCashbackPageURL() {
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
         String URL = driverContainer.get().getCurrentUrl();
@@ -206,7 +232,10 @@ public class PremiumCashbackPage extends BasePage{
     private WebElement openCategoriesList;
 
     @FindBy(xpath = "//span[text()='Выбрать']")
-    private WebElement selectCashbackCategories;
+    private WebElement selectCashbackCategoriesLink;
+
+    @FindBy(xpath = "//button[contains(.,'Выбрать')]")
+    private WebElement selectCashbackCategoriesButton;
 
     @FindBy(xpath = "//input[@role='checkbox']")
     private WebElement checkboxes;
@@ -240,6 +269,21 @@ public class PremiumCashbackPage extends BasePage{
 
     @FindBy(xpath = "//span[contains(text(), 'Повышенный кешбэк в')]")
     private WebElement checkSelectedCategories;
+
+    @FindBy(xpath = "//span[text()='Базовый кешбэк']")
+    private WebElement baseCashbackBlockHeader;
+
+    @FindBy(xpath = "//span[text()='Повышенный кешбэк']")
+    private WebElement increasedCashbackBlockHeader;
+
+    @FindBy(xpath = "//span[text()='С подпиской МТС PREMIUM']")
+    private WebElement subscriptionBlockHeader;
+
+    @FindBy(xpath = "//span[text()='От платежной системы МИР']")
+    private WebElement fromPaymentSystemBlockHeader;
+
+    @FindBy(xpath = "//span[text()='Как получить']")
+    private WebElement howToGetBlockHeader;
 
 
     private By checkLevelPageIsDisplayed = By.xpath("//a[@href='/premium/level']");

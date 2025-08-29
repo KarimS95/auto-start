@@ -34,46 +34,47 @@ public class PremiumLevelPage extends BasePage {
         wait.until(ExpectedConditions.visibilityOf(closeLevelSheet)).click();
     }
 
-    public String openServicesTermsButton() {
+    public String openServicesTermsListButton() {
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(openServiceTerms)).click();
-        return termsText.getText();
+        return termsHeader.getText();
+    }
+
+    public String getCardHeaderTermsList() {
+        return termsCardHeader.getText();
+    }
+
+    public String getLevelsTermsList() {
+        return levelsTerms.getText();
     }
 
     public void returnBack() {
         backButton.click();
     }
 
-    public void openFirstI() {
+    public String openFirstI() {
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(openFirstI)).click();
+
+        return firstIHeader.getText();
     }
 
-    public void closeFirstI() {
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.elementToBeClickable(closeFirstI)).click();
-    }
-
-    public void openSecondI() {
+    public String openSecondI() {
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(openSecondI)).click();
+
+        return secondIHeader.getText();
     }
 
-    public void closeSecondI() {
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.elementToBeClickable(closeSecondI)).click();
-    }
-
-    public void openThirdI() {
+    public String openThirdI() {
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(openThirdI)).click();
+        return thirdIHeader.getText();
     }
 
-    public void closeThirdI() {
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.elementToBeClickable(closeThirdI)).click();
+    public void closeI() {
+        closeFirstI.click();
     }
-
 
 
 
@@ -94,19 +95,28 @@ public class PremiumLevelPage extends BasePage {
     @FindBy(xpath = "//button[@data-testid='back-button']")
     private WebElement backButton;
 
-    @FindBy(xpath = "//div[@class='sc-bSoFTp gkRNID']//div[2]//div[1]//div[1]//div[2]//div[1]//*[name()='svg']")
+    @FindBy(xpath = "(//*[name()='svg'][@class='sc-dTvVRJ ketkom'])[2]")
     private WebElement openFirstI;
 
-    @FindBy(xpath = "//button[@class='sc-dTWiOz HXJNV sc-eJoXEY iskrJj sc-gtURjR esVnOE']")
+    @FindBy(xpath = "//h4[text()='Cреднемесячный остаток']")
+    private WebElement firstIHeader;
+
+    @FindBy(xpath = "//p[contains(text(),'Покупки')]")
+    private WebElement secondIHeader;
+
+    @FindBy(xpath = "//p[contains(text(),'Cреднемесячный остаток на тек')]")
+    private WebElement thirdIHeader;
+
+    @FindBy(xpath = "//*[name()='path' and contains(@d,'M6.293 16.')]")
     private WebElement closeFirstI;
 
-    @FindBy(xpath = "//div[@class='sc-hdBJTi iua-dQD sc-ceUeOH fdLlLH']//div[2]//div[2]//div[1]//*[name()='svg']")
+    @FindBy(xpath = "(//*[name()='svg'][@class='sc-dTvVRJ ketkom'])[3]")
     private WebElement openSecondI;
 
-    @FindBy(xpath = "//button[@class='sc-dTWiOz HXJNV sc-eJoXEY iskrJj sc-gtURjR esVnOE']")
+    @FindBy(xpath = "(//*[name()='svg'][@class='sc-dTvVRJ ketkom'])[5]")
     private WebElement closeSecondI;
 
-    @FindBy(xpath = "//div[@class='sc-bJFmQb uedPQ']//div[3]//div[2]//div[1]//*[name()='svg']")
+    @FindBy(xpath = "(//*[name()='svg'][@class='sc-dTvVRJ ketkom'])[4]")
     private WebElement openThirdI;
 
     @FindBy(xpath = "(//button[@class='sc-dTWiOz HXJNV sc-eJoXEY iskrJj sc-gtURjR esVnOE'])[1]")
@@ -122,7 +132,13 @@ public class PremiumLevelPage extends BasePage {
     private WebElement backToGeneralPage;
 
     @FindBy(xpath = "//div[contains(text(), 'Условия')]")
-    private WebElement termsText;
+    private WebElement termsHeader;
+
+    @FindBy(xpath = "//span[1]")
+    private WebElement termsCardHeader;
+
+    @FindBy(xpath = "//ol[@role='list']")
+    private WebElement levelsTerms;
 
     @FindBy(xpath = "//div[contains(text(), 'Премиальное обслуживание')]")
     private WebElement getLevelPageHeader;

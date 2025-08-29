@@ -14,6 +14,26 @@ public class PremiumPage extends BasePage{
         super(driverContainer);
     }
 
+    public String checkManagerBlock() {
+        return managerBlock.getText();
+    }
+
+    public String getCallButtonName() {
+        return callButton.getText();
+    }
+
+    public String getMassageButtonName() {
+        return messageButton.getText();
+    }
+
+    public boolean checkCallButton() {
+        return callButton.isDisplayed() && callButton.isEnabled();
+    }
+
+    public boolean checkMessageButton() {
+        return messageButton.isDisplayed() && messageButton.isEnabled();
+    }
+
 
     public PremiumLevelPage openPremiumLevelPage() {
 
@@ -67,24 +87,20 @@ public class PremiumPage extends BasePage{
     }
 
     public PremiumCashbackPage openPremiumCashbackPrivilege() {
-        checkElementOnPage(openPremiumCashbackPrivilege);
         openPremiumCashbackPrivilege.click();
 
         return new PremiumCashbackPage(driverContainer);
     }
 
     public boolean checkPremiumCashbackPrivilege() {
-       checkElementOnPage(openPremiumCashbackPrivilege);
         return openPremiumCashbackPrivilege.isDisplayed() && openPremiumCashbackPrivilege.isEnabled();
     }
 
     public String checkLevelPageHeaderName() {
-       checkElementOnPage(checkLevelPageButton);
        return checkLevelPageButton.getText();
     }
 
     public boolean checkPrivilegesBlocks() {
-        checkElementOnPage(checkPrivilegesBlocks);
         return checkPrivilegesBlocks.isDisplayed();
     }
 
@@ -117,11 +133,22 @@ public class PremiumPage extends BasePage{
     @FindBy(xpath = "//span[normalize-space()='Хорошо']")
     private WebElement selectOk;
 
-    @FindBy(xpath = "//p[contains(text(),'Уровень') or contains(text(), 'Private')]")
+    @FindBy(xpath = "//div[@data-testid='flexbox'][contains(.,'Уровень') or contains(.,'Private')]")
     private WebElement checkLevelPageButton;
 
     @FindBy(xpath = "//span[contains(text(), 'Мои привилегии')]")
     private WebElement checkPrivilegesBlocks;
+
+    @FindBy(xpath = "//div[@data-testid='flexbox'][contains(.,'менеджер')]")
+    private WebElement managerBlock;
+
+    @FindBy(xpath = "//button[@type='button'][contains(.,'позвонить')]")
+    private WebElement callButton;
+
+    @FindBy(xpath = "//button[@type='button'][contains(.,'написать')]")
+    private WebElement messageButton;
+
+
 
    // private By checkPrivilegesBlocks = By.xpath("//span[contains(text(), 'Мои привилегии')]");
 
