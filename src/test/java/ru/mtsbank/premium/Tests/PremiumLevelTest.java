@@ -9,6 +9,8 @@ import ru.mtsbank.premium.pages.PremiumPage;
 public class PremiumLevelTest extends BaseTest {
 
     private final String PREMIUM_LEVEL_URL = "https://online.mtsdengi-test.mbrd.ru/premium/level";
+    private final String PURCHASES_TERMS_PDF_URL = "https://static.mtsdengi.ru/portal-frontend-premium/documents/pravila-nachisleniya.pdf";
+    private final String LEVELS_RULES_PDF_URL = "https://static.mtsdengi.ru/portal-frontend-premium/documents/moj-uroven-obsluzhivaniya-";
     private final String EXPECTED_LEVEL_SHEET_HEADER = "уровень";
     private final String EXPECTED_LEVEL_PAGE_HEADER = "Премиальное обслуживание";
     private final String EXPECTED_TERMS_HEADER = "Условия обслуживания";
@@ -99,12 +101,19 @@ public class PremiumLevelTest extends BaseTest {
         boolean isTrue = header.contains(EXPECTED_SECOND_HEADER);
 
         Assert.assertTrue(isTrue);
+    }
+
+    @Test(dependsOnMethods = "testOpenSecond")
+    public void testGetPurchasesTermsPDF() {
+        PremiumLevelPage premiumLevelPage = new PremiumLevelPage(driverContainer);
+        String URL = premiumLevelPage.getPurchasesTermsPDF();
+
+        Assert.assertEquals(URL,PURCHASES_TERMS_PDF_URL);
 
         premiumLevelPage.closeI();
     }
 
-
-    @Test(dependsOnMethods = "testOpenSecond")
+    @Test(dependsOnMethods = "testGetPurchasesTermsPDF")
     public void testOpenThirdI() {
         PremiumLevelPage premiumLevelPage = new PremiumLevelPage(driverContainer);
         String header = premiumLevelPage.openThirdI();
@@ -113,6 +122,16 @@ public class PremiumLevelTest extends BaseTest {
         Assert.assertTrue(isTrue);
 
         premiumLevelPage.closeI();
+    }
+
+
+    @Test(dependsOnMethods = "testOpenThirdI")
+    public void testCheckLevelRulesButton() {
+        PremiumLevelPage premiumLevelPage = new PremiumLevelPage(driverContainer);
+        String URL = premiumLevelPage.checkLevelRulesButton();
+        boolean isTrue = URL.contains(LEVELS_RULES_PDF_URL);
+
+        Assert.assertTrue(isTrue);
     }
 
 

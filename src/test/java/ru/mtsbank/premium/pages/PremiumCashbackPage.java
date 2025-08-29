@@ -156,8 +156,7 @@ public class PremiumCashbackPage extends BasePage{
 
         for (String handle : handles) {
             if (!handle.equals(generalWindowHandle)) {
-                driverContainer.get().switchTo().window(handle);
-                URL = driverContainer.get().getCurrentUrl();
+                URL = driverContainer.get().switchTo().window(handle).getCurrentUrl();
                 driverContainer.get().close();
                 driverContainer.get().switchTo().window(generalWindowHandle);
             }
@@ -176,8 +175,7 @@ public class PremiumCashbackPage extends BasePage{
 
         for (String handle : handles) {
             if (!handle.equals(generalWindowHandle)) {
-                driverContainer.get().switchTo().window(handle);
-                URL = driverContainer.get().getCurrentUrl();
+                URL = driverContainer.get().switchTo().window(handle).getCurrentUrl();
                 driverContainer.get().close();
                 driverContainer.get().switchTo().window(generalWindowHandle);
             }
@@ -196,8 +194,7 @@ public class PremiumCashbackPage extends BasePage{
 
         for (String handle : handles) {
             if (!handle.equals(generalWindowHandle)) {
-                driverContainer.get().switchTo().window(handle);
-                URL = driverContainer.get().getCurrentUrl();
+                URL = driverContainer.get().switchTo().window(handle).getCurrentUrl();
                 driverContainer.get().close();
                 driverContainer.get().switchTo().window(generalWindowHandle);
             }
