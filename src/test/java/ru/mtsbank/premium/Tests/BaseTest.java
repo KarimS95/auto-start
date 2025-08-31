@@ -3,14 +3,12 @@ package ru.mtsbank.premium.Tests;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.Assert;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.BeforeClass;
 import ru.mtsbank.premium.pages.CodePage;
 import ru.mtsbank.premium.pages.LoginPage;
 
 import java.time.Duration;
-import java.util.Arrays;
-import java.util.List;
 
 public class BaseTest {
 
@@ -26,10 +24,9 @@ public class BaseTest {
     public void setUp() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--incognito");
-        WebDriver driver = new ChromeDriver(options);
-        System.setProperty("webdriver.chrome.driver", "./src/test/resources/drivers/chromedriver");
+        WebDriver driver = new FirefoxDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(100));
         driverContainer.set(driver);
     }
 

@@ -3,6 +3,7 @@ package ru.mtsbank.hw.tests;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.BeforeClass;
 
 import java.time.Duration;
@@ -18,7 +19,6 @@ public class BaseTest {
         this.chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--incognito");
         this.driver = new ChromeDriver(chromeOptions);
-        System.setProperty("webdriver.chrome.driver", "./src/test/resources/drivers/chromedriver");
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(50));
         driver.get("https://practice.expandtesting.com/");

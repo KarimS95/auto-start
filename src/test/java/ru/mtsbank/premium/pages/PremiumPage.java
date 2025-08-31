@@ -39,8 +39,7 @@ public class PremiumPage extends BasePage{
 
         for (int i = 0; i < MAX_RETRIES; i++) {
             try {
-                checkElementOnPage(openLevelPage);
-                openLevelPage.click();
+                ((JavascriptExecutor)driverContainer.get()).executeScript("arguments[0].click();",openLevelPage);
                 break;
 
             } catch (StaleElementReferenceException | ElementNotInteractableException e) {

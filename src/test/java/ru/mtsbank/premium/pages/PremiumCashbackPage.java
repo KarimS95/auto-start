@@ -147,15 +147,17 @@ public class PremiumCashbackPage extends BasePage{
     public String openFirstLink()  {
         String URL = "";
         String generalWindowHandle = driverContainer.get().getWindowHandle();
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(150));
-        wait.until(ExpectedConditions.visibilityOf(openFirstLink));
 
-        openFirstLink.click();
+        ((JavascriptExecutor)driverContainer.get()).executeScript("arguments[0].scrollIntoView(true);",openFirstLink);
+        openFirstLink.sendKeys(Keys.SPACE);
+        ((JavascriptExecutor)driverContainer.get()).executeScript("arguments[0].click();",openFirstLink);
 
         Set<String> handles = driverContainer.get().getWindowHandles();
 
         for (String handle : handles) {
             if (!handle.equals(generalWindowHandle)) {
+                WebDriverWait waitURL = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(5));
+                waitURL.until(ExpectedConditions.urlContains("https://"));
                 URL = driverContainer.get().switchTo().window(handle).getCurrentUrl();
                 driverContainer.get().close();
                 driverContainer.get().switchTo().window(generalWindowHandle);
@@ -169,12 +171,17 @@ public class PremiumCashbackPage extends BasePage{
         String generalWindowHandle = driverContainer.get().getWindowHandle();
 
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.elementToBeClickable(openSecondLink)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(openSecondLink));
+        openSecondLink.sendKeys(Keys.SPACE);
+        ((JavascriptExecutor)driverContainer.get()).executeScript("arguments[0].setAttribute('tabindex','0');",openSecondLink);
+        ((JavascriptExecutor)driverContainer.get()).executeScript("arguments[0].click();",openSecondLink);
 
         Set<String> handles = driverContainer.get().getWindowHandles();
 
         for (String handle : handles) {
             if (!handle.equals(generalWindowHandle)) {
+                WebDriverWait waitURL = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(5));
+                waitURL.until(ExpectedConditions.urlContains("https://"));
                 URL = driverContainer.get().switchTo().window(handle).getCurrentUrl();
                 driverContainer.get().close();
                 driverContainer.get().switchTo().window(generalWindowHandle);
@@ -188,12 +195,17 @@ public class PremiumCashbackPage extends BasePage{
         String generalWindowHandle = driverContainer.get().getWindowHandle();
 
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.elementToBeClickable(openCashbackPdf)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(openCashbackPdf));
+        openCashbackPdf.sendKeys(Keys.SPACE);
+        ((JavascriptExecutor)driverContainer.get()).executeScript("arguments[0].setAttribute('tabindex','0');",openCashbackPdf);
+        ((JavascriptExecutor)driverContainer.get()).executeScript("arguments[0].click();",openCashbackPdf);
 
         Set<String> handles = driverContainer.get().getWindowHandles();
 
         for (String handle : handles) {
             if (!handle.equals(generalWindowHandle)) {
+                WebDriverWait waitURL = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(5));
+                waitURL.until(ExpectedConditions.urlContains("https://"));
                 URL = driverContainer.get().switchTo().window(handle).getCurrentUrl();
                 driverContainer.get().close();
                 driverContainer.get().switchTo().window(generalWindowHandle);

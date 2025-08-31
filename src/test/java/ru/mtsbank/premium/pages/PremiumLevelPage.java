@@ -22,13 +22,15 @@ public class PremiumLevelPage extends BasePage {
 
     public String openLevelSheet() {
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.visibilityOf(openLevelSheet)).click();
+        wait.until(ExpectedConditions.visibilityOf(openLevelSheet));
+        openLevelSheet.click();
         return openLevelSheet.getText();
     }
 
     public void closeLevelSheet() {
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.visibilityOf(closeLevelSheet)).click();
+        wait.until(ExpectedConditions.visibilityOf(closeLevelSheet));
+        closeLevelSheet.click();
     }
 
     public String openServicesTermsListButton() {
@@ -72,10 +74,16 @@ public class PremiumLevelPage extends BasePage {
     public String getPurchasesTermsPDF() {
         String URL = "";
         String generalWindowHandle = driverContainer.get().getWindowHandle();
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.elementToBeClickable(purchasesTerms));
+        purchasesTerms.sendKeys(Keys.SPACE);
         purchasesTerms.click();
+
         Set<String> handles = driverContainer.get().getWindowHandles();
         for (String handle : handles) {
             if (!handle.equals(generalWindowHandle)) {
+                WebDriverWait waitURL = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(5));
+                waitURL.until(ExpectedConditions.urlContains("https://"));
                 URL = driverContainer.get().switchTo().window(handle).getCurrentUrl();
                 driverContainer.get().close();
                 driverContainer.get().switchTo().window(generalWindowHandle);
@@ -101,10 +109,17 @@ public class PremiumLevelPage extends BasePage {
     public String checkLevelRulesButton() {
         String URL = "";
         String generalWindowHandle = driverContainer.get().getWindowHandle();
+        ((JavascriptExecutor)driverContainer.get()).executeScript("arguments[0].scrollIntoView(true)",levelsRulesButton);
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.elementToBeClickable(levelsRulesButton));
+        levelsRulesButton.sendKeys(Keys.SPACE);
         levelsRulesButton.click();
+
         Set<String> handles = driverContainer.get().getWindowHandles();
         for (String handle : handles) {
             if (!handle.equals(generalWindowHandle)) {
+                WebDriverWait waitURL = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(5));
+                waitURL.until(ExpectedConditions.urlContains("https://"));
                 URL = driverContainer.get().switchTo().window(handle).getCurrentUrl();
                 driverContainer.get().close();
                 driverContainer.get().switchTo().window(generalWindowHandle);
@@ -132,7 +147,7 @@ public class PremiumLevelPage extends BasePage {
     @FindBy(xpath = "//button[@data-testid='back-button']")
     private WebElement backButton;
 
-    @FindBy(xpath = "(//*[name()='svg'])[13]")
+    @FindBy(xpath = "(//*[name()='svg'])[12]")
     private WebElement openFirstI;
 
     @FindBy(xpath = "//h4[text()='Cреднемесячный остаток']")
@@ -147,10 +162,10 @@ public class PremiumLevelPage extends BasePage {
     @FindBy(xpath = "(//*[name()='svg'][@class='sc-dTvVRJ ketkom'])[6]")
     private WebElement closeI;
 
-    @FindBy(xpath = "(//*[name()='svg'])[14]")
+    @FindBy(xpath = "(//*[name()='svg'])[13]")
     private WebElement openSecondI;
 
-    @FindBy(xpath = "(//*[name()='svg'])[15]")
+    @FindBy(xpath = "(//*[name()='svg'])[14]")
     private WebElement openThirdI;
 
     @FindBy(xpath = "//a[contains(@href,'pdf')]")
@@ -177,7 +192,7 @@ public class PremiumLevelPage extends BasePage {
     @FindBy(xpath = "//a[contains(@href,'pravila-nachisleniya')]")
     private WebElement purchasesTerms;
 
-    @FindBy(xpath = "//span[contains(text(),'все уровни') or contains(text(),'больше в')]")
+    @FindBy(xpath = "//a[contains(@href,'moj-uroven')]")
     private WebElement levelsRulesButton;
 
     private By byOpenLevelSheet = By.xpath("//span[contains(text(),'Мой уровень в')]");

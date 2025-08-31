@@ -84,9 +84,7 @@ public class OTPTest extends BaseTest {
     public void testPositiveOtpLogin(String email, String code) {
         HomePage homePage = new HomePage(driverContainer);
         OTPPage otpPage = homePage.openOTPPageWithUrl(OTP_PAGE_URL);
-        SecurePage securePage = new SecurePage(driverContainer);
-
-        otpPage.otpLogin(email,code);
+        SecurePage securePage = otpPage.otpLogin(email,code);
 
         Assert.assertEquals(securePage.getAlert(), LOGGED_IN);
         Assert.assertEquals(securePage.getSecurePageUrl(), SECURE_URL);
