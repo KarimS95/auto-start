@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.safari.SafariDriver;
 import org.testng.annotations.BeforeClass;
 import ru.mtsbank.premium.pages.CodePage;
 import ru.mtsbank.premium.pages.LoginPage;
@@ -24,9 +26,11 @@ public class BaseTest {
     public void setUp() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--incognito");
-        WebDriver driver = new FirefoxDriver();
+        options.setBrowserVersion("138");
+
+        WebDriver driver = new ChromeDriver(options);
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(100));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driverContainer.set(driver);
     }
 

@@ -76,7 +76,6 @@ public class PremiumLevelPage extends BasePage {
         String generalWindowHandle = driverContainer.get().getWindowHandle();
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(5));
         wait.until(ExpectedConditions.elementToBeClickable(purchasesTerms));
-        purchasesTerms.sendKeys(Keys.SPACE);
         purchasesTerms.click();
 
         Set<String> handles = driverContainer.get().getWindowHandles();
@@ -112,7 +111,6 @@ public class PremiumLevelPage extends BasePage {
         ((JavascriptExecutor)driverContainer.get()).executeScript("arguments[0].scrollIntoView(true)",levelsRulesButton);
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(5));
         wait.until(ExpectedConditions.elementToBeClickable(levelsRulesButton));
-        levelsRulesButton.sendKeys(Keys.SPACE);
         levelsRulesButton.click();
 
         Set<String> handles = driverContainer.get().getWindowHandles();
@@ -147,7 +145,7 @@ public class PremiumLevelPage extends BasePage {
     @FindBy(xpath = "//button[@data-testid='back-button']")
     private WebElement backButton;
 
-    @FindBy(xpath = "(//*[name()='svg'])[12]")
+    @FindBy(xpath = "(//*[name()='svg'])[13]")
     private WebElement openFirstI;
 
     @FindBy(xpath = "//h4[text()='Cреднемесячный остаток']")
@@ -162,10 +160,10 @@ public class PremiumLevelPage extends BasePage {
     @FindBy(xpath = "(//*[name()='svg'][@class='sc-dTvVRJ ketkom'])[6]")
     private WebElement closeI;
 
-    @FindBy(xpath = "(//*[name()='svg'])[13]")
+    @FindBy(xpath = "(//*[name()='svg'])[14]")
     private WebElement openSecondI;
 
-    @FindBy(xpath = "(//*[name()='svg'])[14]")
+    @FindBy(xpath = "(//*[name()='svg'])[15]")
     private WebElement openThirdI;
 
     @FindBy(xpath = "//a[contains(@href,'pdf')]")

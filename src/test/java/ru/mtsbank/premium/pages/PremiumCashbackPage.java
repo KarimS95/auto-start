@@ -149,8 +149,7 @@ public class PremiumCashbackPage extends BasePage{
         String generalWindowHandle = driverContainer.get().getWindowHandle();
 
         ((JavascriptExecutor)driverContainer.get()).executeScript("arguments[0].scrollIntoView(true);",openFirstLink);
-        openFirstLink.sendKeys(Keys.SPACE);
-        ((JavascriptExecutor)driverContainer.get()).executeScript("arguments[0].click();",openFirstLink);
+        openFirstLink.click();
 
         Set<String> handles = driverContainer.get().getWindowHandles();
 
@@ -172,9 +171,7 @@ public class PremiumCashbackPage extends BasePage{
 
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(openSecondLink));
-        openSecondLink.sendKeys(Keys.SPACE);
-        ((JavascriptExecutor)driverContainer.get()).executeScript("arguments[0].setAttribute('tabindex','0');",openSecondLink);
-        ((JavascriptExecutor)driverContainer.get()).executeScript("arguments[0].click();",openSecondLink);
+        openSecondLink.click();
 
         Set<String> handles = driverContainer.get().getWindowHandles();
 
@@ -196,9 +193,7 @@ public class PremiumCashbackPage extends BasePage{
 
         WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(openCashbackPdf));
-        openCashbackPdf.sendKeys(Keys.SPACE);
-        ((JavascriptExecutor)driverContainer.get()).executeScript("arguments[0].setAttribute('tabindex','0');",openCashbackPdf);
-        ((JavascriptExecutor)driverContainer.get()).executeScript("arguments[0].click();",openCashbackPdf);
+        openCashbackPdf.click();
 
         Set<String> handles = driverContainer.get().getWindowHandles();
 
