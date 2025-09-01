@@ -50,7 +50,6 @@ public class PremiumPage extends BasePage{
     }
 
     public boolean checkPremiumLevelPage() {
-        checkElementOnPage(openLevelPage);
         return openLevelPage.isDisplayed() && openLevelPage.isEnabled();
     }
 
@@ -63,10 +62,8 @@ public class PremiumPage extends BasePage{
 
         List<WebElement> checkboxes = driverContainer.get().findElements(By.xpath("//input[@role='checkbox']"));
 
-        if(checkboxes.size() >= 5) {
-            for(WebElement checkbox : checkboxes) {
+        for(WebElement checkbox : checkboxes) {
                 checkbox.click();
-            }
         }
     }
 
@@ -80,14 +77,11 @@ public class PremiumPage extends BasePage{
     }
 
     public boolean checkPremiumCashbackCategoriesList() {
-        checkElementOnPage(openPremiumCashbackCategoriesList);
-
         return openPremiumCashbackCategoriesList.isDisplayed() && openPremiumCashbackCategoriesList.isEnabled();
     }
 
     public PremiumCashbackPage openPremiumCashbackPrivilege() {
         openPremiumCashbackPrivilege.click();
-
         return new PremiumCashbackPage(driverContainer);
     }
 

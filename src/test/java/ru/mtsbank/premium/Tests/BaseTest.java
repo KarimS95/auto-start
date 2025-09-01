@@ -1,5 +1,7 @@
 package ru.mtsbank.premium.Tests;
 
+import org.openqa.selenium.ElementClickInterceptedException;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;

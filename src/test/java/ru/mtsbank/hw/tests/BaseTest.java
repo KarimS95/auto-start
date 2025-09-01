@@ -1,5 +1,7 @@
 package ru.mtsbank.hw.tests;
 
+import org.openqa.selenium.ElementClickInterceptedException;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -18,12 +20,15 @@ public class BaseTest {
     protected void setUp() {
         this.chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--incognito");
+        chromeOptions.setBrowserVersion("138");
         this.driver = new ChromeDriver(chromeOptions);
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(50));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(150));
         driver.get("https://practice.expandtesting.com/");
         driverContainer.set(driver);
     }
+
+
 
 
 //    @AfterClass

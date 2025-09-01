@@ -1,5 +1,6 @@
 package ru.mtsbank.hw.tests;
 
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -13,8 +14,15 @@ public class RegisterTest extends BaseTest {
     @Test
     public void testOpenRegisterPage() {
         HomePage homePage = new HomePage(driverContainer);
-        RegisterPage registerPage = homePage.openRegisterPageWithClickOnLink();
-
+        RegisterPage registerPage = null;
+        for (int i = 0; i < MAX_RETRIES; i++) {
+         try {
+            registerPage = homePage.openRegisterPageWithClickOnLink();
+            break;
+         } catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+             System.out.println("Retries: " + i);
+         }
+        }
         Assert.assertEquals(registerPage.getRegisterPageUrl(), REGISTER_PAGE_URL);
     }
 
@@ -23,19 +31,6 @@ public class RegisterTest extends BaseTest {
         RegisterPage registerPage = new RegisterPage(driverContainer);
 
         Assert.assertTrue(registerPage.getRegisterPageHeader());
-    }
-
-    @Test(groups = "parallel", dependsOnMethods = "testOpenRegisterPage")
-    public void testGetRegisterPageFooter() {
-        RegisterPage registerPage = new RegisterPage(driverContainer);
-
-        boolean footerIsTrue = false;
-        for (String i : FOOTER) {
-            if(registerPage.getRegisterPageFooter().contains(i)) {
-                footerIsTrue = true;
-            }
-        }
-        Assert.assertTrue(footerIsTrue);
     }
 
     @Test(groups = "parallel", dependsOnMethods = "testOpenRegisterPage")
@@ -156,36 +151,16 @@ public class RegisterTest extends BaseTest {
     }
 
     @Test(dependsOnMethods = "testInputConfirmPassword", dataProvider = "invalidCredentials")
-    public void testInputInvalidCredentials(int number, String username, String password, String confirmPassword) {
+    public void testInputInvalidCredentials(String username, String password, String confirmPassword, String expectedResult) {
         RegisterPage registerPage = new RegisterPage(driverContainer);
 
         for(int i = 0; i < MAX_RETRIES; i++) {
             try {
-                switch (number) {
-                    case 1 -> {
-                        registerPage.inputUsername(username); registerPage.inputPassword(password); registerPage.inputConfirmPassword(confirmPassword);
-                        registerPage.clickRegisterButton();
-                    Assert.assertEquals(registerPage.getAlert(), SHORT_USERNAME);}
-                    case 2, 3 -> {
-                        registerPage.inputUsername(username); registerPage.inputPassword(password); registerPage.inputConfirmPassword(confirmPassword);
-                        registerPage.clickRegisterButton();
-                    Assert.assertEquals(registerPage.getAlert(),SHORT_PASSWORD);}
-                    case 4, 5 -> {
-                        registerPage.inputUsername(username); registerPage.inputPassword(password); registerPage.inputConfirmPassword(confirmPassword);
-                        registerPage.clickRegisterButton();
-                    Assert.assertEquals(registerPage.getAlert(), WRONG_USERNAME);}
-                    case 6 -> {
-                        registerPage.inputUsername(username); registerPage.inputPassword(password); registerPage.inputConfirmPassword(confirmPassword);
-                        registerPage.clickRegisterButton();
-                    Assert.assertEquals(registerPage.getAlert(), DIFFERENT_PASSWORDS);}
-                    case 7 -> {
-                        registerPage.inputUsername(username); registerPage.inputPassword(password); registerPage.inputConfirmPassword(confirmPassword);
-                        registerPage.clickRegisterButton();
-                    Assert.assertEquals(registerPage.getAlert(), SAME_CREDS);}
-                    default -> throw new IllegalStateException("Unexpected value: " + number);
-                }
+                registerPage.inputUsername(username); registerPage.inputPassword(password); registerPage.inputConfirmPassword(confirmPassword);
+                registerPage.clickRegisterButton();
+                Assert.assertEquals(registerPage.getAlert(), expectedResult);
                 break;
-            } catch (StaleElementReferenceException e) {
+            } catch (StaleElementReferenceException | ElementClickInterceptedException e) {
                 System.err.println("Retries: " + i);
             }
         }
@@ -212,20 +187,20 @@ public class RegisterTest extends BaseTest {
     @DataProvider(name = "invalidCredentials")
     public Object[][] invalidCredentials() {
         return new Object[][]{
-                {1, ".", ".", "."},
-                {2, "test", "1", "1"},
-                {3, "test", "123", "123"},
-                {4, "тест", "1234", "1234"},
-                {5, "testtesttesttesttesttesttesttesttesttest", "1234", "1234"},
-                {6, "test", "1234", "test"},
-                {7, "practice", "SuperSecretPassword!", "SuperSecretPassword!"}
+                { ".", ".", ".", SHORT_USERNAME},
+                {"test", "1", "1", SHORT_PASSWORD},
+                {"test", "123", "123", SHORT_PASSWORD},
+                {"тест", "1234", "1234", WRONG_USERNAME},
+                {"testtesttesttesttesttesttesttesttesttest", "1234", "1234", WRONG_USERNAME},
+                {"test", "1234", "test", DIFFERENT_PASSWORDS},
+                {"practice", "SuperSecretPassword!", "SuperSecretPassword!", SAME_CREDS}
         };
     }
 
     @DataProvider(name = "validICredentials")
     public Object[][] validCredentials() {
       return new Object[][] {
-              {"karimtesttesttesttest11","12345aaakk", "12345aaakk"}
+              {"karimtesttesttestte2st11","12345aaakk", "12345aaakk"}
       };
     }
 

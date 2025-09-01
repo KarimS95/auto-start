@@ -15,26 +15,26 @@ public class PremiumLevelPage extends BasePage {
     }
 
     public String getLevelPageHeader() {
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(100));
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOf(getLevelPageHeader));
         return getLevelPageHeader.getText();
     }
 
     public String openLevelSheet() {
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOf(openLevelSheet));
         openLevelSheet.click();
         return openLevelSheet.getText();
     }
 
     public void closeLevelSheet() {
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOf(closeLevelSheet));
         closeLevelSheet.click();
     }
 
     public String openServicesTermsListButton() {
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(5));
         wait.until(ExpectedConditions.elementToBeClickable(openServiceTerms)).click();
         return termsHeader.getText();
     }
@@ -52,7 +52,7 @@ public class PremiumLevelPage extends BasePage {
     }
 
     public String openFirstI() {
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(5));
         wait.until(ExpectedConditions.elementToBeClickable(openFirstI)).click();
 
         WebDriverWait waitHeader = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(5));
@@ -62,7 +62,7 @@ public class PremiumLevelPage extends BasePage {
     }
 
     public String openSecondI() {
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(5));
         wait.until(ExpectedConditions.elementToBeClickable(openSecondI)).click();
 
         WebDriverWait waitHeader = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(5));
@@ -92,7 +92,7 @@ public class PremiumLevelPage extends BasePage {
     }
 
     public String openThirdI() {
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(5));
         wait.until(ExpectedConditions.elementToBeClickable(openThirdI)).click();
 
         WebDriverWait waitHeader = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(5));

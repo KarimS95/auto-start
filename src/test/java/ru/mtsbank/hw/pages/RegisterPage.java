@@ -1,7 +1,6 @@
 package ru.mtsbank.hw.pages;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -78,24 +77,60 @@ public class RegisterPage extends BasePage {
     }
 
     public void inputUsername(String value) {
-        checkElement(userNameField);
-        userNameField.sendKeys(value);
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(),Duration.ofSeconds(30));
+        for (int i = 0; i < 4; i++) {
+            try {
+                wait.until(ExpectedConditions.elementToBeClickable(userNameField));
+                ((JavascriptExecutor)driverContainer.get()).executeScript("arguments[0].focus();",userNameField);
+                userNameField.sendKeys(value);
+                break;
+            } catch (StaleElementReferenceException | ElementNotInteractableException e) {
+                System.out.println("Retries: " + i);
+            }
+        }
     }
 
     public void inputPassword(String value) {
-        checkElement(passwordField);
-        passwordField.sendKeys(value);
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(),Duration.ofSeconds(30));
+        for (int i = 0; i < 4; i++) {
+            try {
+                wait.until(ExpectedConditions.elementToBeClickable(passwordField));
+                ((JavascriptExecutor)driverContainer.get()).executeScript("arguments[0].focus();",passwordField);
+                passwordField.sendKeys(value);
+                break;
+            } catch (StaleElementReferenceException | ElementNotInteractableException e) {
+                System.out.println("Retries: " + i);
+            }
+        }
     }
 
     public void inputConfirmPassword(String value) {
-        checkElement(confirmPasswordField);
-        confirmPasswordField.sendKeys(value);
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(),Duration.ofSeconds(30));
+        for (int i = 0; i < 4; i++) {
+            try {
+                wait.until(ExpectedConditions.elementToBeClickable(confirmPasswordField));
+                ((JavascriptExecutor)driverContainer.get()).executeScript("arguments[0].scrollIntoView({block:'center'}); focus();",confirmPasswordField);
+                confirmPasswordField.sendKeys(value);
+                break;
+            } catch (StaleElementReferenceException | ElementNotInteractableException e) {
+                System.out.println("Retries: " + i);
+            }
+        }
     }
 
 
     public void clickRegisterButton() {
-        checkElement(registerButton);
-        registerButton.click();
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
+        ((JavascriptExecutor)driverContainer.get()).executeScript("arguments[0].scrollIntoView({block:'center'});",registerButton);
+        for (int i = 0; i < 4; i++) {
+            try {
+                wait.until(ExpectedConditions.elementToBeClickable(registerButton));
+                registerButton.click();
+                break;
+            } catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+                System.out.println("Retries: " + i);
+            }
+        }
     }
 
     public String getAlert() {
@@ -107,7 +142,7 @@ public class RegisterPage extends BasePage {
         userNameField.sendKeys(username);
         passwordField.sendKeys(password);
         confirmPasswordField.sendKeys(confirmPassword);
-        registerButton.click();
+        clickRegisterButton();
 
         return new LoginPage(driverContainer);
     }
@@ -138,19 +173,19 @@ public class RegisterPage extends BasePage {
     @FindBy(xpath = "//label[@for='username']")
     private WebElement userNameFieldName;
 
-    @FindBy(id = "username")
+    @FindBy(xpath = "//input[@id='username']")
     private WebElement userNameField;
 
     @FindBy(xpath = "//label[@for='password']")
     private WebElement passwordFieldName;
 
-    @FindBy(id = "password")
+    @FindBy(xpath = "//input[@id='password']")
     private WebElement passwordField;
 
     @FindBy(xpath = "//label[@for='confirmPassword']")
     private WebElement confirmPasswordFieldName;
 
-    @FindBy(id = "confirmPassword")
+    @FindBy(xpath = "//input[@id='confirmPassword']")
     private WebElement confirmPasswordField;
 
     @FindBy(xpath = "//button[contains(text(),'Register')]")
