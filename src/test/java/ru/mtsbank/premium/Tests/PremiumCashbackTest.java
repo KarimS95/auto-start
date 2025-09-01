@@ -96,10 +96,11 @@ public class PremiumCashbackTest extends BaseTest {
     @Test(dependsOnMethods = "testGetLevelPageHeader")
     public void testBackToCashbackPrivilege() {
         PremiumCashbackPage premiumCashbackPage = new PremiumCashbackPage(driverContainer);
+        String URL = premiumCashbackPage.backToCashbackPrivilege();
 
         boolean isTrue = false;
         for (String i : CASHBACK_URL) {
-            if (premiumCashbackPage.backToCashbackPrivilege().equals(i)) {
+            if (URL.equals(i)) {
                 isTrue = true;
                 break;
             }
@@ -156,12 +157,12 @@ public class PremiumCashbackTest extends BaseTest {
     @Test(dependsOnMethods = "testOpenThirdLink")
     public void testOpenPremiumCashbackCategoriesList() {
         PremiumCashbackPage premiumCashbackPage = new PremiumCashbackPage(driverContainer);
-
         premiumCashbackPage.openCategoriesList();
+        String HEADER = premiumCashbackPage.getCategoriesListHeader();
 
         boolean isHeaderTrue = false;
         for(String i : CASHBACK_HEADER) {
-            if(premiumCashbackPage.getCategoriesListHeader().contains(i)) {
+            if(HEADER.contains(i)) {
                 isHeaderTrue = true;
                 break;
             }
@@ -217,9 +218,11 @@ public class PremiumCashbackTest extends BaseTest {
 
         Assert.assertTrue(premiumCashbackPage.checkSelectedCategories());
 
+        String URL = premiumCashbackPage.getPremiumCashbackPageURL();
+
         boolean isTrue = false;
         for (String i : CASHBACK_URL) {
-            if (premiumCashbackPage.getPremiumCashbackPageURL().equals(i)) {
+            if (URL.equals(i)) {
                 isTrue = true;
                 break;
             }

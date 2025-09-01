@@ -27,6 +27,6 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//input[contains(@id,'login') or contains(@id,'phone')]")
     private WebElement inputLogin;
 
-    @FindBy(xpath = "//span[text()='Далее']")
+    @FindBy(xpath = "//span[text()='Далее'] | //button[text()='Далее']")
     private WebElement nextButton;
 }

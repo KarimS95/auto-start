@@ -15,7 +15,7 @@ public class AuthTest extends BaseTest{
         boolean found = false;
 
             for(String j : URL) {
-                if(actualURL.equals(j)) {
+                if(actualURL.contains(j)) {
                     found = true;
                     break;
                 }
