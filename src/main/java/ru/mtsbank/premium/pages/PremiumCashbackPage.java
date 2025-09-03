@@ -46,7 +46,7 @@ public class PremiumCashbackPage extends BasePage{
         for(int i = 0; i < MAX_RETRIES; i++) {
             try {
                 WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
-                ((JavascriptExecutor)driverContainer.get()).executeScript("arguments[0].scrollIntoView(true);",openCategoriesList);
+                ((JavascriptExecutor)driverContainer.get()).executeScript("arguments[0].scrollIntoView({block:'center'});",openCategoriesList);
                 wait.until(ExpectedConditions.elementToBeClickable(openCategoriesList)).click();
                 break;
 

@@ -16,14 +16,14 @@ public class PremiumLevelTest extends BaseTest {
         PremiumPage premiumPage = homePage.openPremiumPage();
         PremiumLevelPage premiumLevelPage = premiumPage.openPremiumLevelPage();
 
-        Assert.assertTrue(premiumLevelPage.getLevelPageHeader().contains(Constans.LEVEL_PAGE_HEADER.getValue()));
+        Assert.assertTrue(premiumLevelPage.getLevelPageHeader().contains(Constans.LEVEL_PAGE_HEADER.getStringValue()));
     }
 
     @Test(dependsOnMethods = "testCheckLevelPageHeader")
     public void testOpenLevelSheet()  {
         PremiumLevelPage premiumLevelPage = new PremiumLevelPage(driverContainer);
 
-        Assert.assertTrue(premiumLevelPage.openLevelSheet().contains(Constans.LEVEL_SHEET_HEADER.getValue()));
+        Assert.assertTrue(premiumLevelPage.openLevelSheet().contains(Constans.LEVEL_SHEET_HEADER.getStringValue()));
 
         premiumLevelPage.closeLevelSheet();
     }
@@ -46,7 +46,7 @@ public class PremiumLevelTest extends BaseTest {
     public void testGetLevelsTermsList() {
         PremiumLevelPage premiumLevelPage = new PremiumLevelPage(driverContainer);
         String termsList = premiumLevelPage.getLevelsTermsList();
-        boolean isTrue = termsList.equals(Constans.LEVEL_FIRST_CLIENTS_CASE.getValue()) || termsList.equals(Constans.LEVEL_SECOND_CLIENTS_CASE.getValue());
+        boolean isTrue = termsList.equals(Constans.LEVEL_FIRST_CLIENTS_CASE.getStringValue()) || termsList.equals(Constans.LEVEL_SECOND_CLIENTS_CASE.getStringValue());
         premiumLevelPage.returnBack();
 
         Assert.assertTrue(isTrue);
@@ -66,7 +66,7 @@ public class PremiumLevelTest extends BaseTest {
     public void testOpenSecond() {
         PremiumLevelPage premiumLevelPage = new PremiumLevelPage(driverContainer);
         String header = premiumLevelPage.openSecondI();
-        boolean isTrue = header.contains(Constans.LEVEL_SECOND_HEADER.getValue());
+        boolean isTrue = header.contains(Constans.LEVEL_SECOND_HEADER.getStringValue());
 
         Assert.assertTrue(isTrue);
     }
@@ -85,7 +85,7 @@ public class PremiumLevelTest extends BaseTest {
     public void testOpenThirdI() {
         PremiumLevelPage premiumLevelPage = new PremiumLevelPage(driverContainer);
         String header = premiumLevelPage.openThirdI();
-        boolean isTrue = header.contains(Constans.LEVEL_THIRD_HEADER.getValue());
+        boolean isTrue = header.contains(Constans.LEVEL_THIRD_HEADER.getStringValue());
 
         Assert.assertTrue(isTrue);
 
@@ -97,7 +97,7 @@ public class PremiumLevelTest extends BaseTest {
     public void testCheckLevelRulesButton() {
         PremiumLevelPage premiumLevelPage = new PremiumLevelPage(driverContainer);
         String URL = premiumLevelPage.checkLevelRulesButton();
-        boolean isTrue = URL.contains(Constans.LEVEL_RULES_PDF_URL.getValue());
+        boolean isTrue = URL.contains(Constans.LEVEL_RULES_PDF_URL.getStringValue());
 
         Assert.assertTrue(isTrue);
     }

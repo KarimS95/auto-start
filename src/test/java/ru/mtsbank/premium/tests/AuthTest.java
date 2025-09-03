@@ -14,7 +14,7 @@ public class AuthTest extends BaseTest{
         String actualURL = homePage.getHomePageURL();
         boolean found = false;
 
-            for(String j : Constans.BASE_URLS_ARRAY.<String[]>getValue()) {
+            for(String j : Constans.BASE_URLS_ARRAY.getArrayStringValue()) {
                 if(actualURL.contains(j)) {
                     found = true;
                     break;

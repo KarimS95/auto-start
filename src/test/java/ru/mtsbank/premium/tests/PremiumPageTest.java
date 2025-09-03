@@ -18,7 +18,7 @@ public class PremiumPageTest extends BaseTest {
 
         boolean found = false;
 
-        for(String i : Constans.LEVEL_PAGE_NAMES.<String[]>getValue()) {
+        for(String i : Constans.LEVEL_PAGE_NAMES.getArrayStringValue()) {
             if(header.contains(i)) {
                 found = true;
                 break;
@@ -60,7 +60,7 @@ public class PremiumPageTest extends BaseTest {
     public void testCheckManagerBlock() {
         PremiumPage premiumPage = new PremiumPage(driverContainer);
         String manager = premiumPage.checkManagerBlock();
-        boolean isTrue = manager.contains(Constans.MANAGER_VALUE.getValue());
+        boolean isTrue = manager.contains(Constans.MANAGER_VALUE.getStringValue());
 
         Assert.assertTrue(isTrue);
     }
@@ -69,7 +69,7 @@ public class PremiumPageTest extends BaseTest {
     public void testGetCallButtonName() {
         PremiumPage premiumPage = new PremiumPage(driverContainer);
         String button = premiumPage.getCallButtonName();
-        boolean isTrue = button.equalsIgnoreCase(Constans.MANAGER_CALL_BUTTON.getValue());
+        boolean isTrue = button.equalsIgnoreCase(Constans.MANAGER_CALL_BUTTON.getStringValue());
 
         Assert.assertTrue(isTrue);
     }
@@ -78,7 +78,7 @@ public class PremiumPageTest extends BaseTest {
     public void testGetMassageButtonName() {
         PremiumPage premiumPage = new PremiumPage(driverContainer);
         String button = premiumPage.getMassageButtonName();
-        boolean isTrue = button.equalsIgnoreCase(Constans.MANAGER_MESSAGE_BUTTON.getValue());
+        boolean isTrue = button.equalsIgnoreCase(Constans.MANAGER_MESSAGE_BUTTON.getStringValue());
 
         Assert.assertTrue(isTrue);
     }

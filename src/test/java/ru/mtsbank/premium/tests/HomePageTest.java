@@ -17,7 +17,7 @@ public class HomePageTest extends BaseTest {
         homePage = new HomePage(driverContainer);
 
         boolean found = false;
-        for(String i : Constans.PREMIUM_WIDGET_NAMES.<String[]>getValue()) {
+        for(String i : Constans.PREMIUM_WIDGET_NAMES.getArrayStringValue()) {
             if(homePage.checkPremiumWidgetName().contains(i)) {
                 found = true;
                 break;
