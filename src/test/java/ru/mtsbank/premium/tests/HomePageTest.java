@@ -1,17 +1,13 @@
-package ru.mtsbank.premium.Tests;
+package ru.mtsbank.premium.tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import ru.mtsbank.premium.constans.Constans;
 import ru.mtsbank.premium.pages.HomePage;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class HomePageTest extends BaseTest {
-
-    private static final String BASE_URL = "https://online.mtsdengi-test.mbrd.ru/";
-    private static final String PREMIUM_URL = "https://online.mtsdengi-test.mbrd.ru/premium";
-    private static final List<String> WIDGET_NAMES = List.of("Премиум", "Premium", "Прайвет", "Private");
 
     private HomePage homePage;
 
@@ -21,7 +17,7 @@ public class HomePageTest extends BaseTest {
         homePage = new HomePage(driverContainer);
 
         boolean found = false;
-        for(String i : WIDGET_NAMES) {
+        for(String i : Constans.PREMIUM_WIDGET_NAMES.<String[]>getValue()) {
             if(homePage.checkPremiumWidgetName().contains(i)) {
                 found = true;
                 break;

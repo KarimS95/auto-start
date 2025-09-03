@@ -46,7 +46,7 @@ public class PremiumCashbackPage extends BasePage{
         for(int i = 0; i < MAX_RETRIES; i++) {
             try {
                 WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
-                openCategoriesList.sendKeys(Keys.PAGE_UP);
+                ((JavascriptExecutor)driverContainer.get()).executeScript("arguments[0].scrollIntoView(true);",openCategoriesList);
                 wait.until(ExpectedConditions.elementToBeClickable(openCategoriesList)).click();
                 break;
 
@@ -81,11 +81,9 @@ public class PremiumCashbackPage extends BasePage{
 
        List<WebElement> checkboxesList = driverContainer.get().findElements(checkboxesByLocator);
 
-       if(checkboxesList.size() >= 5) {
-           for (WebElement checkbox : checkboxesList) {
+       for (WebElement checkbox : checkboxesList) {
                checkbox.click();
            }
-       }
     }
 
     public boolean checkDisableCheckboxes() {

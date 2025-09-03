@@ -1,0 +1,108 @@
+package ru.mtsbank.premium.tests;
+
+import org.testng.Assert;
+import org.testng.annotations.Test;
+import ru.mtsbank.premium.constans.Constans;
+import ru.mtsbank.premium.pages.HomePage;
+import ru.mtsbank.premium.pages.PremiumLevelPage;
+import ru.mtsbank.premium.pages.PremiumPage;
+
+public class PremiumLevelTest extends BaseTest {
+
+
+    @Test(priority = 1)
+    public void testCheckLevelPageHeader() {
+        HomePage homePage = new HomePage(driverContainer);
+        PremiumPage premiumPage = homePage.openPremiumPage();
+        PremiumLevelPage premiumLevelPage = premiumPage.openPremiumLevelPage();
+
+        Assert.assertTrue(premiumLevelPage.getLevelPageHeader().contains(Constans.LEVEL_PAGE_HEADER.getValue()));
+    }
+
+    @Test(dependsOnMethods = "testCheckLevelPageHeader")
+    public void testOpenLevelSheet()  {
+        PremiumLevelPage premiumLevelPage = new PremiumLevelPage(driverContainer);
+
+        Assert.assertTrue(premiumLevelPage.openLevelSheet().contains(Constans.LEVEL_SHEET_HEADER.getValue()));
+
+        premiumLevelPage.closeLevelSheet();
+    }
+
+    @Test(dependsOnMethods = "testOpenLevelSheet")
+    public void testOpenServicesTermsButton() {
+        PremiumLevelPage premiumLevelPage = new PremiumLevelPage(driverContainer);
+
+        Assert.assertEquals(premiumLevelPage.openServicesTermsListButton(),Constans.LEVEL_TERMS_HEADER);
+    }
+
+    @Test(dependsOnMethods = "testOpenServicesTermsButton", groups = "parallel")
+    public void testGetCardHeaderTermsList() {
+        PremiumLevelPage premiumLevelPage = new PremiumLevelPage(driverContainer);
+
+        Assert.assertEquals(premiumLevelPage.getCardHeaderTermsList(),Constans.LEVEL_TERMS_CARD_HEADER);
+    }
+
+    @Test(dependsOnMethods = "testOpenServicesTermsButton", groups = "parallel")
+    public void testGetLevelsTermsList() {
+        PremiumLevelPage premiumLevelPage = new PremiumLevelPage(driverContainer);
+        String termsList = premiumLevelPage.getLevelsTermsList();
+        boolean isTrue = termsList.equals(Constans.LEVEL_FIRST_CLIENTS_CASE.getValue()) || termsList.equals(Constans.LEVEL_SECOND_CLIENTS_CASE.getValue());
+        premiumLevelPage.returnBack();
+
+        Assert.assertTrue(isTrue);
+    }
+
+    @Test(dependsOnGroups = "parallel")
+    public void testOpenFirstI() {
+        PremiumLevelPage premiumLevelPage = new PremiumLevelPage(driverContainer);
+        String header = premiumLevelPage.openFirstI();
+        Assert.assertEquals(header,Constans.LEVEL_FIRST_HEADER);
+
+        premiumLevelPage.closeI();
+    }
+
+
+    @Test(dependsOnMethods = "testOpenFirstI")
+    public void testOpenSecond() {
+        PremiumLevelPage premiumLevelPage = new PremiumLevelPage(driverContainer);
+        String header = premiumLevelPage.openSecondI();
+        boolean isTrue = header.contains(Constans.LEVEL_SECOND_HEADER.getValue());
+
+        Assert.assertTrue(isTrue);
+    }
+
+    @Test(dependsOnMethods = "testOpenSecond")
+    public void testGetPurchasesTermsPDF() {
+        PremiumLevelPage premiumLevelPage = new PremiumLevelPage(driverContainer);
+        String URL = premiumLevelPage.getPurchasesTermsPDF();
+
+        Assert.assertEquals(URL,Constans.LEVEL_PURCHASES_TERMS_PDF_URL);
+
+        premiumLevelPage.closeI();
+    }
+
+    @Test(dependsOnMethods = "testGetPurchasesTermsPDF")
+    public void testOpenThirdI() {
+        PremiumLevelPage premiumLevelPage = new PremiumLevelPage(driverContainer);
+        String header = premiumLevelPage.openThirdI();
+        boolean isTrue = header.contains(Constans.LEVEL_THIRD_HEADER.getValue());
+
+        Assert.assertTrue(isTrue);
+
+        premiumLevelPage.closeI();
+    }
+
+
+    @Test(dependsOnMethods = "testOpenThirdI")
+    public void testCheckLevelRulesButton() {
+        PremiumLevelPage premiumLevelPage = new PremiumLevelPage(driverContainer);
+        String URL = premiumLevelPage.checkLevelRulesButton();
+        boolean isTrue = URL.contains(Constans.LEVEL_RULES_PDF_URL.getValue());
+
+        Assert.assertTrue(isTrue);
+    }
+
+
+
+
+}

@@ -1,31 +1,18 @@
-package ru.mtsbank.premium.Tests;
+package ru.mtsbank.premium.tests;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import ru.mtsbank.premium.constans.Constans;
 import ru.mtsbank.premium.pages.HomePage;
 import ru.mtsbank.premium.pages.PremiumCashbackPage;
 import ru.mtsbank.premium.pages.PremiumPage;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class PremiumCashbackTest extends BaseTest {
 
-    private static final String[] CASHBACK_HEADER = {"Кешбэк", "кешбэк"};
-    private static final int CHECKBOXES_COUNT = 5;
-    private static final String[] PREMIUM_LEVEL_PAGE_URL = {"https://online.mtsdengi-test.mbrd.ru/premium/level","https://online.mtsdengi-dev.mbrd.ru/premium/level"};
-    private final String PREMIUM_LEVEL_PAGE_HEADER = "Премиальное обслуживание";
-    private final String[] CASHBACK_URL = {"https://online.mtsdengi-test.mbrd.ru/premium/cashback", "https://online.mtsdengi-dev.mbrd.ru/premium/cashback"};
-    private final String[] PARTNERS_URLS = {"https://vamprivet.ru/supreme-restaurants/","https://vamprivet.ru/afisha/"};
-    private final String[] CASHBACK_TERMS_URL = {
-            "https://static.mtsdengi.ru/portal-frontend-premium/documents/usloviya-nachisleniya-keshbehka-dlya-debetovyh-kart-v-ramkah.pdf",
-            "https://static.mtsdengi.ru/portal-frontend-private-banking/documents/usloviya-nachisleniya-keshbeka-private.pdf"};
-    private final String BASE_CASHBACK_BLOCK_HEADER = "Базовый кешбэк";
-    private final String INCREASED_CASHBACK_BLOCK_HEADER = "Повышенный кешбэк";
-    private final String SUBSCRIPTION_BLOCK_HEADER = "С подпиской МТС PREMIUM";
-    private final String FROM_PAYMENT_SYSTEM_BLOCK_HEADER = "От платежной системы МИР";
-    private final String HOW_TO_GET_BLOCK_HEADER = "Как получить";
 
+    private static final Logger log = LoggerFactory.getLogger(PremiumCashbackTest.class);
 
     @Test
     public void testGetBaseCashbackBlockHeader() {
@@ -33,35 +20,35 @@ public class PremiumCashbackTest extends BaseTest {
         PremiumPage premiumPage = homePage.openPremiumPage();
         PremiumCashbackPage premiumCashbackPage = premiumPage.openPremiumCashbackPrivilege();
 
-        Assert.assertEquals(premiumCashbackPage.getBaseCashbackBlockHeader(), BASE_CASHBACK_BLOCK_HEADER);
+        Assert.assertEquals(premiumCashbackPage.getBaseCashbackBlockHeader(), Constans.CASHBACK_BASE_CASHBACK_BLOCK_HEADER);
     }
 
     @Test(groups = "parallel", dependsOnMethods = "testGetBaseCashbackBlockHeader")
     public void testGetIncreasedCashbackBlockHeader() {
         PremiumCashbackPage premiumCashbackPage = new PremiumCashbackPage(driverContainer);
 
-        Assert.assertEquals(premiumCashbackPage.getIncreasedCashbackBlockHeader(), INCREASED_CASHBACK_BLOCK_HEADER);
+        Assert.assertEquals(premiumCashbackPage.getIncreasedCashbackBlockHeader(), Constans.CASHBACK_INCREASED_CASHBACK_BLOCK_HEADER);
     }
 
     @Test(groups = "parallel", dependsOnMethods = "testGetBaseCashbackBlockHeader")
     public void testGetSubscriptionBlockHeader() {
         PremiumCashbackPage premiumCashbackPage = new PremiumCashbackPage(driverContainer);
 
-        Assert.assertEquals(premiumCashbackPage.getSubscriptionBlockHeader(), SUBSCRIPTION_BLOCK_HEADER);
+        Assert.assertEquals(premiumCashbackPage.getSubscriptionBlockHeader(), Constans.CASHBACK_SUBSCRIPTION_BLOCK_HEADER);
     }
 
     @Test(groups = "parallel", dependsOnMethods = "testGetBaseCashbackBlockHeader")
     public void testGetFromPaymentSystemBlockHeder() {
         PremiumCashbackPage premiumCashbackPage = new PremiumCashbackPage(driverContainer);
 
-        Assert.assertEquals(premiumCashbackPage.getFromPaymentSystemBlockHeder(), FROM_PAYMENT_SYSTEM_BLOCK_HEADER);
+        Assert.assertEquals(premiumCashbackPage.getFromPaymentSystemBlockHeder(), Constans.CASHBACK_FROM_PAYMENT_SYSTEM_BLOCK_HEADER);
     }
 
     @Test(groups = "parallel", dependsOnMethods = "testGetBaseCashbackBlockHeader")
     public void testGetHowToGetBlockHeader() {
         PremiumCashbackPage premiumCashbackPage = new PremiumCashbackPage(driverContainer);
 
-        Assert.assertEquals(premiumCashbackPage.getHowToGetBlockHeader(), HOW_TO_GET_BLOCK_HEADER);
+        Assert.assertEquals(premiumCashbackPage.getHowToGetBlockHeader(), Constans.CASHBACK_HOW_TO_GET_BLOCK_HEADER);
     }
 
     @Test(groups = "parallel", dependsOnMethods = "testGetBaseCashbackBlockHeader")
@@ -77,7 +64,7 @@ public class PremiumCashbackTest extends BaseTest {
         String URL = premiumCashbackPage.openLevelPageLink();
 
         boolean isTrue = false;
-        for (String i : PREMIUM_LEVEL_PAGE_URL) {
+        for (String i : Constans.LEVEL_PAGE_URLS.<String[]>getValue()) {
             if (URL.equals(i)) {
                 isTrue = true;
                 break;
@@ -90,7 +77,7 @@ public class PremiumCashbackTest extends BaseTest {
     public void testGetLevelPageHeader() {
         PremiumCashbackPage premiumCashbackPage = new PremiumCashbackPage(driverContainer);
 
-        Assert.assertEquals(premiumCashbackPage.getLevelPageHeader(), PREMIUM_LEVEL_PAGE_HEADER);
+        Assert.assertEquals(premiumCashbackPage.getLevelPageHeader(), Constans.LEVEL_PAGE_HEADER);
     }
 
     @Test(dependsOnMethods = "testGetLevelPageHeader")
@@ -99,7 +86,7 @@ public class PremiumCashbackTest extends BaseTest {
         String URL = premiumCashbackPage.backToCashbackPrivilege();
 
         boolean isTrue = false;
-        for (String i : CASHBACK_URL) {
+        for (String i : Constans.CASHBACK_URLS.<String[]>getValue()) {
             if (URL.equals(i)) {
                 isTrue = true;
                 break;
@@ -114,7 +101,7 @@ public class PremiumCashbackTest extends BaseTest {
         String URL = premiumCashbackPage.openFirstLink();
 
         boolean isTrue = false;
-        for (String i : PARTNERS_URLS) {
+        for (String i : Constans.CASHBACK_PARTNERS_URLS.<String[]>getValue()) {
             if (URL.equals(i)) {
                 isTrue = true;
                 break;
@@ -129,7 +116,7 @@ public class PremiumCashbackTest extends BaseTest {
         String URL = premiumCashbackPage.openSecondLink();
 
         boolean isTrue = false;
-        for (String i : PARTNERS_URLS) {
+        for (String i : Constans.CASHBACK_PARTNERS_URLS.<String[]>getValue()) {
             if (URL.equals(i)) {
                 isTrue = true;
                 break;
@@ -144,7 +131,7 @@ public class PremiumCashbackTest extends BaseTest {
         String URL = premiumCashbackPage.openThirdLink();
 
         boolean isTrue = false;
-        for (String i : CASHBACK_TERMS_URL) {
+        for (String i : Constans.CASHBACK_TERMS_URLS.<String[]>getValue()) {
             if (URL.equals(i)) {
                 isTrue = true;
                 break;
@@ -161,7 +148,7 @@ public class PremiumCashbackTest extends BaseTest {
         String HEADER = premiumCashbackPage.getCategoriesListHeader();
 
         boolean isHeaderTrue = false;
-        for(String i : CASHBACK_HEADER) {
+        for(String i : Constans.CASHBACK_HEADER.<String[]>getValue()) {
             if(HEADER.contains(i)) {
                 isHeaderTrue = true;
                 break;
@@ -175,7 +162,7 @@ public class PremiumCashbackTest extends BaseTest {
     public void testGetCheckboxesCount() {
         PremiumCashbackPage premiumCashbackPage = new PremiumCashbackPage(driverContainer);
 
-        boolean isCheckboxesTrue = (premiumCashbackPage.getCheckboxesCount() >= CHECKBOXES_COUNT);
+        boolean isCheckboxesTrue = (premiumCashbackPage.getCheckboxesCount() >= Constans.CASHBACK_CHECKBOXES_COUNT.<Integer>getValue());
         Assert.assertTrue(isCheckboxesTrue);
     }
 
@@ -221,7 +208,7 @@ public class PremiumCashbackTest extends BaseTest {
         String URL = premiumCashbackPage.getPremiumCashbackPageURL();
 
         boolean isTrue = false;
-        for (String i : CASHBACK_URL) {
+        for (String i : Constans.CASHBACK_URLS.<String[]>getValue()) {
             if (URL.equals(i)) {
                 isTrue = true;
                 break;

@@ -145,7 +145,7 @@ public class PremiumLevelPage extends BasePage {
     @FindBy(xpath = "//button[@data-testid='back-button']")
     private WebElement backButton;
 
-    @FindBy(xpath = "(//*[name()='svg'])[13]")
+    @FindBy(xpath = "//div[.//p[text() = 'Cреднемесячный остаток']]/following-sibling::div[not(@class) and not(@id)]")
     private WebElement openFirstI;
 
     @FindBy(xpath = "//h4[text()='Cреднемесячный остаток']")
@@ -160,10 +160,10 @@ public class PremiumLevelPage extends BasePage {
     @FindBy(xpath = "(//*[name()='svg'][@class='sc-dTvVRJ ketkom'])[6]")
     private WebElement closeI;
 
-    @FindBy(xpath = "(//*[name()='svg'])[14]")
+    @FindBy(xpath = "//div[.//p[text() = 'Покупки по премиальным картам']]/following-sibling::div[not(@class) and not(@id)]")
     private WebElement openSecondI;
 
-    @FindBy(xpath = "(//*[name()='svg'])[15]")
+    @FindBy(xpath = "//div[.//p[text() = 'Cреднемесячный остаток на текущих и карточных счетах']]/following-sibling::div[not(@class) and not(@id)]")
     private WebElement openThirdI;
 
     @FindBy(xpath = "//a[contains(@href,'pdf')]")

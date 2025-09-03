@@ -1,20 +1,13 @@
-package ru.mtsbank.premium.Tests;
+package ru.mtsbank.premium.tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import ru.mtsbank.premium.constans.Constans;
 import ru.mtsbank.premium.pages.HomePage;
 import ru.mtsbank.premium.pages.PremiumPage;
 
-import java.util.Arrays;
-import java.util.List;
 
 public class PremiumPageTest extends BaseTest {
-
-    private final String PREMIUM_URL = "https://online.mtsdengi-test.mbrd.ru/premium";
-    private final List<String> LEVEL_PAGE_NAME = List.of("Уровень", "уровень", "Private", "private");
-    private final String MANAGER_BLOCK = "менеджер";
-    private final String CALL_BUTTON = "позвонить";
-    private final String MESSAGE_BUTTON = "написать";
 
 
     @Test(priority = 1)
@@ -25,7 +18,7 @@ public class PremiumPageTest extends BaseTest {
 
         boolean found = false;
 
-        for(String i : LEVEL_PAGE_NAME) {
+        for(String i : Constans.LEVEL_PAGE_NAMES.<String[]>getValue()) {
             if(header.contains(i)) {
                 found = true;
                 break;
@@ -67,7 +60,7 @@ public class PremiumPageTest extends BaseTest {
     public void testCheckManagerBlock() {
         PremiumPage premiumPage = new PremiumPage(driverContainer);
         String manager = premiumPage.checkManagerBlock();
-        boolean isTrue = manager.contains(MANAGER_BLOCK);
+        boolean isTrue = manager.contains(Constans.MANAGER_VALUE.getValue());
 
         Assert.assertTrue(isTrue);
     }
@@ -76,7 +69,7 @@ public class PremiumPageTest extends BaseTest {
     public void testGetCallButtonName() {
         PremiumPage premiumPage = new PremiumPage(driverContainer);
         String button = premiumPage.getCallButtonName();
-        boolean isTrue = button.equalsIgnoreCase(CALL_BUTTON);
+        boolean isTrue = button.equalsIgnoreCase(Constans.MANAGER_CALL_BUTTON.getValue());
 
         Assert.assertTrue(isTrue);
     }
@@ -85,7 +78,7 @@ public class PremiumPageTest extends BaseTest {
     public void testGetMassageButtonName() {
         PremiumPage premiumPage = new PremiumPage(driverContainer);
         String button = premiumPage.getMassageButtonName();
-        boolean isTrue = button.equalsIgnoreCase(MESSAGE_BUTTON);
+        boolean isTrue = button.equalsIgnoreCase(Constans.MANAGER_MESSAGE_BUTTON.getValue());
 
         Assert.assertTrue(isTrue);
     }

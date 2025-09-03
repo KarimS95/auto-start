@@ -1,13 +1,8 @@
-package ru.mtsbank.premium.Tests;
+package ru.mtsbank.premium.tests;
 
-import org.openqa.selenium.ElementClickInterceptedException;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.safari.SafariDriver;
 import org.testng.annotations.BeforeClass;
 import ru.mtsbank.premium.pages.CodePage;
 import ru.mtsbank.premium.pages.LoginPage;

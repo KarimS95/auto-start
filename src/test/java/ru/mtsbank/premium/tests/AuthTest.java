@@ -1,12 +1,12 @@
-package ru.mtsbank.premium.Tests;
+package ru.mtsbank.premium.tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import ru.mtsbank.premium.constans.Constans;
 import ru.mtsbank.premium.pages.HomePage;
 
 public class AuthTest extends BaseTest{
 
-    private static final String[] URL = {"https://online.mtsdengi-dev.mbrd.ru/","https://online.mtsdengi-test.mbrd.ru/"};
 
     @Test
     public void testAuth() {
@@ -14,7 +14,7 @@ public class AuthTest extends BaseTest{
         String actualURL = homePage.getHomePageURL();
         boolean found = false;
 
-            for(String j : URL) {
+            for(String j : Constans.BASE_URLS_ARRAY.<String[]>getValue()) {
                 if(actualURL.contains(j)) {
                     found = true;
                     break;
