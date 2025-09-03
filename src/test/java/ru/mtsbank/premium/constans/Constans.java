@@ -57,7 +57,17 @@ public enum Constans {
 
     private String stringValue;
     private String[] arrayStringValue;
-    private int intValue;
+    private Integer intValue;
+
+//    Constans(Object object) {
+//        if (object instanceof String) {
+//            this.stringValue = (String) object;
+//        } else if (object instanceof String[]) {
+//            this.arrayStringValue = (String[]) object;
+//        } else if (object instanceof Integer) {
+//            this.intValue = (Integer) object;
+//        }
+//    }
 
     Constans(String stringValue) {
         this.stringValue = stringValue;
@@ -67,9 +77,10 @@ public enum Constans {
         this.arrayStringValue = arrayStringValue;
     }
 
-    Constans(int intValue) {
+    Constans(Integer intValue) {
         this.intValue = intValue;
     }
+
 
     public String getStringValue() {
         return stringValue;
