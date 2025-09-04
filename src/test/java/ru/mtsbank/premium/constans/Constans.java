@@ -55,30 +55,27 @@ public enum Constans {
     CASHBACK_FROM_PAYMENT_SYSTEM_BLOCK_HEADER("От платежной системы МИР"),
     CASHBACK_HOW_TO_GET_BLOCK_HEADER("Как получить");
 
-    private String stringValue;
-    private String[] arrayStringValue;
-    private Integer intValue;
+    private final String stringValue;
+    private final String[] arrayStringValue;
+    private final Integer intValue;
 
-//    Constans(Object object) {
-//        if (object instanceof String) {
-//            this.stringValue = (String) object;
-//        } else if (object instanceof String[]) {
-//            this.arrayStringValue = (String[]) object;
-//        } else if (object instanceof Integer) {
-//            this.intValue = (Integer) object;
-//        }
-//    }
 
     Constans(String stringValue) {
         this.stringValue = stringValue;
+        this.intValue = 0;
+        this.arrayStringValue = null;
     }
 
     Constans(String[] arrayStringValue) {
         this.arrayStringValue = arrayStringValue;
+        this.intValue = 0;
+        this.stringValue = null;
     }
 
     Constans(Integer intValue) {
         this.intValue = intValue;
+        this.stringValue = null;
+        this.arrayStringValue = null;
     }
 
 
