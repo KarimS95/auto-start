@@ -1,11 +1,11 @@
-package ru.mtsbank.premium.tests;
+package ru.mtsbank.premium.web.mtsmoney.tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import ru.mtsbank.premium.constans.Constans;
-import ru.mtsbank.premium.pages.HomePage;
-import ru.mtsbank.premium.pages.PremiumLevelPage;
-import ru.mtsbank.premium.pages.PremiumPage;
+import ru.mtsbank.premium.web.mtsmoney.constans.Constans;
+import ru.mtsbank.premium.web.mtsmoney.pages.HomePage;
+import ru.mtsbank.premium.web.mtsmoney.pages.PremiumLevelPage;
+import ru.mtsbank.premium.web.mtsmoney.pages.PremiumPage;
 
 public class PremiumLevelTest extends BaseTest {
 

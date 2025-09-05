@@ -1,15 +1,10 @@
-package ru.mtsbank.premium.pages;
+package ru.mtsbank.premium.web.mtsmoney.pages;
 
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CodePage extends BasePage {
-
-    private static final String[] URLS = {"https://online.mtsdengi-test.mbrd.ru/", "https://online.mtsdengi-dev.mbrd.ru/"};
 
     public CodePage(InheritableThreadLocal<WebDriver> driverContainer) {
         super(driverContainer);

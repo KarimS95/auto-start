@@ -1,4 +1,4 @@
-package ru.mtsbank.premium.pages;
+package ru.mtsbank.premium.web.mtsmoney.pages;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
@@ -43,7 +43,7 @@ public class PremiumCashbackPage extends BasePage{
 
     public void openCategoriesList() {
 
-        for(int i = 0; i < MAX_RETRIES; i++) {
+        for (int i = 0; i < MAX_RETRIES; i++) {
             try {
                 WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
                 ((JavascriptExecutor)driverContainer.get()).executeScript("arguments[0].scrollIntoView({block:'center'});",openCategoriesList);

@@ -1,11 +1,12 @@
-package ru.mtsbank.premium.tests;
+package ru.mtsbank.premium.web.mtsmoney.tests;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.BeforeClass;
-import ru.mtsbank.premium.pages.CodePage;
-import ru.mtsbank.premium.pages.LoginPage;
+import ru.mtsbank.premium.web.mtsmoney.constans.Constans;
+import ru.mtsbank.premium.web.mtsmoney.pages.CodePage;
+import ru.mtsbank.premium.web.mtsmoney.pages.LoginPage;
 
 import java.time.Duration;
 
@@ -13,17 +14,11 @@ public class BaseTest {
 
     protected InheritableThreadLocal<WebDriver> driverContainer = new InheritableThreadLocal<>();
 
-    private final String PHONE_NUMBER = "9636125085";
-    private final String[] PASSWORD_LIST = {"1", "2", "3","4"};
-    private final String TEST_URL = "https://online.mtsdengi-test.mbrd.ru/";
-    private final String DEV_URL = "https://online.mtsdengi-dev.mbrd.ru/";
-
-
     @BeforeClass(alwaysRun = true)
     public void setUp() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--incognito");
-        options.setBrowserVersion("138");
+        options.setBrowserVersion("139");
 
         WebDriver driver = new ChromeDriver(options);
         driver.manage().window().maximize();
@@ -33,10 +28,10 @@ public class BaseTest {
 
     @BeforeClass(alwaysRun = true, dependsOnMethods = "setUp")
     public void auth() {
-        driverContainer.get().get(TEST_URL);
+        driverContainer.get().get(Constans.TEST_URL.getStringValue());
         LoginPage loginPage = new LoginPage(driverContainer);
-        CodePage codePage = loginPage.inputLogin(PHONE_NUMBER);
-        codePage.inputCode(PASSWORD_LIST);
+        CodePage codePage = loginPage.inputLogin(Constans.PHONE_NUMBER.getStringValue());
+        codePage.inputCode(Constans.PASSWORD_LIST.getArrayStringValue());
     }
 
 
@@ -47,6 +42,7 @@ public class BaseTest {
 //            driverContainer.get().close();
 //        }
 //    }
+
 
 
 

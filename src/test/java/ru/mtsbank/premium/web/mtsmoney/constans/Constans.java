@@ -1,8 +1,12 @@
-package ru.mtsbank.premium.constans;
+package ru.mtsbank.premium.web.mtsmoney.constans;
 
 
 public enum Constans {
 
+    PHONE_NUMBER("9636125085"),
+    PASSWORD_LIST(new String[]{"1", "2", "3","4"}),
+    TEST_URL("https://online.mtsdengi-test.mbrd.ru/"),
+    DEV_URL ("https://online.mtsdengi-dev.mbrd.ru/"),
     BASE_URLS_ARRAY (new String[]{"https://online.mtsdengi-dev.mbrd.ru/","https://online.mtsdengi-test.mbrd.ru/"}),
     PREMIUM_WIDGET_NAMES (new String[]{"Премиум", "Premium", "Прайвет", "Private"}),
     LEVEL_PAGE_NAMES (new String[]{"Уровень", "уровень", "Private", "private"}),

@@ -1,4 +1,4 @@
-package ru.mtsbank.premium.pages;
+package ru.mtsbank.premium.web.mtsmoney.pages;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;

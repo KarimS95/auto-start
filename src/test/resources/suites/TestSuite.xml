@@ -1,11 +1,11 @@
 <suite name="tests" parallel="methods" thread-count="10">
-    <test name="premium-tests">
+    <test name="mtsmoney-premium-tests">
         <classes>
-            <class name="ru.mtsbank.premium.tests.AuthTest"/>
-            <class name="ru.mtsbank.premium.tests.PremiumPageTest"/>
-            <class name="ru.mtsbank.premium.tests.PremiumLevelTest"/>
-            <class name="ru.mtsbank.premium.tests.PremiumCashbackTest"/>
-            <class name="ru.mtsbank.premium.tests.HomePageTest"/>
+            <class name="ru.mtsbank.premium.web.mtsmoney.tests.AuthTest"/>
+            <class name="ru.mtsbank.premium.web.mtsmoney.tests.PremiumPageTest"/>
+            <class name="ru.mtsbank.premium.web.mtsmoney.tests.PremiumLevelTest"/>
+            <class name="ru.mtsbank.premium.web.mtsmoney.tests.PremiumCashbackTest"/>
+            <class name="ru.mtsbank.premium.web.mtsmoney.tests.HomePageTest"/>
         </classes>
     </test>
     <test name="homework-tests">
@@ -17,6 +17,12 @@
             <class name="ru.mtsbank.hw.tests.LoginPageTest"/>
             <class name="ru.mtsbank.hw.tests.SecurePageTest"/>
             <class name="ru.mtsbank.hw.tests.WebInputsPageTest"/>
+        </classes>
+    </test>
+    <test name="mtsbanksite-premium-tests">
+        <classes>
+            <class name="ru.mtsbank.premium.web.mtsbanksite.tests.HomePageTest"/>
+            <class name="ru.mtsbank.premium.web.mtsbanksite.tests.PremiumPageTest"/>
         </classes>
     </test>
     <test name="parallel">
