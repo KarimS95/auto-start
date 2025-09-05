@@ -1,6 +1,8 @@
 package ru.mtsbank.premium.web.mtsbanksite.pages;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -19,6 +21,10 @@ public class BasePage {
 
     protected WebDriverWait waitElement() {
         return new WebDriverWait(driverContainer.get(), Duration.ofSeconds(5));
+    }
+
+    protected void js(String value, WebElement element) {
+        ((JavascriptExecutor)driverContainer.get()).executeScript(value, element);
     }
 
 }

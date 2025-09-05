@@ -11,7 +11,7 @@ public class HomePage extends BasePage {
     }
 
 
-    public String getPremiumText() {
+    public String getPremiumTabText() {
         return searchPremiumLink.getText();
     }
 

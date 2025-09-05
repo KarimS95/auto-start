@@ -1,5 +1,6 @@
 package ru.mtsbank.premium.web.mtsbanksite.pages;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -41,6 +42,30 @@ public class PremiumPage extends BasePage {
         return afterHeaderSecondButton.isDisplayed() && afterHeaderSecondButton.isEnabled();
     }
 
+    public String getAboutServicesTabText() {
+        return aboutServicesTab.getText();
+    }
+
+    public String getServicesAndTariffsTabText() {
+        return servicesAndTariffsTab.getText();
+    }
+
+    public String getPremiumServiceHeader() {
+        return premiumServiceHeader.getText();
+    }
+
+    public void clickFirstButton() {
+       js("arguments[0].click();",afterHeaderFirstButton);
+    }
+
+    public String getNextButtonText() {
+        return nextButton.getText();
+    }
+
+    public boolean checkNextButtonDisable() {
+        return nextButton.getAttribute("disabled") != null;
+    }
+
 
 
 
@@ -57,6 +82,21 @@ public class PremiumPage extends BasePage {
 
     @FindBy(xpath = "//div[@data-testid='flexbox']/button[@data-testid='button'][2]")
     private WebElement afterHeaderSecondButton;
+
+    @FindBy(xpath = "//div[contains(text(),'Об услугах')]")
+    private WebElement aboutServicesTab;
+
+    @FindBy(xpath = "//div[contains(text(),'Сервисы и тарифы')]")
+    private WebElement servicesAndTariffsTab;
+
+    @FindBy(xpath = "//h2[text()='Премиальное обслуживание']")
+    private WebElement premiumServiceHeader;
+
+    @FindBy(xpath = "//h2[@data-testid='heading' and contains(text(),'Закажите карту')]")
+    private WebElement cardOrderHeader;
+
+    @FindBy(xpath = "//button[@data-testid='button'][.//text()='Продолжить']")
+    private WebElement nextButton;
 
 
 }

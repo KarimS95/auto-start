@@ -2,15 +2,11 @@ package ru.mtsbank.premium.web.mtsbanksite.tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import ru.mtsbank.premium.web.mtsbanksite.constans.Constants;
 import ru.mtsbank.premium.web.mtsbanksite.pages.HomePage;
 import ru.mtsbank.premium.web.mtsbanksite.pages.PremiumPage;
 
 public class PremiumPageTest extends BaseTest {
-
-    private final String PREMIUM_GENERAL_HEADER = "Премиальное обслуживание\nв МТС Банке";
-    private final String PREMIUM_AFTER_HEADER_TEXT = "До 16,2% доходность по вкладам\n0 ₽ первые 2 месяца\nФинансовые привилегии и уникальные услуги";
-    private final String PREMIUM_AFTER_HEADER_FIRST_BUTTON_TEXT = "Стать премиум-клиентом";
-    private final String PREMIUM_AFTER_HEADER_SECOND_BUTTON_TEXT = "Остались вопросы о Премиум?";
 
 
     @Test
@@ -19,7 +15,7 @@ public class PremiumPageTest extends BaseTest {
         PremiumPage premiumPage = homePage.openPremiumLink();
         String header = premiumPage.getPremiumPageGeneralHeader();
 
-        Assert.assertEquals(header, PREMIUM_GENERAL_HEADER);
+        Assert.assertEquals(header, Constants.PREMIUM_GENERAL_HEADER.getStringValue());
     }
 
     @Test(dependsOnMethods = "testGetPremiumPageGeneralHeader", groups = "parallel")
@@ -27,7 +23,7 @@ public class PremiumPageTest extends BaseTest {
         PremiumPage premiumPage = new PremiumPage(driverContainer);
         String text = premiumPage.getAfterHeaderText();
 
-        Assert.assertEquals(text, PREMIUM_AFTER_HEADER_TEXT);
+        Assert.assertEquals(text, Constants.PREMIUM_AFTER_HEADER_TEXT.getStringValue());
     }
 
     @Test(dependsOnMethods = "testGetPremiumPageGeneralHeader", groups = "parallel")
@@ -35,7 +31,7 @@ public class PremiumPageTest extends BaseTest {
         PremiumPage premiumPage = new PremiumPage(driverContainer);
         String text = premiumPage.getAfterHeaderFirstButtonText();
 
-        Assert.assertEquals(text, PREMIUM_AFTER_HEADER_FIRST_BUTTON_TEXT);
+        Assert.assertEquals(text, Constants.PREMIUM_AFTER_HEADER_FIRST_BUTTON_TEXT.getStringValue());
     }
 
     @Test(dependsOnMethods = "testGetPremiumPageGeneralHeader", groups = "parallel")
@@ -43,7 +39,7 @@ public class PremiumPageTest extends BaseTest {
         PremiumPage premiumPage = new PremiumPage(driverContainer);
         String text = premiumPage.getAfterHeaderSecondButtonText();
 
-        Assert.assertEquals(text, PREMIUM_AFTER_HEADER_SECOND_BUTTON_TEXT);
+        Assert.assertEquals(text, Constants.PREMIUM_AFTER_HEADER_SECOND_BUTTON_TEXT.getStringValue());
     }
 
     @Test(dependsOnMethods = "testGetPremiumPageGeneralHeader", groups = "parallel")
@@ -58,6 +54,47 @@ public class PremiumPageTest extends BaseTest {
     public void testCheckSecondButton() {
         PremiumPage premiumPage = new PremiumPage(driverContainer);
         boolean isTrue = premiumPage.checkAfterHeaderSecondButton();
+
+        Assert.assertTrue(isTrue);
+    }
+
+    @Test(dependsOnMethods = "testGetPremiumPageGeneralHeader", groups = "parallel")
+    public void testGetAboutServicesTabText() {
+        PremiumPage premiumPage = new PremiumPage(driverContainer);
+        String text = premiumPage.getAboutServicesTabText();
+
+        Assert.assertEquals(text, Constants.PREMIUM_ABOUT_SERVICES_TAB_TEXT.getStringValue());
+    }
+
+    @Test(dependsOnMethods = "testGetPremiumPageGeneralHeader", groups = "parallel")
+    public void testGetServicesAndTariffsTabText() {
+        PremiumPage premiumPage = new PremiumPage(driverContainer);
+        String text = premiumPage.getServicesAndTariffsTabText();
+
+        Assert.assertEquals(text, Constants.PREMIUM_SERVICES_AND_TARIFFS_TAB.getStringValue());
+    }
+
+    @Test(dependsOnMethods = "testGetPremiumPageGeneralHeader", groups = "parallel")
+    public void testGetPremiumServiceHeader() {
+        PremiumPage premiumPage = new PremiumPage(driverContainer);
+        String header = premiumPage.getPremiumServiceHeader();
+
+        Assert.assertEquals(header, Constants.PREMIUM_SERVICE_HEADER.getStringValue());
+    }
+
+    @Test(dependsOnGroups = "parallel")
+    public void testGetNextButtonText() {
+        PremiumPage premiumPage = new PremiumPage(driverContainer);
+        premiumPage.clickFirstButton();
+        String text = premiumPage.getNextButtonText();
+
+        Assert.assertEquals(text, Constants.PREMIUM_NEXT_BUTTON.getStringValue());
+    }
+
+    @Test(dependsOnMethods = "testGetNextButtonText")
+    public void testCheckNextButtonDisable() {
+        PremiumPage premiumPage = new PremiumPage(driverContainer);
+        boolean isTrue = premiumPage.checkNextButtonDisable();
 
         Assert.assertTrue(isTrue);
     }

@@ -2,31 +2,29 @@ package ru.mtsbank.premium.web.mtsbanksite.tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import ru.mtsbank.premium.web.mtsbanksite.constans.Constants;
 import ru.mtsbank.premium.web.mtsbanksite.pages.HomePage;
 import ru.mtsbank.premium.web.mtsbanksite.pages.PremiumPage;
 
 public class HomePageTest extends BaseTest {
 
-    String TEXT = "Премиум";
-    String PREMIUM_URL_TEST = "https://site-pred1.mbrd.ru/chastnim-licam/premium/premium-package/";
-
 
     @Test
-    public void testGetPremiumText() {
+    public void testGetPremiumTabText() {
         HomePage homePage = new HomePage(driverContainer);
-        String text = homePage.getPremiumText();
+        String text = homePage.getPremiumTabText();
 
-        Assert.assertEquals(text, TEXT);
+        Assert.assertEquals(text, Constants.PREMIUM_TAB_TEXT.getStringValue());
     }
 
-    @Test(dependsOnMethods = "testGetPremiumText")
+    @Test(dependsOnMethods = "testGetPremiumTabText")
     public void testOpenPremiumLink() {
         HomePage homePage = new HomePage(driverContainer);
         PremiumPage premiumPage = homePage.openPremiumLink();
 
         String url = premiumPage.getPremiumPageUrl();
 
-        Assert.assertEquals(url, PREMIUM_URL_TEST);
+        Assert.assertEquals(url, Constants.PREMIUM_TEST_URL.getStringValue());
     }
 
 
