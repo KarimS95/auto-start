@@ -32,14 +32,14 @@ public class PremiumLevelTest extends BaseTest {
     public void testOpenServicesTermsButton() {
         PremiumLevelPage premiumLevelPage = new PremiumLevelPage(driverContainer);
 
-        Assert.assertEquals(premiumLevelPage.openServicesTermsListButton(),Constans.LEVEL_TERMS_HEADER);
+        Assert.assertEquals(premiumLevelPage.openServicesTermsListButton(),Constans.LEVEL_TERMS_HEADER.getStringValue());
     }
 
     @Test(dependsOnMethods = "testOpenServicesTermsButton", groups = "parallel")
     public void testGetCardHeaderTermsList() {
         PremiumLevelPage premiumLevelPage = new PremiumLevelPage(driverContainer);
 
-        Assert.assertEquals(premiumLevelPage.getCardHeaderTermsList(),Constans.LEVEL_TERMS_CARD_HEADER);
+        Assert.assertEquals(premiumLevelPage.getCardHeaderTermsList(),Constans.LEVEL_TERMS_CARD_HEADER.getStringValue());
     }
 
     @Test(dependsOnMethods = "testOpenServicesTermsButton", groups = "parallel")
@@ -56,7 +56,7 @@ public class PremiumLevelTest extends BaseTest {
     public void testOpenFirstI() {
         PremiumLevelPage premiumLevelPage = new PremiumLevelPage(driverContainer);
         String header = premiumLevelPage.openFirstI();
-        Assert.assertEquals(header,Constans.LEVEL_FIRST_HEADER);
+        Assert.assertEquals(header,Constans.LEVEL_FIRST_HEADER.getStringValue());
 
         premiumLevelPage.closeI();
     }
@@ -76,7 +76,7 @@ public class PremiumLevelTest extends BaseTest {
         PremiumLevelPage premiumLevelPage = new PremiumLevelPage(driverContainer);
         String URL = premiumLevelPage.getPurchasesTermsPDF();
 
-        Assert.assertEquals(URL,Constans.LEVEL_PURCHASES_TERMS_PDF_URL);
+        Assert.assertEquals(URL,Constans.LEVEL_PURCHASES_TERMS_PDF_URL.getStringValue());
 
         premiumLevelPage.closeI();
     }

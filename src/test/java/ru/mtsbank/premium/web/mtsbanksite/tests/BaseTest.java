@@ -4,12 +4,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.BeforeClass;
+import ru.mtsbank.premium.web.mtsbanksite.constans.Constants;
 
 import java.time.Duration;
 
 public class BaseTest {
-
-    private final String URL_TEST = "https://site-pred1.mbrd.ru/";
 
     InheritableThreadLocal<WebDriver> driverContainer = new InheritableThreadLocal<>();
 
@@ -19,14 +18,14 @@ public class BaseTest {
     @BeforeClass(alwaysRun = true)
     public void setUp() {
         this.options = new ChromeOptions();
-        options.setBrowserVersion("138");
+        options.setBrowserVersion("116");
         options.addArguments("--incognito");
 
         this.driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         driverContainer.set(driver);
-        driverContainer.get().get(URL_TEST);
+        driverContainer.get().get(Constants.PREMIUM_TEST_URL.getStringValue());
     }
 
 }

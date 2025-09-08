@@ -66,6 +66,42 @@ public class PremiumPage extends BasePage {
         return nextButton.getAttribute("disabled") != null;
     }
 
+    public String getPremiumServiceFirstBlockHeader() {
+        js("arguments[0].scrollIntoView(true);",premiumServiceFirstBlockHeader);
+        return premiumServiceFirstBlockHeader.getText();
+    }
+
+    public String getPremiumServiceFirstBlockInfo() {
+        return premiumServiceFirstBlockInfo.getText();
+    }
+
+    public String getPremiumServiceSecondBlockHeader() {
+        return premiumServiceSecondBlockHeader.getText();
+    }
+
+    public String getPremiumServiceSecondBlockInfo() {
+        return premiumServiceSecondBlockInfo.getText();
+    }
+
+    public String getPremiumServiceThirdBlockHeader() {
+        return premiumServiceThirdBlockHeader.getText();
+    }
+
+    public String getPremiumServiceThirdBlockInfo() {
+        return premiumServiceThirdBlockInfo.getText();
+    }
+
+
+
+
+
+
+
+
+    public String getCardPaymentToolsHeader() {
+        return cardPaymentToolsHeader.getText();
+    }
+
 
 
 
@@ -97,6 +133,27 @@ public class PremiumPage extends BasePage {
 
     @FindBy(xpath = "//button[@data-testid='button'][.//text()='Продолжить']")
     private WebElement nextButton;
+
+    @FindBy(xpath = "//h3[text()='Платежные инструменты']")
+    private WebElement cardPaymentToolsHeader;
+
+    @FindBy(xpath = "//h4[contains(text(),'Персональный менеджер')]")
+    private WebElement premiumServiceFirstBlockHeader;
+
+    @FindBy(xpath = "//h4[contains(text(),'Персональный менеджер')]/following-sibling::div")
+    private WebElement premiumServiceFirstBlockInfo;
+
+    @FindBy(xpath = "//h4[contains(text(),'Выделенная линия')]")
+    private WebElement premiumServiceSecondBlockHeader;
+
+    @FindBy(xpath = "//h4[contains(text(),'Выделенная линия')]/following-sibling::div")
+    private WebElement premiumServiceSecondBlockInfo;
+
+    @FindBy(xpath = "//h4[contains(text(),'Обслуживание без очередей')]")
+    private WebElement premiumServiceThirdBlockHeader;
+
+    @FindBy(xpath = "//h4[contains(text(),'Обслуживание без очередей')]/following-sibling::div")
+    private WebElement premiumServiceThirdBlockInfo;
 
 
 }

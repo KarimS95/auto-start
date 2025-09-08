@@ -2,6 +2,7 @@ package ru.mtsbank.premium.web.mtsbanksite.constans;
 
 public enum Constants {
 
+    URL_TEST ("https://site-pred1.mbrd.ru/"),
     PREMIUM_TAB_TEXT("Премиум"),
     PREMIUM_TEST_URL ("https://site-pred1.mbrd.ru/chastnim-licam/premium/premium-package/"),
 
@@ -12,7 +13,14 @@ public enum Constants {
     PREMIUM_ABOUT_SERVICES_TAB_TEXT("Об услугах"),
     PREMIUM_SERVICES_AND_TARIFFS_TAB("Сервисы и тарифы"),
     PREMIUM_SERVICE_HEADER("Премиальное обслуживание"),
-    PREMIUM_NEXT_BUTTON("Продолжить");
+    PREMIUM_NEXT_BUTTON("Продолжить"),
+
+    PREMIUM_SERVICE_FIRST_BLOCK_HEADER("Персональный менеджер"),
+    PREMIUM_SERVICE_FIRST_BLOCK_INFO("Ваш личный советник и помощник в банке"),
+    PREMIUM_SERVICE_SECOND_BLOCK_HEADER("Выделенная линия 24/7"),
+    PREMIUM_SERVICE_SECOND_BLOCK_INFO("Круглосуточная поддержка по важным вопросам"),
+    PREMIUM_SERVICE_THIRD_BLOCK_HEADER("Обслуживание без очередей"),
+    PREMIUM_SERVICE_THIRD_BLOCK_INFO("Без ожидания в банке или на линии поддержки");
 
 
 

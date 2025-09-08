@@ -122,7 +122,7 @@ public class PremiumCashbackPage extends BasePage{
     }
 
     public String openLevelPageLink() {
-        WebDriverWait waitPremiumLink = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(60));
+        WebDriverWait waitPremiumLink = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(10));
         waitPremiumLink.until(ExpectedConditions.elementToBeClickable(openPremiumLink)).click();
 
         return driverContainer.get().getCurrentUrl();
@@ -136,7 +136,7 @@ public class PremiumCashbackPage extends BasePage{
     }
 
     public String backToCashbackPrivilege() {
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
+        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOf(backButton));
         backButton.click();
         return driverContainer.get().getCurrentUrl();

@@ -83,6 +83,54 @@ public class PremiumPageTest extends BaseTest {
     }
 
     @Test(dependsOnGroups = "parallel")
+    public void testGetPremiumServiceFirstBlockHeader() {
+        PremiumPage premiumPage = new PremiumPage(driverContainer);
+        String header = premiumPage.getPremiumServiceFirstBlockHeader();
+
+        Assert.assertEquals(header, Constants.PREMIUM_SERVICE_FIRST_BLOCK_HEADER.getStringValue());
+    }
+
+    @Test(dependsOnMethods = "testGetPremiumServiceFirstBlockHeader", groups = "second-parallel")
+    public void testGetPremiumServiceFirstBlockInfo() {
+        PremiumPage premiumPage = new PremiumPage(driverContainer);
+        String text = premiumPage.getPremiumServiceFirstBlockInfo();
+
+        Assert.assertEquals(text, Constants.PREMIUM_SERVICE_FIRST_BLOCK_INFO.getStringValue());
+    }
+
+    @Test(dependsOnMethods = "testGetPremiumServiceFirstBlockHeader", groups = "second-parallel")
+    public void testGetPremiumServiceSecondBlockHeader() {
+        PremiumPage premiumPage = new PremiumPage(driverContainer);
+        String header = premiumPage.getPremiumServiceSecondBlockHeader();
+
+        Assert.assertEquals(header, Constants.PREMIUM_SERVICE_SECOND_BLOCK_HEADER.getStringValue());
+    }
+
+    @Test(dependsOnMethods = "testGetPremiumServiceFirstBlockHeader", groups = "second-parallel")
+    public void testGetPremiumServiceSecondBlockInfo() {
+        PremiumPage premiumPage = new PremiumPage(driverContainer);
+        String text = premiumPage.getPremiumServiceSecondBlockInfo();
+
+        Assert.assertEquals(text, Constants.PREMIUM_SERVICE_SECOND_BLOCK_INFO.getStringValue());
+    }
+
+    @Test(dependsOnMethods = "testGetPremiumServiceFirstBlockHeader", groups = "second-parallel")
+    public void testGetPremiumServiceThirdBlockHeader() {
+        PremiumPage premiumPage = new PremiumPage(driverContainer);
+        String header = premiumPage.getPremiumServiceThirdBlockHeader();
+
+        Assert.assertEquals(header, Constants.PREMIUM_SERVICE_THIRD_BLOCK_HEADER.getStringValue());
+    }
+
+    @Test(dependsOnMethods = "testGetPremiumServiceFirstBlockHeader", groups = "second-parallel")
+    public void testGetPremiumServiceThirdBlockInfo() {
+        PremiumPage premiumPage = new PremiumPage(driverContainer);
+        String text = premiumPage.getPremiumServiceThirdBlockInfo();
+
+        Assert.assertEquals(text, Constants.PREMIUM_SERVICE_THIRD_BLOCK_INFO.getStringValue());
+    }
+
+    @Test(dependsOnGroups = "second-parallel")
     public void testGetNextButtonText() {
         PremiumPage premiumPage = new PremiumPage(driverContainer);
         premiumPage.clickFirstButton();
