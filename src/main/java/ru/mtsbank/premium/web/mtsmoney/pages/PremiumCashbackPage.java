@@ -15,6 +15,17 @@ public class PremiumCashbackPage extends BasePage{
         super(driverContainer);
     }
 
+    public String getCategoriesLinkText() {
+        return categoriesLink.getText();
+    }
+
+    public String getLevelLinkText() {
+        return openPremiumLink.getText();
+    }
+
+    public String getBaseCashbackText() {
+        return baseCashbackText.getText();
+    }
 
     public String getBaseCashbackBlockHeader() {
         return baseCashbackBlockHeader.getText();
@@ -46,8 +57,8 @@ public class PremiumCashbackPage extends BasePage{
         for (int i = 0; i < MAX_RETRIES; i++) {
             try {
                 WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
-                ((JavascriptExecutor)driverContainer.get()).executeScript("arguments[0].scrollIntoView({block:'center'});",openCategoriesList);
-                wait.until(ExpectedConditions.elementToBeClickable(openCategoriesList)).click();
+                ((JavascriptExecutor)driverContainer.get()).executeScript("arguments[0].scrollIntoView({block:'center'});",categoriesLink);
+                wait.until(ExpectedConditions.elementToBeClickable(categoriesLink)).click();
                 break;
 
             } catch (StaleElementReferenceException | ElementNotInteractableException e) {
@@ -92,7 +103,7 @@ public class PremiumCashbackPage extends BasePage{
         boolean isTrue = false;
 
         for (WebElement i : checkboxesList) {
-            isTrue = (!i.isSelected()) && i.getAttribute("disabled") != null;
+            isTrue = !i.isSelected() && i.getAttribute("disabled") != null;
         }
         return isTrue;
     }
@@ -230,8 +241,11 @@ public class PremiumCashbackPage extends BasePage{
 //    }
 
 
-    @FindBy(xpath = "//a[contains(@href, '/premium/cashback-category?fromDate=')]")
-    private WebElement openCategoriesList;
+    @FindBy(xpath = "//*[contains(text(),'Базовый кешбэк')]/parent::div//div/*[contains(text(),'Начисляется')]")
+    private WebElement baseCashbackText;
+
+    @FindBy(xpath = "//*[contains(text(),'Выбрать категории на месяц')]/parent::div")
+    private WebElement categoriesLink;
 
     @FindBy(xpath = "//span[text()='Выбрать']")
     private WebElement selectCashbackCategoriesLink;

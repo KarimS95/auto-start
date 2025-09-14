@@ -11,7 +11,7 @@ public class HomePageTest extends BaseTest {
 
 
     @Test
-    public void testChekPremiumWidgetName() {
+    public void testCheсkPremiumWidgetName() {
         homePage = new HomePage(driverContainer);
 
         boolean found = false;
@@ -25,14 +25,14 @@ public class HomePageTest extends BaseTest {
         Assert.assertTrue(found);
     }
 
-    @Test(dependsOnMethods = "testChekPremiumWidgetName")
+    @Test(dependsOnMethods = "testCheсkPremiumWidgetName")
     public void testCheckPremiumWidget() {
         homePage = new HomePage(driverContainer);
 
         Assert.assertTrue(homePage.checkPremiumWidget());
     }
 
-//    @Test(dependsOnMethods = "testChekPremiumWidgetName")
+//    @Test(dependsOnMethods = "testCheсkPremiumWidgetName")
 //    public void testCheckPremiumPage() {
 //        homePage = new HomePage(driverContainer);
 //

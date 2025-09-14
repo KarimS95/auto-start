@@ -18,7 +18,7 @@ public class BaseTest {
     public void setUp() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--incognito");
-        options.setBrowserVersion("139");
+        options.setBrowserVersion("116");
 
         WebDriver driver = new ChromeDriver(options);
         driver.manage().window().maximize();

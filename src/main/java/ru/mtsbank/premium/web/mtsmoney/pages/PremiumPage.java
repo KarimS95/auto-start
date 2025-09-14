@@ -2,7 +2,11 @@ package ru.mtsbank.premium.web.mtsmoney.pages;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import ru.mtsbank.premium.web.mtsmoney.pages.constants.Constants;
 
+import java.time.Duration;
 import java.util.List;
 
 public class PremiumPage extends BasePage{
@@ -79,6 +83,18 @@ public class PremiumPage extends BasePage{
 
     public PremiumCashbackPage openPremiumCashbackPrivilege() {
         openPremiumCashbackPrivilege.click();
+        return new PremiumCashbackPage(driverContainer);
+    }
+
+    public PremiumCashbackPage openPremiumCashbackPrivilegeWithLink() {
+        String url = driverContainer.get().getCurrentUrl();
+
+        if (url.contains("dev")) {
+            driverContainer.get().get(Constants.URL_DEV);
+        }
+        else {
+            driverContainer.get().get(Constants.URL_TEST);
+        }
         return new PremiumCashbackPage(driverContainer);
     }
 

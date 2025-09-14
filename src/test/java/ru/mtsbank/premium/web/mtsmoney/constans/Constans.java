@@ -14,7 +14,7 @@ public enum Constans {
     MANAGER_CALL_BUTTON("позвонить"),
     MANAGER_MESSAGE_BUTTON("написать"),
     LEVEL_PURCHASES_TERMS_PDF_URL("https://static.mtsdengi.ru/portal-frontend-premium/documents/pravila-nachisleniya.pdf"),
-    LEVEL_RULES_PDF_URL("https://static.mtsdengi.ru/portal-frontend-premium/documents/moj-uroven-obsluzhivaniya-"),
+    LEVEL_RULES_PDF_URL("https://static.mtsdengi.ru/portal-frontend-premium/documents/"),
     LEVEL_SHEET_HEADER("уровень"),
     LEVEL_PAGE_HEADER("Премиальное обслуживание"),
     LEVEL_TERMS_HEADER("Условия обслуживания"),
@@ -57,7 +57,12 @@ public enum Constans {
     CASHBACK_INCREASED_CASHBACK_BLOCK_HEADER("Повышенный кешбэк"),
     CASHBACK_SUBSCRIPTION_BLOCK_HEADER("С подпиской МТС PREMIUM"),
     CASHBACK_FROM_PAYMENT_SYSTEM_BLOCK_HEADER("От платежной системы МИР"),
-    CASHBACK_HOW_TO_GET_BLOCK_HEADER("Как получить");
+    CASHBACK_HOW_TO_GET_BLOCK_HEADER("Как получить"),
+    CASHBACK_CATEGORIES_LINK_TEXT_PAT_ONE("Кешбэк в"),
+    CASHBACK_CATEGORIES_LINK_TEXT_PART_TWO("Выбрать категории на месяц"),
+    CASHBACK_LEVEL_LINK_TEXT("уровня программы Премиум"),
+    CASHBACK_BASE_CASHBACK_TEXT("Начисляется за покупки по дебетовой карте. Размер зависит от\nуровня программы Премиум");
+
 
     private final String stringValue;
     private final String[] arrayStringValue;

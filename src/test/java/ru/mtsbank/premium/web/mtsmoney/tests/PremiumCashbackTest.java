@@ -14,9 +14,41 @@ public class PremiumCashbackTest extends BaseTest {
     public void testGetBaseCashbackBlockHeader() {
         HomePage homePage = new HomePage(driverContainer);
         PremiumPage premiumPage = homePage.openPremiumPage();
-        PremiumCashbackPage premiumCashbackPage = premiumPage.openPremiumCashbackPrivilege();
+        PremiumCashbackPage premiumCashbackPage = premiumPage.openPremiumCashbackPrivilegeWithLink();
 
         Assert.assertEquals(premiumCashbackPage.getBaseCashbackBlockHeader(), Constans.CASHBACK_BASE_CASHBACK_BLOCK_HEADER.getStringValue());
+    }
+
+    @Test(groups = "parallel", dependsOnMethods = "testGetBaseCashbackBlockHeader")
+    public void testGetCashbackCategoriesLinkText() {
+        PremiumCashbackPage premiumCashbackPage = new PremiumCashbackPage(driverContainer);
+        String actualText = premiumCashbackPage.getCategoriesLinkText();
+        System.out.println("Actual text: " + actualText);
+
+        boolean isTrue = false;
+
+        if (actualText.contains(Constans.CASHBACK_CATEGORIES_LINK_TEXT_PAT_ONE.getStringValue()) && actualText.contains(Constans.CASHBACK_CATEGORIES_LINK_TEXT_PART_TWO.getStringValue())) {
+            isTrue = true;
+        }
+
+      Assert.assertTrue(isTrue);
+    }
+
+    @Test(groups = "parallel", dependsOnMethods = "testGetBaseCashbackBlockHeader")
+    public void testGetBaseCashbackText() {
+        PremiumCashbackPage premiumCashbackPage = new PremiumCashbackPage(driverContainer);
+        String text = premiumCashbackPage.getBaseCashbackText();
+        System.out.println("base cashback text: " + text);
+
+        Assert.assertEquals(text, Constans.CASHBACK_BASE_CASHBACK_TEXT.getStringValue());
+    }
+
+    @Test(groups = "parallel", dependsOnMethods = "testGetBaseCashbackBlockHeader")
+    public void testGetLevelLinkText() {
+        PremiumCashbackPage premiumCashbackPage = new PremiumCashbackPage(driverContainer);
+        String text = premiumCashbackPage.getLevelLinkText();
+
+        Assert.assertEquals(text, Constans.CASHBACK_LEVEL_LINK_TEXT.getStringValue());
     }
 
     @Test(groups = "parallel", dependsOnMethods = "testGetBaseCashbackBlockHeader")

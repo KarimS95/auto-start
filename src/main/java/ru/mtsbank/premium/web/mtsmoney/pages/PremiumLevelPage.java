@@ -190,7 +190,7 @@ public class PremiumLevelPage extends BasePage {
     @FindBy(xpath = "//a[contains(@href,'pravila-nachisleniya')]")
     private WebElement purchasesTerms;
 
-    @FindBy(xpath = "//a[contains(@href,'moj-uroven')]")
+    @FindBy(xpath = "//a[contains(@href,'premium')]")
     private WebElement levelsRulesButton;
 
     private By byOpenLevelSheet = By.xpath("//span[contains(text(),'Мой уровень в')]");
