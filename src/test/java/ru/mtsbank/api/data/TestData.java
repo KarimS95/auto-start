@@ -16,6 +16,9 @@ public final class TestData {
     public static final String LOGIN_SUCCESSFUL = "Login successful";
     public static final String PATH_PROFILE_MESSAGE = "Profile updated successful";
     public static final String TOKEN = "x-auth-token";
+    public static final String TITLE = "Practice WebApp UI";
+    public static final String DESCRIPTION = "Finish the development of the UI Automation Practice WebApp";
+    public static final String CATEGORY = "Personal";
 
 
 }

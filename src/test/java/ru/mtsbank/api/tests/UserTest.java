@@ -3,7 +3,6 @@ package ru.mtsbank.api.tests;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
-import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -17,6 +16,7 @@ import static ru.mtsbank.api.data.TestData.*;
 public class UserTest {
 
     private String token;
+    private String id;
     private RequestSpecification requestSpecification;
     private LoginResponse loginResponse;
 
@@ -82,14 +82,14 @@ public class UserTest {
        loginResponse = given()
                 .spec(requestSpecification)
                 .formParam("name", NEW_NAME)
-                 .header(TOKEN, this.token)
+                .header(TOKEN, this.token)
 
-                 .when()
-                 .patch("/users/profile")
+                .when()
+                .patch("/users/profile")
 
                 .then()
                 .statusCode(200)
-                        .extract().as(LoginResponse.class);
+                .extract().as(LoginResponse.class);
 
 
         Assert.assertEquals(loginResponse.getMessage(), PATH_PROFILE_MESSAGE);
@@ -137,19 +137,52 @@ public class UserTest {
                 .when()
                 .post("/users/change-password")
 
-                .then().statusCode(200);
+                .then()
+                .statusCode(200);
+    }
+
+    @Test(dependsOnMethods = "testChangePassword")
+    public void testCreateNewNote() {
+
+         given()
+                .spec(requestSpecification)
+                .formParam("title", TITLE)
+                .formParam("description", DESCRIPTION)
+                .formParam("category", CATEGORY)
+
+                .when()
+                .param("/notes")
+
+                .then()
+                .statusCode(200);
     }
 
 
     @AfterClass
     public void testDeleteAccount() {
 
-        given()
+       loginResponse = given()
                 .spec(requestSpecification)
                 .header("x-auth-token", this.token)
 
                 .when()
                 .delete("/users/delete-account")
+
+                .then()
+                .statusCode(200)
+               .extract().as(LoginResponse.class);
+       this.id = loginResponse.getData().getId();
+    }
+
+    @AfterClass
+    public void testDeleteNotes() {
+
+        given()
+                .spec(requestSpecification)
+                .formParam("id", this.id)
+
+                .when()
+                .delete("/notes/")
 
                 .then()
                 .statusCode(200);
