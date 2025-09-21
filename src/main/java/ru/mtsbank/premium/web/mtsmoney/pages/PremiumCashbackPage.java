@@ -220,10 +220,7 @@ public class PremiumCashbackPage extends BasePage{
 
 
     public String getPremiumCashbackPageURL() {
-        WebDriverWait wait = new WebDriverWait(driverContainer.get(), Duration.ofSeconds(30));
-        String URL = driverContainer.get().getCurrentUrl();
-        wait.until(ExpectedConditions.urlToBe(URL));
-        return URL;
+        return driverContainer.get().getCurrentUrl();
     }
 
 

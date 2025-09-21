@@ -245,7 +245,4 @@ public class PremiumCashbackTest extends BaseTest {
 
         Assert.assertTrue(isTrue);
     }
-
-
-
 }
