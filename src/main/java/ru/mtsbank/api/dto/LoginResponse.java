@@ -7,7 +7,6 @@ public class LoginResponse {
     private String message;
     private DataResponse data;
     private String phone;
-    private String company;
 
 
     public boolean getSuccess() {
@@ -26,13 +25,10 @@ public class LoginResponse {
         return data;
     }
 
-    public String phone() {
+    public String getPhone() {
         return phone;
     }
 
-    public String company() {
-        return company;
-    }
 
     public void setSuccess(boolean success) {
         this.success = success;
@@ -52,9 +48,5 @@ public class LoginResponse {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public void setCompany(String company) {
-        this.company = company;
     }
 }

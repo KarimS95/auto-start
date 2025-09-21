@@ -1,5 +1,6 @@
 package ru.mtsbank.api.tests;
 
+import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
@@ -19,6 +20,11 @@ public class UserTest {
     private String id;
     private RequestSpecification requestSpecification;
     private LoginResponse loginResponse;
+    private String title;
+    private String description;
+    private String company;
+    private String category;
+    private boolean completed;
 
     @BeforeClass
     public void initSpec() {
@@ -129,7 +135,7 @@ public class UserTest {
                 .post("/users/reset-password")
 
                 .then()
-                .statusCode(200);
+                .statusCode(401);
 
     }
 
@@ -152,24 +158,119 @@ public class UserTest {
     @Test(dependsOnMethods = "testChangePassword")
     public void testCreateNewNote() {
 
-         given()
+        loginResponse = given()
                 .spec(requestSpecification)
+                .header(TOKEN, this.token)
                 .formParam("title", TITLE)
                 .formParam("description", DESCRIPTION)
                 .formParam("category", CATEGORY)
 
                 .when()
-                .param("/notes")
+                .post("/notes")
+
+                .then()
+                .statusCode(200)
+                .extract().as(LoginResponse.class);
+
+        this.id = loginResponse.getData().getId();
+        this.title = loginResponse.getData().getTitle();
+        this.description = loginResponse.getData().getDescription();
+        this.completed = loginResponse.getData().getCompleted();
+        this.category = loginResponse.getData().getCategory();
+
+        Assert.assertEquals(loginResponse.getData().getId(), this.id);
+        Assert.assertEquals(loginResponse.getData().getTitle(), this.title);
+        Assert.assertEquals(loginResponse.getData().getDescription(), this.description);
+        Assert.assertEquals(loginResponse.getData().getCategory(), this.category);
+
+
+    }
+
+    @Test(dependsOnMethods = "testCreateNewNote")
+    public void testGetAllNotes() {
+
+        given()
+                .spec(requestSpecification)
+                .header(TOKEN, this.token)
+
+                .when()
+                .get("/notes")
 
                 .then()
                 .statusCode(200);
     }
 
+    @Test(dependsOnMethods = "testGetAllNotes")
+    public void testPutUpdateNotes() {
 
-    @AfterClass
+        loginResponse = given()
+                .spec(requestSpecification)
+                .header(TOKEN, this.token)
+                .queryParam("id", this.id)
+                .formParam("title", NEW_TITLE)
+                .formParam("description", NEW_DESCRIPTION)
+                .formParam("completed", false)
+                .formParam("category", NEW_CATEGORY)
+
+                .when()
+                .put("/notes/" + this.id)
+
+                .then()
+                .statusCode(200)
+                .extract().as(LoginResponse.class);
+
+        this.title = loginResponse.getData().getTitle();
+        this.description = loginResponse.getData().getDescription();
+        this.completed = loginResponse.getData().getCompleted();
+        this.category = loginResponse.getData().getCategory();
+
+        Assert.assertEquals(this.title, NEW_TITLE);
+        Assert.assertEquals(this.description, NEW_DESCRIPTION);
+        Assert.assertFalse(this.completed);
+        Assert.assertEquals(this.category, NEW_CATEGORY);
+    }
+
+    @Test(dependsOnMethods = "testPutUpdateNotes")
+    public void testGetNotes() {
+
+        given()
+                .spec(requestSpecification)
+                .header(TOKEN, this.token)
+                .formParam("id", this.id)
+
+                .when()
+                .get("/notes/" + this.id)
+
+                .then()
+                .statusCode(200);
+    }
+
+    @Test(dependsOnMethods = "testGetNotes")
+    public void testPatchUpdateNotes() {
+
+        loginResponse = given()
+                .spec(requestSpecification)
+                .header(TOKEN, this.token)
+                .queryParam("id", this.id)
+                .formParam("completed", true)
+
+                .when()
+                .patch("/notes/" + this.id)
+
+                .then()
+                .statusCode(200)
+                .extract().as(LoginResponse.class);
+
+        Assert.assertEquals(loginResponse.getMessage(), NOTE_PATCH);
+        Assert.assertTrue(loginResponse.getData().getCompleted());
+
+    }
+
+
+    @AfterClass(dependsOnMethods = "testDeleteNotes")
     public void testDeleteAccount() {
 
-       loginResponse = given()
+       given()
                 .spec(requestSpecification)
                 .header("x-auth-token", this.token)
 
@@ -177,9 +278,7 @@ public class UserTest {
                 .delete("/users/delete-account")
 
                 .then()
-                .statusCode(200)
-               .extract().as(LoginResponse.class);
-       this.id = loginResponse.getData().getId();
+                .statusCode(200);
     }
 
     @AfterClass
@@ -187,10 +286,11 @@ public class UserTest {
 
         given()
                 .spec(requestSpecification)
-                .formParam("id", this.id)
+                .header(TOKEN, this.token)
+                .queryParam("id", this.id)
 
                 .when()
-                .delete("/notes/")
+                .delete("/notes/" + this.id)
 
                 .then()
                 .statusCode(200);
