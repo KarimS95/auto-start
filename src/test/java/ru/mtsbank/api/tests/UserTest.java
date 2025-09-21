@@ -1,6 +1,5 @@
 package ru.mtsbank.api.tests;
 
-import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
@@ -8,6 +7,7 @@ import io.restassured.specification.RequestSpecification;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.mtsbank.api.dto.LoginResponse;
 
@@ -57,8 +57,28 @@ public class UserTest {
         Assert.assertEquals(message, REGISTER_MESSAGE);
     }
 
+    @Test(dependsOnMethods = "testRegister", dataProvider = "credentials")
+    public void testNegativeRegister(String name, String email, String password) {
 
-    @Test(dependsOnMethods = "testRegister")
+         loginResponse = given()
+                .spec(requestSpecification)
+                .formParam("name", name)
+                .formParam("email", email)
+                .formParam("password", password)
+
+                .when()
+                .post("/users/register")
+
+                .then()
+                .statusCode(409)
+                 .extract().as(LoginResponse.class);
+         String message = loginResponse.getMessage();
+
+         Assert.assertEquals(message, REGISTER_MESSAGE_ERROR);
+    }
+
+
+    @Test(dependsOnMethods = "testNegativeRegister")
     public void testLogin() {
          loginResponse = given()
                 .spec(requestSpecification)
@@ -296,5 +316,13 @@ public class UserTest {
                 .statusCode(200);
     }
 
+
+
+    @DataProvider(name = "credentials")
+    public Object[][] creds() {
+        return new Object[][] {
+                {"Karim","testkarims123456789@gmail.com","12345karimS"},
+        };
+    }
 
 }
