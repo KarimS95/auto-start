@@ -21,7 +21,7 @@ public class UserTest {
     private LoginResponse loginResponse;
 
     @BeforeClass
-    public void register() {
+    public void initSpec() {
         requestSpecification = new RequestSpecBuilder()
                 .setBaseUri(BASE_URI)
                 .setContentType(CONTENT_TYPE)
@@ -29,8 +29,12 @@ public class UserTest {
                 .addFilter(new RequestLoggingFilter())
                 .addFilter(new ResponseLoggingFilter())
                 .build();
+    }
 
-        given()
+    @Test
+    public void testRegister() {
+
+        loginResponse = given()
                 .spec(requestSpecification)
                 .formParam("name", NAME)
                 .formParam("email", EMAIL)
@@ -40,11 +44,15 @@ public class UserTest {
                 .post("/users/register")
 
                 .then()
-                .statusCode(201);
+                .statusCode(201)
+                .extract().as(LoginResponse.class);
+        String message = loginResponse.getMessage();
+
+        Assert.assertEquals(message, REGISTER_MESSAGE);
     }
 
 
-    @Test
+    @Test(dependsOnMethods = "testRegister")
     public void testLogin() {
          loginResponse = given()
                 .spec(requestSpecification)
