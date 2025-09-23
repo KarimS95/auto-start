@@ -16,10 +16,11 @@ import static ru.mtsbank.api.data.TestData.*;
 
 public class UserTest {
 
-    private String token;
-    private String id;
     private RequestSpecification requestSpecification;
     private LoginResponse loginResponse;
+
+    private String token;
+    private String id;
     private String title;
     private String description;
     private String company;
@@ -52,6 +53,7 @@ public class UserTest {
                 .then()
                 .statusCode(201)
                 .extract().as(LoginResponse.class);
+
         String message = loginResponse.getMessage();
 
         Assert.assertEquals(message, REGISTER_MESSAGE);
@@ -72,6 +74,7 @@ public class UserTest {
                 .then()
                 .statusCode(409)
                  .extract().as(LoginResponse.class);
+
          String message = loginResponse.getMessage();
 
          Assert.assertEquals(message, REGISTER_MESSAGE_ERROR);
@@ -91,6 +94,7 @@ public class UserTest {
                 .then()
                 .statusCode(200)
                 .extract().as(LoginResponse.class);
+
         this.token = loginResponse.getData().getToken();
 
         Assert.assertEquals(loginResponse.getMessage(), LOGIN_SUCCESSFUL);
@@ -108,7 +112,6 @@ public class UserTest {
 
                 .then()
                 .statusCode(200);
-
     }
 
     @Test(dependsOnMethods = "testGetProfile")
@@ -124,7 +127,6 @@ public class UserTest {
                 .then()
                 .statusCode(200)
                 .extract().as(LoginResponse.class);
-
 
         Assert.assertEquals(loginResponse.getMessage(), PATH_PROFILE_MESSAGE);
     }
@@ -156,7 +158,6 @@ public class UserTest {
 
                 .then()
                 .statusCode(401);
-
     }
 
     @Test(dependsOnMethods = "testForgotPassword")
@@ -202,8 +203,6 @@ public class UserTest {
         Assert.assertEquals(loginResponse.getData().getTitle(), this.title);
         Assert.assertEquals(loginResponse.getData().getDescription(), this.description);
         Assert.assertEquals(loginResponse.getData().getCategory(), this.category);
-
-
     }
 
     @Test(dependsOnMethods = "testCreateNewNote")
@@ -283,7 +282,6 @@ public class UserTest {
 
         Assert.assertEquals(loginResponse.getMessage(), NOTE_PATCH);
         Assert.assertTrue(loginResponse.getData().getCompleted());
-
     }
 
 
@@ -319,10 +317,9 @@ public class UserTest {
 
 
     @DataProvider(name = "credentials")
-    public Object[][] creds() {
+    public Object[][] credentials() {
         return new Object[][] {
-                {"Karim","testkarims123456789@gmail.com","12345karimS"},
+                {"Karim","testkarims123456789@gmail.com","12345karimS"}
         };
     }
-
 }

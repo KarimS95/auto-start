@@ -31,6 +31,11 @@
                 <class name="ru.mtsbank.api.tests.UserTest"/>
             </classes>
     </test>
+    <test name="premium-services-api">
+          <classes>
+              <class name="ru.mtsbank.premiumServices.premium_clients_ref.tests.PremiumClientsRefTest"/>
+          </classes>
+    </test>
     <test name="parallel">
         <groups>
             <run>
