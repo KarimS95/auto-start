@@ -4,30 +4,24 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class LoginPage extends BasePage {
+public class LoginPage extends BasePage{
 
-
-    public LoginPage(InheritableThreadLocal<WebDriver> driverContainer) {
+    public LoginPage(InheritableThreadLocal<WebDriver> driverContainer){
         super(driverContainer);
     }
 
-
-    @FindBy(xpath = "//input[@id='login' or @type='tel']")
+    @FindBy(xpath = "//input[@id = 'login' or type = 'tel']")
     private WebElement inputLogin;
 
-    @FindBy(xpath = "//*[text()='Далее']/parent::button")
+    @FindBy(xpath = "//*[text() = 'Далее']/parent::button")
     private WebElement nextButton;
 
 
-    public void inputLogin(String phoneNumber) {
+    public CodePage inputLogin(String phoneNumber) {
         inputLogin.sendKeys(phoneNumber);
-    }
-
-    public CodePage clickOnNextButton() {
         nextButton.click();
         return new CodePage(driverContainer);
     }
-
 
 
 }

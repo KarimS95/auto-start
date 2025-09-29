@@ -9,24 +9,24 @@ import java.time.Duration;
 
 public class BaseTest {
 
+    protected InheritableThreadLocal<WebDriver> driverContainer = new InheritableThreadLocal<>();
+    protected WebDriver driver;
+    protected ChromeOptions chromeOptions;
+    private static final String URL_DEV = "https://online.mtsdengi-dev.mbrd.ru/";
 
-    InheritableThreadLocal<WebDriver> driverContainer = new InheritableThreadLocal<>();
-    WebDriver driver;
-    ChromeOptions options;
-
-    private final String URL_DEV = "https://online.mtsdengi-dev.mbrd.ru";
 
     @BeforeClass
-    public void setUp() {
-        this.options = new ChromeOptions();
-        options.addArguments("--incognito");
-        options.setBrowserVersion("124");
+    public void setTup() {
+        this.chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--incognito");
+        chromeOptions.setBrowserVersion("124");
 
-        this.driver = new ChromeDriver(options);
-        driver.manage().window().maximize();
+        this.driver = new ChromeDriver(chromeOptions);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().window().maximize();
         this.driverContainer.set(driver);
-        this.driverContainer.get().get(URL_DEV);
+        driverContainer.get().get(URL_DEV);
     }
+
 
 }
