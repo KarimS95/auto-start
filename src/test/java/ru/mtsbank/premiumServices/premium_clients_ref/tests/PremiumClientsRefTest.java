@@ -116,7 +116,4 @@ public class PremiumClientsRefTest {
                         Matchers.not(emptyOrNullString())
                 ));
     }
-
-
-
 }

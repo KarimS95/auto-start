@@ -6,7 +6,17 @@
             <class name="ru.mtsbank.premium.web.mtsmoney.tests.PremiumLevelTest"/>
             <class name="ru.mtsbank.premium.web.mtsmoney.tests.PremiumCashbackTest"/>
             <class name="ru.mtsbank.premium.web.mtsmoney.tests.HomePageTest"/>
-            <class name="ru.mtsbank.likeCoding.LoginTest"/>
+            <class name="ru.mtsbank.likeCoding.tests.AuthTest"/>
+            <class name="ru.mtsbank.algorithms.AlgorithmsTest"/>
+            <class name="ru.mtsbank.algorithms.NewAlgorithms"/>
+            <class name="ru.mtsbank.database.tests.DatabaseTest"/>
+            <class name="ru.mtsbank.GetV1CustomerLevelTest"/>
+            <class name="ru.mtsbank.TestDataGenerate"/>
+            <class name="ru.mtsbank.GeneratorTest"/>
+            <class name="ru.mtsbank.SuperGeneratorTest"/>
+            <class name="ru.mtsbank.DbUtilkaTest"/>
+            <class name="ru.mtsbank.myTest"/>
+            <class name="ru.mtsbank.DbKTest"/>
         </classes>
     </test>
     <test name="homework-tests">

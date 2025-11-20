@@ -3,7 +3,8 @@ package ru.mtsbank.premium.web.mtsmoney.constans;
 
 public enum Constans {
 
-    PHONE_NUMBER("9636125085"),
+    PHONE_NUMBER("9041781770"),
+    RBO_ID("472265040024"),
     PASSWORD_LIST(new String[]{"1", "2", "3","4"}),
     TEST_URL("https://online.mtsdengi-test.mbrd.ru/"),
     DEV_URL ("https://online.mtsdengi-dev.mbrd.ru/"),

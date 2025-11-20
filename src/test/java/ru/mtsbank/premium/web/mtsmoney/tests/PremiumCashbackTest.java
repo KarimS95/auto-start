@@ -1,11 +1,17 @@
 package ru.mtsbank.premium.web.mtsmoney.tests;
 
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
+import ru.mtsbank.database.DbUtils;
 import ru.mtsbank.premium.web.mtsmoney.constans.Constans;
 import ru.mtsbank.premium.web.mtsmoney.pages.HomePage;
 import ru.mtsbank.premium.web.mtsmoney.pages.PremiumCashbackPage;
 import ru.mtsbank.premium.web.mtsmoney.pages.PremiumPage;
+
+import java.time.Duration;
 
 public class PremiumCashbackTest extends BaseTest {
 
@@ -244,5 +250,12 @@ public class PremiumCashbackTest extends BaseTest {
         }
 
         Assert.assertTrue(isTrue);
+    }
+
+    @AfterClass
+    public void testDeleteQuery() {
+        DbUtils dbUtils = new DbUtils();
+        dbUtils.deleteQuery(Constans.RBO_ID.getStringValue());
+        driverContainer.get().navigate().refresh();
     }
 }

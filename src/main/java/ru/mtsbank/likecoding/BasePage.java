@@ -1,10 +1,7 @@
-package ru.mtsbank.likeCoding;
+package ru.mtsbank.likecoding;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 public class BasePage {
 
@@ -14,10 +11,4 @@ public class BasePage {
         this.driverContainer = driverContainer;
         PageFactory.initElements(this.driverContainer.get(), this);
     }
-
-
-    protected WebDriverWait waitElement() {
-        return new WebDriverWait(driverContainer.get(), Duration.ofSeconds(10));
-    }
-
 }
